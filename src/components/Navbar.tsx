@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <div className='absolute backdrop-blur-sm bg-white/75 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 shadow-sm flex'>
-      <div className='container w-full flex justify-between items-center'>
+      <div className='container max-w-7xl mx-auto w-full flex justify-between items-center'>
         <Link
           href='/'
           className='mx-2 md:mx-5'>
