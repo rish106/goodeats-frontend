@@ -11,12 +11,12 @@ const page: React.FC = () => {
         <Image src='/food-1.jpg' alt='' width={600} height={600} className='w-full h-full object-contain' />
       </div>
       <div className='mx-auto flex w-full flex-col justify-center space-y-6 max-w-lg px-10'>
-        <div className='flex flex-col items-center gap-6 text-center'>
-          <LargeHeading>Welcome back!</LargeHeading>
+        <div className='flex flex-col items-center gap-5 text-center'>
+          <LargeHeading>Welcome!</LargeHeading>
           <SignupForm />
           <div className='flex items-center'>
-            <Paragraph>
-              Don't have an account? {' '}
+            <Paragraph size='sm'>
+              Have an account already? {' '}
               <Link href='/login' className='underline underline-offset-2 font-medium text-black'>
                 Login
               </Link>

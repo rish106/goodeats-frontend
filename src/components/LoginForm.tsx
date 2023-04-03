@@ -5,31 +5,37 @@ import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 
 const LoginForm = () => (
-  <Form.Root className='w-full items-center mt-4'>
-    <Form.Field className='grid mb-6' name='email'>
-      <div className='flex items-baseline text-24 justify-between'>
-        <Form.Label className='text-black font-medium leading-35'>Email</Form.Label>
-        <Form.Message className='text-black text-8 opacity-80' match='valueMissing'>
+  <Form.Root className='w-[360px] items-center'>
+    <Form.Field className='grid mb-[15px]' name='email'>
+      <div className='flex items-baseline justify-between'>
+        <Form.Label>
+          Email
+        </Form.Label>
+        <Form.Message className='text-black text-[13px] opacity-80' match='valueMissing'>
           Please enter your email
         </Form.Message>
-        <Form.Message className='text-black text-8 opacity-80' match='typeMismatch'>
+        <Form.Message className='text-black text-[13px] opacity-80' match='typeMismatch'>
           Please provide a valid email
         </Form.Message>
       </div>
       <Form.Control asChild>
-        <input className='w-full inline-flex items-center justify-center rounded-4 text-black text-24 h-35 leading-1 bg-white hover:shadow-1-black focus:shadow-2-black selection:bg-black selection:text-white' type='email' required />
+        <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9' type='email' required />
       </Form.Control>
     </Form.Field>
-    <Form.Field className='grid mb-6' name='password'>
+    <Form.Field className='grid mb-[15px]' name='password'>
       <div className='flex items-baseline justify-between'>
-        <Form.Label className='text-black text-24 font-medium leading-35'>Password</Form.Label>
+        <Form.Label>
+          Password
+        </Form.Label>
       </div>
       <Form.Control asChild>
-        <input className='w-full inline-flex items-center justify-center rounded-4 text-black text-24 bg-white shadow-1-black' type='password' required />
+        <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white selection:bg-blackA9' type='password' required />
       </Form.Control>
     </Form.Field>
     <Form.Submit asChild>
-      <Button>Login</Button>
+      <Button className='w-full'>
+        Login
+      </Button>
     </Form.Submit>
   </Form.Root>
 );

@@ -11,23 +11,20 @@ import {
 } from '@/components/ui/DropdownMenu'
 import Link from 'next/link'
 
-export function RecipesMenu() {
+export function EnterMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='link' className='center'>
-          Recipes <Icons.ChevronDown size={16} />
+          Enter <Icons.ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuItem>
-          <Link href='/all-recipes' className='w-full'>All Recipes</Link>
+          <Link href='/login' className='w-full'>Login</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href='/post-recipe' className='w-full'>Post a Recipe</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href='/collections' className='w-full'>Collections</Link>
+          <Link href='/signup' className='w-full'>Sign Up</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

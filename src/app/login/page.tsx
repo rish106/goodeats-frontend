@@ -12,12 +12,12 @@ const page: React.FC = () => {
         <Image src='/food-1.jpg' alt='' width={1000} height={1000} className='w-full h-full object-contain' />
       </div>
       <div className='mx-auto flex w-full flex-col items-center justify-center space-y-6 max-w-lg px-10'>
-        <div className='flex flex-col items-center gap-6 text-center'>
+        <div className='flex flex-col items-center gap-5 text-center'>
           <LargeHeading>Welcome back!</LargeHeading>
           <LoginForm />
           <div className='flex items-center'>
-            <Paragraph>
-              Don't have an account? {' '}
+            <Paragraph size='sm'>
+              Don\'t have an account? {' '}
               <Link href='/signup' className='underline underline-offset-2 font-medium text-black'>
                 Sign Up
               </Link>
