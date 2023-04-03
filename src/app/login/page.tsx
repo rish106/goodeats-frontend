@@ -17,7 +17,7 @@ const page: React.FC = () => {
           <LoginForm />
           <div className='flex items-center'>
             <Paragraph size='sm'>
-              Don\'t have an account? {' '}
+              Don&apos;t have an account? {' '}
               <Link href='/signup' className='underline underline-offset-2 font-medium text-black'>
                 Sign Up
               </Link>
