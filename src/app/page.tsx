@@ -1,13 +1,24 @@
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import { Metadata } from 'next'
+import LargeHeading from '@/components/ui/LargeHeading'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const metadata: Metadata = {
+  title: 'Goodeats',
+  description: 'What would you like to cook today mf',
+}
+
 export default function Home() {
   return (
-  <main className='bg-red-500'>
-    Hello world!
-  </main>
+    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+      <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+        <div className='h-full gap-6 flex flex-col justify-start lg:justify-center items-center lg:items-start'>
+          <LargeHeading size='lg' className='text-black' text='check'>
+            Get some nice recipes
+          </LargeHeading>
+        </div>
+      </div>
+    </div>
   )
 }

@@ -7,7 +7,7 @@ interface ParagraphProps {
 }
 
 const ParagraphVariants = cva(
-  'max-w-prose text-slate-700 dark:text-slate-300 mb-2 text-center',
+  'max-w-prose text-slate-700 mb-2 text-center',
   {
     variants: {
       size: {
