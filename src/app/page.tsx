@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Goodeats',
-  description: 'What would you like to cook today mf',
+  description: 'What would you like to cook today',
 }
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
         <div className='h-full gap-6 flex flex-col justify-start lg:justify-center items-center lg:items-start'>
-          <LargeHeading size='lg' className='text-black' text='check'>
+          <LargeHeading size='lg' className='text-black'>
             Get some nice recipes
           </LargeHeading>
         </div>

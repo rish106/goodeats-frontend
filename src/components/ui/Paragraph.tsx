@@ -2,9 +2,7 @@ import { HTMLAttributes, forwardRef } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-interface ParagraphProps {
-  text: string
-}
+interface ParagraphProps {}
 
 const ParagraphVariants = cva(
   'max-w-prose text-slate-700 mb-2 text-center',

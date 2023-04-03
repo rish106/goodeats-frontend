@@ -2,9 +2,7 @@ import { HTMLAttributes, forwardRef } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
-interface LargeHeadingProps {
-  text: string
-}
+interface LargeHeadingProps {}
 
 const LargeHeadingVariants = cva(
   'text-black text-center lg:text-left font-extrabold leading-tight tracking-tighter',

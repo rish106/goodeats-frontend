@@ -1,6 +1,5 @@
-import { getServerSession } from 'next-auth'
 import Link from 'next/link'
-import { buttonVariants } from '@/components/ui/Button'
+import { buttonVariants } from '@/ui/Button'
 import { RecipesMenu } from '@/components/RecipesMenu'
 
 interface NavbarProps {}
@@ -20,7 +19,7 @@ const Navbar = () => {
         <div className='md:hidden'>
         </div>
 
-        <div className='hidden md:flex gap-4'>
+        <div className='hidden md:flex gap-6'>
           <Link
             href='/about-us'
             className={buttonVariants({ variant: 'link' })}>

@@ -3,14 +3,14 @@
 import * as React from 'react'
 
 import { Icons } from '@/components/Icons'
-import { Button, buttonVariants } from '@/components/ui/Button'
-import { Link } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
+import Link from 'next/link'
 
 export function RecipesMenu() {
 
@@ -23,15 +23,13 @@ export function RecipesMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuItem>
-          <a href='/all-recipes'>All Recipes</a>
+          <Link href='/all-recipes' className='w-full'>All Recipes</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href='/post-recipe'>Post a Recipe</a>
+          <Link href='/post-recipe' className='w-full'>Post a Recipe</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          {/* <Link href='/collections' className={buttonVariants({ variant: 'link' })}> */}
-            <a href='/collections'>Collections</a>
-          {/* </Link> */}
+          <Link href='/collections' className='w-full'>Collections</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

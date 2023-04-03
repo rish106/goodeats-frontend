@@ -4,9 +4,6 @@ export const Icons = {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  Sun,
-  Moon,
-  Laptop,
 }
 
 export default Icons
