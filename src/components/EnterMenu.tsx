@@ -21,10 +21,14 @@ export function EnterMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuItem>
-          <Link href='/login' className='w-full'>Login</Link>
+          <Link href='/login' className='w-full'>
+            Login
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href='/signup' className='w-full'>Sign Up</Link>
+          <Link href='/signup' className='w-full'>
+            Sign Up
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
