@@ -1,6 +1,9 @@
 import * as React from 'react'
 import LargeHeading from '@/ui/LargeHeading'
+import Image from 'next/image'
+import About from '@/components/About'
 
+const imageSize = 40;
 const page: React.FC = () => {
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
@@ -9,13 +12,24 @@ const page: React.FC = () => {
           <LargeHeading size='lg' className='text-black'>
             About Us
           </LargeHeading>
-          <div className='grid items-center justify-center'>
-            <div>
-              <span>abcd</span>
-            </div>
-            <div>
-              <span>abcd</span>
-            </div>
+          
+          <div className='flex justify-center flex-row  gap-10 md:gap-20 items-start'> 
+             
+            <About Name='Dhruv Ahlawat' Role='Full Stack Developer' 
+            ImagePath='/MyPhoto.jpeg' imageSize={imageSize} Description='the Brains behind the project' 
+            GithubIds='DhruvAhlawat'/>
+
+            <About Name='Rishabh Verma' Role='Frontend Master' 
+            ImagePath='/Rishabh.png' imageSize={imageSize} Description='The reason why we banged our heads over learning Tailwind and Typescript and Nextjs' 
+            GithubIds='rish106'/>
+
+            <About Name='Garv Nagori' Role='Flask video watcher' 
+            ImagePath='/Rishabh.png' imageSize={imageSize} Description='Learnt Flask from youtube' 
+            GithubIds='DarkMatter314'/>
+
+            <About Name='Naman Agarwal' Role='ER diagram expert' 
+            ImagePath='/Rishabh.png' imageSize={imageSize} Description='made ER diagrams and (possibly?) did MySQL'
+            GithubIds='Naman0411' />
           </div>
         </div>
       </div>
