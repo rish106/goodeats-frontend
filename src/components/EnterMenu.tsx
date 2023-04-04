@@ -19,7 +19,7 @@ export function EnterMenu() {
           Enter <Icons.ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end' forceMount>
+      <DropdownMenuContent align='end'>
         <DropdownMenuItem>
           <Link href='/login' className='w-full'>
             Login

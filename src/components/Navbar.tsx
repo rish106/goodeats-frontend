@@ -12,7 +12,7 @@ const Navbar = () => {
     <div className='fixed backdrop-blur-sm bg-orange-400/75 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 shadow-sm flex'>
       <div className='container max-w-full w-full flex justify-between items-center mx-2 md:mx-5'>
         <Link href='/'>
-          <Image src='/logo.png' alt='Goodeats' width={60} height={60} />
+          <Image src='/logo.png' alt='Goodeats' width={50} height={50} />
         </Link>
 
         <div className='md:hidden'>

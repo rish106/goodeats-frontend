@@ -5,7 +5,7 @@ import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 
 const SignupForm = () => (
-  <Form.Root className='w-[360px] items-center'>
+  <Form.Root className='w-[360px] items-center px-8 md:px-0'>
     <Form.Field className='grid mb-[10px]' name='username'>
       <div className='flex items-baseline justify-between'>
         <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
