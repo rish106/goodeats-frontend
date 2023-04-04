@@ -21,7 +21,7 @@ export function RecipesMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuItem>
-          <Link href='/all-recipes' className='w-full'>All Recipes</Link>
+          <Link href='/recipes' className='w-full'>All Recipes</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link href='/post-recipe' className='w-full'>Post a Recipe</Link>
