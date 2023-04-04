@@ -8,7 +8,7 @@ const page: React.FC = () => {
   return (
     <div className='max-w-full items-center flex flex-col px-8 py-4 flex-wrap gap-6 flex-1 mt-[80px]'>
       {feedRecipes.map((recipe) => (
-        <div className='flex flex-col md:flex-row gap-3 min-w-[360px] md:w-[520px] lg:w-[800px] max-w-7xl'>
+        <div key={ recipe.recipeId } className='flex flex-col md:flex-row gap-3 min-w-[360px] md:w-[520px] lg:w-[800px] max-w-7xl'>
           <div className=''>
             <Image
               src={ recipe.imageUrl }
