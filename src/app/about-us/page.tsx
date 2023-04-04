@@ -13,7 +13,7 @@ const page: React.FC = () => {
             About Us
           </LargeHeading>
           
-          <div className='flex justify-center flex-row  gap-10 md:gap-20 items-start'> 
+          <div className='flex justify-center flex-row  gap-7 md:gap-20 items-start'> 
              
             <About Name='Dhruv Ahlawat' Role='Full Stack Developer' 
             ImagePath='/MyPhoto.jpeg' imageSize={imageSize} Description='the Brains behind the project' 
