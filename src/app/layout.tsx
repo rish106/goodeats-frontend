@@ -20,7 +20,6 @@ export default function RootLayout({
           <Navbar />
           <main>{children}</main>
         </Providers>
-        <div className='h-40 md:hidden' />
       </body>
     </html>
   )
