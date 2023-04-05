@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Button, buttonVariants, IconButton } from '@/ui/Button'
+import { buttonVariants, IconButton } from '@/ui/Button'
 import { RecipesMenu } from '@/components/RecipesMenu'
-import { EnterMenu } from '@/components/EnterMenu'
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -35,17 +34,19 @@ const Navbar = () => {
           </Link>
 
           <RecipesMenu />
+
           <Link
             href='/login'
             className={cn(buttonVariants({ variant: 'link' }), 'hover:bg-transparent')}>
             Login
           </Link>
+
           <Link
             href='/signup'
             className={cn(buttonVariants({ variant: 'outline' }), 'text-black border-black hover:text-slate-600 hover:border-slate-600')}>
             Sign up
           </Link>
-          {/* <EnterMenu /> */}
+
         </div>
       </div>
     </div>
