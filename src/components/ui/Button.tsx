@@ -4,7 +4,7 @@ import { Loader2 } from 'lucide-react'
 import * as React from 'react'
 
 const buttonVariants = cva(
-  'active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-100 disabled:opacity-50 disabled:pointer-events-none',
+  'active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       variant: {
@@ -12,7 +12,7 @@ const buttonVariants = cva(
           'bg-slate-900 text-white hover:bg-slate-800',
         destructive: 'text-white hover:bg-red-600',
         outline:
-          'bg-slate-900 text-white hover:bg-slate-800 border border-slate-200',
+          'bg-transparent text-white border border-slate-200',
         subtle:
           'bg-slate-100 text-slate-900 hover:bg-slate-200',
         ghost:
@@ -53,29 +53,59 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 )
 
-type IconButtonProps = {
-  icon: React.FC<{ className?: string }>;
-  size?: number;
-  className?: string;
-};
 
-const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, size = 8, className = '', ...props }) => {
+
+const iconButtonVariants = cva(
+  'active:scale-95 inline-flex items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 disabled:opacity-50 disabled:pointer-events-none',
+  {
+    variants: {
+      variant: {
+        default:
+          'bg-slate-900 hover:bg-slate-800',
+        destructive: 'hover:bg-red-600',
+        outline:
+          'bg-slate-900 hover:bg-slate-800 border border-slate-200',
+        subtle:
+          'bg-slate-100 hover:bg-slate-200',
+        ghost:
+          'bg-transparent hover:bg-slate-100 data-[state=open]:bg-transparent',
+        link: 'bg-transparent underline-offset-4 hover:underline hover:bg-transparent',
+      },
+      size: {
+        default: 'h-10 w-10',
+        sm: 'h-8 w-8',
+        lg: 'h-11 w-11',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+)
+
+export interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  VariantProps<typeof iconButtonVariants> {
+  icon: React.FC<{ className?: string }>
+  isLoading?: boolean
+}
+
+const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ icon: Icon, className = '', variant, size, ...props }, ref) => {
   return (
     <button
       type="button"
-      className={cn(
-        'inline-flex items-center justify-center rounded-full border border-transparent shadow-sm text-black hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-300',
-        `h-${size} w-${size}`, className
-      )}
+      className={cn(iconButtonVariants({ variant, size, className}))}
+      ref={ref}
       {...props}>
-      <div className='flex items-center justify-center'>
-        <Icon className={`h-${size-1} w-${size-1}`} aria-hidden='true' />
-      </div>
+        <Icon className='sm:scale-75 md:scale-100' aria-hidden='true' />
     </button>
   );
-};
+}
+)
 
 
 Button.displayName = 'Button'
 
-export { Button, buttonVariants, IconButton }
+export { Button, buttonVariants, IconButton, iconButtonVariants }
