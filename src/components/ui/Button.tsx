@@ -52,6 +52,30 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
+
+type IconButtonProps = {
+  icon: React.FC<{ className?: string }>;
+  size?: number;
+  className?: string;
+};
+
+const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, size = 8, className = '', ...props }) => {
+  return (
+    <button
+      type="button"
+      className={cn(
+        'inline-flex items-center justify-center rounded-full border border-transparent shadow-sm text-black hover:bg-orange-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-300',
+        `h-${size} w-${size}`, className
+      )}
+      {...props}>
+      <div className='flex items-center justify-center'>
+        <Icon className={`h-${size-1} w-${size-1}`} aria-hidden='true' />
+      </div>
+    </button>
+  );
+};
+
+
 Button.displayName = 'Button'
 
-export { Button, buttonVariants }
+export { Button, buttonVariants, IconButton }

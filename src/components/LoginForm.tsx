@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react';
 import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 
