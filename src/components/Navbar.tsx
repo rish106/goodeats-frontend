@@ -5,6 +5,8 @@ import { RecipesMenu } from '@/components/RecipesMenu'
 import { EnterMenu } from '@/components/EnterMenu'
 import { Search } from 'lucide-react'
 
+const id = 'yoyo';
+
 const Navbar = () => {
   // const session = await getServerSession()
 
@@ -25,11 +27,17 @@ const Navbar = () => {
           <Button variant='ghost'>
             <Search />
           </Button>
+
           <Link
-            href='/about-us'
+            href='/about-us' 
             className={buttonVariants({ variant: 'link' })}>
             About Us
           </Link>
+
+          <Link  href={`/recipes/${id}`} className={buttonVariants({ variant : 'link'})}>
+            RecipeID
+          </Link>
+
           <RecipesMenu />
           <EnterMenu />
         </div>
