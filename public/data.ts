@@ -19,7 +19,7 @@ export const feedRecipes: Array<Recipe> = [
     name: 'Chicken Parmesan',
     ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
-    username: 'John Doe',
+    username: 'john_doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
@@ -99,3 +99,25 @@ export const feedRecipes: Array<Recipe> = [
     reviewcount: 10
   },
 ];
+
+interface Collection {
+  collectionId: number;
+  name: string;
+  username: string;
+  recipeList: Array<Recipe>;
+}
+
+export const feedCollections: Array<Collection> = [
+  {
+    collectionId: 1,
+    name: 'non veg',
+    username: 'john_doe',
+    recipeList: [feedRecipes[0], feedRecipes[1], feedRecipes[2]]
+  },
+  {
+    collectionId: 2,
+    name: 'non veg',
+    username: 'john_doe',
+    recipeList: [feedRecipes[0], feedRecipes[1], feedRecipes[2]]
+  },
+]
