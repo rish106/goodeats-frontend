@@ -3,6 +3,12 @@ import Paragraph from '@/ui/Paragraph'
 import Link from 'next/link'
 import Image from 'next/image'
 import LoginForm from '@/components/LoginForm'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description: 'Login to your account',
+}
 
 const page: React.FC = () => {
   return (
