@@ -10,9 +10,4 @@ const Post : React.FC = () => {
   return <p>Post: {id}</p>
 }
 
-
-export async function getStaticPaths() {
-    // Return a list of possible value for id
-  }
-
 export default Post
