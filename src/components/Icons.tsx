@@ -6,7 +6,8 @@ import { ChevronLeft,
   Plus,
   MessageSquare,
   Share,
-  Star } from 'lucide-react'
+  Star,
+  Menu } from 'lucide-react'
 
 export const Icons = {
   ChevronLeft,
@@ -18,6 +19,7 @@ export const Icons = {
   MessageSquare,
   Share,
   Star,
+  Menu,
 }
 
 export default Icons

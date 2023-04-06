@@ -10,11 +10,11 @@ const page: React.FC = () => {
       <div className='hidden lg:flex max-w-7xl w-1/2 h-full px-10'>
         <Image src='/food-1.jpg' alt='' width={600} height={600} className='w-full h-full object-contain' />
       </div>
-      <div className='mx-auto max-w-7xl w-1/2 flex flex-col justify-center space-y-6 px-10'>
+      <div className='mx-auto max-w-7xl w-1/2 flex flex-col items-center space-y-6 px-10'>
         <div className='flex flex-col items-center gap-5 text-center'>
           <LargeHeading>Welcome!</LargeHeading>
-          <SignupForm />
-          <div className='flex items-center'>
+          <div className='flex flex-col items-center gap-2 text-center'>
+            <SignupForm />
             <Paragraph size='sm'>
               Have an account already? {' '}
               <Link href='/login' className='underline underline-offset-2 font-medium text-black'>

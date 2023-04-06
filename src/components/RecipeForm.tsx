@@ -19,7 +19,7 @@ const RecipeForm = () => (
       </Form.Control>
     </Form.Field>
     <div className='flex w-full md:gap-[10px] gap-0 md:flex-row flex-col'>
-      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='select-time-type'>
+      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='selectMealType'>
         <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
           Best served in
         </Form.Label>
@@ -27,7 +27,7 @@ const RecipeForm = () => (
           <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
         </Form.Control>
       </Form.Field>
-      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='select-veg-type'>
+      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='selectVegType'>
         <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
           Made for
         </Form.Label>
@@ -37,7 +37,7 @@ const RecipeForm = () => (
       </Form.Field>
     </div>
     <div className='flex w-full md:gap-[10px] gap-0 md:flex-row flex-col'>
-      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='select-time-type'>
+      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='cookTime'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
             Cook time
@@ -50,7 +50,7 @@ const RecipeForm = () => (
           <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
         </Form.Control>
       </Form.Field>
-      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='select-veg-type'>
+      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='prepTime'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
             Prep time
@@ -64,7 +64,7 @@ const RecipeForm = () => (
         </Form.Control>
       </Form.Field>
     </div>
-    <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='password'>
+    <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='description'>
       <div className='flex items-baseline justify-between'>
         <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
           Description
@@ -77,7 +77,7 @@ const RecipeForm = () => (
         <textarea className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
       </Form.Control>
     </Form.Field>
-    <Form.Field className='grid mb-[15px]' name='password'>
+    <Form.Field className='grid mb-[15px]' name='instructions'>
       <div className='flex items-baseline justify-between'>
         <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
           Instructions

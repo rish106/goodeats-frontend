@@ -53,8 +53,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 )
 
-
-
 const iconButtonVariants = cva(
   'active:scale-95 inline-flex items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 disabled:opacity-50 disabled:pointer-events-none',
   {
@@ -99,13 +97,14 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         className={cn(iconButtonVariants({ variant, size, className }))}
         ref={ref}
         {...props}>
-        <Icon className='sm:scale-75 md:scale-100' aria-hidden='true' />
+        <Icon className='scale-90 md:scale-100' aria-hidden='true' />
       </button>
     );
   }
 )
 
 Button.displayName = 'Button'
+
 IconButton.displayName = 'IconButton'
 
 export { Button, buttonVariants, IconButton, iconButtonVariants }

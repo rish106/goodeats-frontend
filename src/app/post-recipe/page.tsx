@@ -1,6 +1,4 @@
 import LargeHeading from '@/components/ui/LargeHeading';
-import Paragraph from '@/components/ui/Paragraph';
-import Image from 'next/image';
 import React from 'react';
 import { Metadata } from 'next'
 import RecipeForm from '@/components/RecipeForm';
