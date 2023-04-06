@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface AboutProps 
+interface AboutProps
 {
     children?: React.ReactNode;
     Name: string;
@@ -15,8 +15,8 @@ interface AboutProps
 
 const About = ({children,Name,Role,ImagePath,Description,imageSize, GithubIds}:AboutProps) => {
     return (
-    <div className='flex flex-col justify-center gap-3 md:gap-5 w-40' >
-              <span><Image src={`${ImagePath}`} alt='Person' width={400} height={400} className={`h-${imageSize} justify-center object-contain hover:object-cover`} />
+    <div className='flex flex-col justify-center w-40' >
+              <span><Image src={`${ImagePath}`} alt='Person' width={400} height={400} className={`h-${imageSize} object-cover`} />
               <h3 className='text-black text-center text-xl font-medium'>{Name}</h3>
               <p className='flex text-black text-center text-sm font-medium flex-wrap justify-center'> <strong>{Role}</strong> <br/> {Description} <br/>
               <Link className='font-light underline underline-offset-2 hover:underline-offset-1 hover:font-medium text-slate-600' href={'https://Github.com/'.concat(GithubIds.toString())}> {GithubIds}</Link>
