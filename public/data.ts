@@ -1,7 +1,12 @@
+interface ingredient {
+  quantity: number;
+  name: string;
+}
+
 interface Recipe {
   recipeId: number;
   name: string;
-  ingredients: string;
+  ingredients: Array<ingredient>;
   instructions: string;
   username: string;
   rating: number;
@@ -17,8 +22,21 @@ export const feedRecipes: Array<Recipe> = [
   {
     recipeId: 1,
     name: 'Chicken Parmesan',
-    ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
+    ingredients: [
+      {
+        quantity: 1,
+        name: 'Chicken'
+      },
+      {
+        quantity: 2,
+        name: 'Parmesan'
+      },
+      {
+        quantity: 3,
+        name: 'Pasta'
+      }
+    ],
     username: 'john_doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
@@ -31,8 +49,21 @@ export const feedRecipes: Array<Recipe> = [
   {
     recipeId: 2,
     name: 'Chicken Parmesan',
-    ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
+    ingredients: [
+      {
+        quantity: 1,
+        name: 'Chicken'
+      },
+      {
+        quantity: 2,
+        name: 'Parmesan'
+      },
+      {
+        quantity: 3,
+        name: 'Pasta'
+      }
+    ],
     username: 'John Doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
@@ -45,8 +76,21 @@ export const feedRecipes: Array<Recipe> = [
   {
     recipeId: 3,
     name: 'Chicken Parmesan',
-    ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
+    ingredients: [
+      {
+        quantity: 1,
+        name: 'Chicken'
+      },
+      {
+        quantity: 2,
+        name: 'Parmesan'
+      },
+      {
+        quantity: 3,
+        name: 'Pasta'
+      }
+    ],
     username: 'John Doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
@@ -59,8 +103,21 @@ export const feedRecipes: Array<Recipe> = [
   {
     recipeId: 4,
     name: 'Chicken Parmesan',
-    ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
+    ingredients: [
+      {
+        quantity: 1,
+        name: 'Chicken'
+      },
+      {
+        quantity: 2,
+        name: 'Parmesan'
+      },
+      {
+        quantity: 3,
+        name: 'Pasta'
+      }
+    ],
     username: 'John Doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
@@ -73,8 +130,21 @@ export const feedRecipes: Array<Recipe> = [
   {
     recipeId: 5,
     name: 'Chicken Parmesan',
-    ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
+    ingredients: [
+      {
+        quantity: 1,
+        name: 'Chicken'
+      },
+      {
+        quantity: 2,
+        name: 'Parmesan'
+      },
+      {
+        quantity: 3,
+        name: 'Pasta'
+      }
+    ],
     username: 'John Doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
@@ -87,8 +157,21 @@ export const feedRecipes: Array<Recipe> = [
   {
     recipeId: 6,
     name: 'Chicken Parmesan',
-    ingredients: 'Chicken, Parmesan, Pasta',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
+    ingredients: [
+      {
+        quantity: 1,
+        name: 'Chicken'
+      },
+      {
+        quantity: 2,
+        name: 'Parmesan'
+      },
+      {
+        quantity: 3,
+        name: 'Pasta'
+      }
+    ],
     username: 'John Doe',
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',

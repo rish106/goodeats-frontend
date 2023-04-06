@@ -20,9 +20,9 @@ const page: React.FC = () => {
               Browse all Recipes
             </LargeHeading>
           </div>
-          <div className='h-full gap-6 flex flex-col justify-start items-center px-8 pb-8'>
+          <div className='h-full flex flex-col justify-start items-center px-8'>
             {feedRecipes.map((recipe) => (
-              <div key={recipe.recipeId} className='flex flex-col md:flex-row gap-4 min-w-[300px] md:w-[540px] lg:w-[900px] max-w-7xl'>
+              <div key={recipe.recipeId} className='flex flex-col md:flex-row gap-4 min-w-[300px] md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                 <div className=''>
                   <Image
                     src={recipe.imageUrl}

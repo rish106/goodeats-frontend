@@ -7,7 +7,7 @@ import { Icons } from '@/components/Icons'
 import MobileMenu from '@/components/MobileMenu'
 import { cn } from '@/lib/utils'
 
-const id = 'yoyo';
+const id = 1;
 
 const Navbar = () => {
   // const session = await getServerSession()

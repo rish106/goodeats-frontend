@@ -1,6 +1,5 @@
 import LargeHeading from '@/components/ui/LargeHeading';
 import Paragraph from '@/components/ui/Paragraph';
-import { RecipeActions } from '@/components/RecipeActions';
 import Image from 'next/image';
 import React from 'react';
 import { feedCollections } from '@/public/data';
@@ -20,19 +19,19 @@ const page: React.FC = () => {
               My Collections
             </LargeHeading>
           </div>
-          <div className='h-full gap-6 flex flex-col justify-start items-center w-4/5 min-w-[300px] px-8'>
+          <div className='h-full flex flex-col justify-start items-center w-full min-w-[300px] px-8'>
             {feedCollections.map((collection) => (
-              <div key={collection.collectionId} className='flex flex-col md:flex-row gap-4 w-4/5 min-w-[250px] items-start'>
+              <div key={collection.collectionId} className='flex flex-col items-center md:flex-row gap-4 min-w-[300px] md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                 <div className=''>
                   <Image
                     src={collection.imageUrl}
                     height={250}
                     width={250}
                     alt='thumbnail'
-                    className='rounded-lg'
+                    className='rounded-xl'
                   />
                 </div>
-                <div className='flex flex-col gap-1 w-[250px] md:w-[500px]'>
+                <div className='flex flex-col gap-1 w-[250px] md:w-full'>
                   <LargeHeading className='text-start' size='xs'>
                     {collection.name}
                   </LargeHeading>
