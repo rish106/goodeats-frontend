@@ -7,12 +7,10 @@ export function RecipeActions() {
       <div className='hidden md:flex flex-row items-center gap-2'>
         <IconButton icon={Icons.Heart} variant='ghost' />
         <IconButton icon={Icons.Plus} variant='ghost' />
-        <IconButton icon={Icons.Share} variant='ghost' />
       </div>
       <div className='md:hidden flex flex-row items-center gap-2'>
         <IconButton icon={Icons.Heart} variant='ghost' size='sm' />
         <IconButton icon={Icons.Plus} variant='ghost' size='sm' />
-        <IconButton icon={Icons.Share} variant='ghost' size='sm' />
       </div>
     </div>
   )

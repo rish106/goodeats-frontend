@@ -5,10 +5,10 @@ import About from '@/components/About'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Us',
+  title: 'Goodeats | About Us',
 }
 
-const imageSize = 40;
+const imageSize = 400;
 const page: React.FC = () => {
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>

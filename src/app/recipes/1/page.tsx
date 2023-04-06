@@ -18,21 +18,21 @@ const Post : React.FC = () => {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container max-w-full mx-auto w-full h-full'>
         <div className='h-full gap-0 flex flex-col justify-start items-center'>
-          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row md:px-10 bg-violet-800 w-full pb-8'>
-            <div className='flex flex-col justify-center items-center gap-2 sm:gap-[1px]'>
-              <LargeHeading className='text-white text-center w-full'>
+          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row md:px-10 bg-violet-800 w-full px-8 pb-8'>
+            <div className='flex flex-col justify-center items-center'>
+              <LargeHeading className='text-white text-center w-full pb-2'>
                 {post.name}
               </LargeHeading>
-              <LargeHeading size='xs' className='text-white font-bold'>
+              <LargeHeading size='xs' className='text-white font-bold pb-2'>
                 {`${post.username}`}
               </LargeHeading>
-              <Paragraph className='text-white flex flex-row items-center'>
+              <Paragraph className='text-white flex flex-row items-center pb-1'>
                 {`${post.rating}  `} <Icons.Star size={16} />
               </Paragraph>
-              <Paragraph className='text-white'>
+              <Paragraph className='text-white pb-1'>
                 {`Cook : ${post.cooktime}`}
               </Paragraph>
-              <Paragraph className='text-white'>
+              <Paragraph className='text-white pb-1'>
                 {`Prep : ${post.preptime}`}
               </Paragraph>
             </div>

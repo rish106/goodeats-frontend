@@ -7,7 +7,7 @@ import { feedRecipes } from '@/public/data';
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Browse Recipes',
+  title: 'Goodeats | Browse Recipes',
 }
 
 const page: React.FC = () => {
@@ -22,7 +22,7 @@ const page: React.FC = () => {
           </div>
           <div className='h-full flex flex-col justify-start items-center px-8'>
             {feedRecipes.map((recipe) => (
-              <div key={recipe.recipeId} className='flex flex-col md:flex-row gap-4 min-w-[300px] md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
+              <div key={recipe.recipeId} className='flex flex-col md:flex-row gap-4 min-w-[300px] md:w-[720px] lg:w-[900px] max-w-7xl pb-8'>
                 <div className=''>
                   <Image
                     src={recipe.imageUrl}
@@ -32,8 +32,8 @@ const page: React.FC = () => {
                     className='rounded-lg'
                   />
                 </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex flex-row lg:w-[600px] md:w-[450px] min-w-[300px] justify-between'>
+                <div className='flex flex-col'>
+                  <div className='flex flex-row lg:w-[600px] md:w-[450px] min-w-[300px] justify-between pb-1'>
                     <LargeHeading className='text-start' size='xs'>
                       {recipe.name}
                     </LargeHeading>

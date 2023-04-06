@@ -3,6 +3,11 @@ import Paragraph from '@/ui/Paragraph'
 import Link from 'next/link'
 import Image from 'next/image'
 import SignupForm from '@/components/SignupForm'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Goodeats | Sign Up',
+}
 
 const page: React.FC = () => {
   return (

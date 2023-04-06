@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 import RecipeForm from '@/components/RecipeForm';
 
 export const metadata: Metadata = {
-  title: 'Post recipe',
+  title: 'Goodeats | Post recipe',
 }
 
 const page: React.FC = () => {

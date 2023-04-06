@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Icons from '@/components/Icons';
 
 export const metadata: Metadata = {
-  title: 'My profile',
+  title: 'Goodeats | My profile',
 }
 
 const page: React.FC = () => {

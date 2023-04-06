@@ -1,12 +1,11 @@
 import LargeHeading from '@/components/ui/LargeHeading';
 import Paragraph from '@/components/ui/Paragraph';
 import Image from 'next/image';
-import React from 'react';
 import { feedCollections } from '@/public/data';
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'My Collections',
+  title: 'Goodeats | My Collections',
 }
 
 const page: React.FC = () => {
@@ -19,9 +18,9 @@ const page: React.FC = () => {
               My Collections
             </LargeHeading>
           </div>
-          <div className='h-full flex flex-col justify-start items-center w-full min-w-[300px] px-8'>
+          <div className='h-full flex flex-col justify-start items-center w-full px-8'>
             {feedCollections.map((collection) => (
-              <div key={collection.collectionId} className='flex flex-col items-center md:flex-row gap-4 min-w-[300px] md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
+              <div key={collection.collectionId} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                 <div className=''>
                   <Image
                     src={collection.imageUrl}
