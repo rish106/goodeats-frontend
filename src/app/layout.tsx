@@ -15,6 +15,7 @@ export default function RootLayout({
     <html
     lang="en"
     className={cn('bg-white text-slate-900 antialiased', inter.className)}>
+      <link rel='icon' href='/logo.png' />
       <body className='min-h-screen bg-slate-50 antialiased'>
         <Providers>
           <Navbar />
