@@ -46,14 +46,14 @@ const Post : React.FC = () => {
               <div className='flex flex-row justify-start items-center gap-8'>
                 <div className='flex flex-col justify-center items-center gap-1'>
                   {post.ingredients.map((ingredient) => (
-                    <Paragraph className='text-end'>
+                    <Paragraph key={ingredient.quantity} className='text-end'>
                         {ingredient.quantity}
                     </Paragraph>
                   ))}
                 </div>
                 <div className='flex flex-col justify-center items-center gap-1'>
                   {post.ingredients.map((ingredient) => (
-                    <Paragraph className='text-start w-full'>
+                    <Paragraph key={ingredient.name} className='text-start w-full'>
                         {ingredient.name}
                     </Paragraph>
                   ))}
