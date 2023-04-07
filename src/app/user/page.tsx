@@ -47,7 +47,7 @@ const page: React.FC = () => {
             <Link href='/change-password' className={buttonVariants({ variant: 'link' })}>
               Change password
             </Link>
-            <Button className='gap-2 bg-orange-300 hover:bg-orange-200 text-black'>
+            <Button className='flex flex-row items-center gap-2 bg-orange-300 hover:bg-orange-200 text-black'>
               <Icons.Trash /> Delete Account
             </Button>
           </div>
