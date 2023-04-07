@@ -1,0 +1,43 @@
+'use client'
+
+import { useState } from 'react';
+import Icons from '@/components/Icons';
+import { useRouter } from 'next/navigation';
+import { Button } from './ui/Button';
+
+type SearchBarProps = {
+  placeholder?: string;
+};
+
+export default function SearchBar({ placeholder }: SearchBarProps) {
+  const router = useRouter();
+  const [value, setValue] = useState('');
+
+  const handleSearch = () => {
+    router.push(`/recipes?search=${value}`)
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+
+  return (
+    <form onSubmit={handleSearch} className='flex flex-row gap-3 w-full items-center justify-center px-8'>
+      <div className='relative w-full'>
+        <input
+          type='text'
+          className='block h-[40px] w-full pl-10 pr-3 py-2 border rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 sm:text-sm'
+          placeholder={placeholder}
+          value={value}
+          onChange={handleInputChange}
+        />
+        <div className='absolute inset-y-0 left-0 flex items-center pl-3'>
+          <Icons.Search className='h-5 w-5 text-gray-400' aria-hidden='true' />
+        </div>
+      </div>
+      <Button variant='default' type='submit' className='bg-orange-300 hover:bg-orange-400 text-black'>
+        Search
+      </Button>
+    </form>
+  );
+}
