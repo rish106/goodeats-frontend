@@ -29,7 +29,7 @@ const RecipeForm = () => (
       </Form.Field>
       <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='selectVegType'>
         <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
-          Made for
+          Diet type
         </Form.Label>
         <Form.Control asChild>
           <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
@@ -74,7 +74,7 @@ const RecipeForm = () => (
         </Form.Message>
       </div>
       <Form.Control asChild>
-        <textarea className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
+        <textarea className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
       </Form.Control>
     </Form.Field>
     <Form.Field className='grid mb-[15px]' name='instructions'>
@@ -87,14 +87,16 @@ const RecipeForm = () => (
         </Form.Message>
       </div>
       <Form.Control asChild>
-        <textarea className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
+        <textarea className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
       </Form.Control>
     </Form.Field>
-    <Form.Submit asChild>
-      <Button className='w-full'>
-        Post
-      </Button>
-    </Form.Submit>
+    <div className='flex flex-row w-full justify-center md:justify-end'>
+      <Form.Submit asChild>
+        <Button className='w-full md:w-1/2'>
+          Post
+        </Button>
+      </Form.Submit>
+    </div>
   </Form.Root>
 );
 

@@ -1,4 +1,5 @@
-import { ChevronLeft,
+import {
+  ChevronLeft,
   ChevronRight,
   ChevronDown,
   Search,
@@ -7,7 +8,9 @@ import { ChevronLeft,
   MessageSquare,
   Star,
   Menu,
-  Trash } from 'lucide-react'
+  Trash,
+  X,
+} from 'lucide-react'
 
 export const Icons = {
   ChevronLeft,
@@ -20,6 +23,7 @@ export const Icons = {
   Star,
   Menu,
   Trash,
+  X,
 }
 
 export default Icons

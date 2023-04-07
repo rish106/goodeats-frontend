@@ -3,6 +3,7 @@ import Paragraph from '@/components/ui/Paragraph';
 import Image from 'next/image';
 import { feedCollections } from '@/public/data';
 import { Metadata } from 'next'
+import NewCollectionDialog from '@/components/NewCollectionDialog';
 
 export const metadata: Metadata = {
   title: 'Goodeats | My Collections',
@@ -13,10 +14,11 @@ const page: React.FC = () => {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
         <div className='h-full gap-8 flex flex-col justify-start items-center'>
-          <div className='flex flex-col items-center gap-3'>
+          <div className='flex flex-row items-center gap-6'>
             <LargeHeading>
               My Collections
             </LargeHeading>
+            <NewCollectionDialog />
           </div>
           <div className='h-full flex flex-col justify-start items-center w-full px-8'>
             {feedCollections.map((collection) => (

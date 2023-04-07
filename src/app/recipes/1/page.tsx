@@ -5,6 +5,7 @@ import Paragraph from '@/components/ui/Paragraph';
 import Image from 'next/image';
 import { feedRecipes } from '@/public/data';
 import Icons from '@/components/Icons';
+import CommentForm from '@/components/CommentForm';
 
 // import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
@@ -38,20 +39,20 @@ const Post : React.FC = () => {
             </div>
             <Image src={post.imageUrl} height={500} width={500} alt='thumbnail' className='rounded-xl' />
           </div>
-          <div className='flex flex-col justify-center gap-32 md:flex-row bg-slate-100 w-full pt-8 pb-8'>
+          <div className='flex flex-col justify-center gap-6 md:gap-32 md:flex-row bg-slate-100 w-full pt-8 pb-8'>
             <div className='flex flex-col justify-start items-center gap-1'>
               <LargeHeading size='xs'>
                Ingredients
               </LargeHeading>
               <div className='flex flex-row justify-start items-center gap-8'>
-                <div className='flex flex-col justify-center items-center gap-1'>
+                <div className='flex flex-col justify-center items-center'>
                   {post.ingredients.map((ingredient) => (
                     <Paragraph key={ingredient.quantity} className='text-end'>
                         {ingredient.quantity}
                     </Paragraph>
                   ))}
                 </div>
-                <div className='flex flex-col justify-center items-center gap-1'>
+                <div className='flex flex-col justify-center items-center'>
                   {post.ingredients.map((ingredient) => (
                     <Paragraph key={ingredient.name} className='text-start w-full'>
                         {ingredient.name}
@@ -60,7 +61,7 @@ const Post : React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className='flex flex-col justify-start items-center gap-1'>
+            <div className='flex flex-col justify-start items-center gap-1 px-8'>
               <LargeHeading size='xs'>
                 Instructions
               </LargeHeading>
@@ -68,6 +69,9 @@ const Post : React.FC = () => {
                 {post.instructions}
               </Paragraph>
             </div>
+          </div>
+          <div className='flex flex-col justify-center bg-purple-800 w-full pt-8 pb-8'>
+            <CommentForm />
           </div>
         </div>
       </div>

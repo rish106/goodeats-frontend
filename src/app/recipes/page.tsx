@@ -5,6 +5,7 @@ import Image from 'next/image';
 import React from 'react';
 import { feedRecipes } from '@/public/data';
 import { Metadata } from 'next'
+import SearchBar from '@/components/SearchBar';
 
 export const metadata: Metadata = {
   title: 'Goodeats | Browse Recipes',
@@ -15,10 +16,11 @@ const page: React.FC = () => {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
         <div className='h-full gap-8 flex flex-col justify-start items-center'>
-          <div className='flex flex-col items-center gap-3'>
+          <div className='flex flex-col items-center gap-6'>
             <LargeHeading>
               Browse all Recipes
             </LargeHeading>
+            <SearchBar placeholder='Search recipes' />
           </div>
           <div className='h-full flex flex-col justify-start items-center px-8'>
             {feedRecipes.map((recipe) => (
