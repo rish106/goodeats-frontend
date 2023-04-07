@@ -14,15 +14,22 @@ export default function SearchBar({ placeholder }: SearchBarProps) {
   const [value, setValue] = useState('');
 
   const handleSearch = () => {
-    router.push(`/recipes?search=${value}`)
+    router.push(`/recipes?search=${value}`);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSearch();
+    }
+  };
+
   return (
-    <form onSubmit={handleSearch} className='flex flex-row gap-3 w-full items-center justify-center px-8'>
+    <div className='flex flex-row gap-3 w-full items-center justify-center px-8'>
       <div className='relative w-full'>
         <input
           type='text'
@@ -30,14 +37,15 @@ export default function SearchBar({ placeholder }: SearchBarProps) {
           placeholder={placeholder}
           value={value}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
         />
         <div className='absolute inset-y-0 left-0 flex items-center pl-3'>
           <Icons.Search className='h-5 w-5 text-gray-400' aria-hidden='true' />
         </div>
       </div>
-      <Button variant='default' type='submit' className='bg-orange-300 hover:bg-orange-400 text-black'>
+      <Button variant='default' onClick={() => router.push(`/recipes?search=${value}`)} className='bg-orange-300 hover:bg-orange-400 text-black'>
         Search
       </Button>
-    </form>
+    </div>
   );
 }
