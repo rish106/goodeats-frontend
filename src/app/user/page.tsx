@@ -20,8 +20,8 @@ const page: React.FC = () => {
             My profile
           </LargeHeading>
 
-          <div className='flex flex-col md:flex-row max-w-7xl lg:w-[854px] w-10/12 items-center px-8 md:px-0 gap-4 pt-6'>
-            <div className='flex flex-col justify-start w-full'>
+          <div className='flex flex-col md:flex-col max-w-7xl lg:w-[500px] w-5/12 items-center px-8 md:px-0 gap-2 lg:gap-3 pt-6'>
+            <div className='flex flex-col justify-start w-full '>
               <Paragraph size='sm' className='font-medium px-3 w-full text-start'>
                 Username
               </Paragraph>
@@ -41,9 +41,17 @@ const page: React.FC = () => {
               disabled
               className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
             </div>
-          </div>
-
-          <div className='flex flex-col md:flex-row max-w-7xl lg:w-[854px] w-10/12 items-center gap-4 md:gap-0 justify-between px-8 md:px-0'>
+            <div className='flex flex-col justify-start w-full'>
+              <Paragraph size='sm' className='font-medium px-3 w-full text-start'>
+                Name
+              </Paragraph>
+              <input
+              type='name'
+              value='name'
+              disabled
+              className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
+            </div>
+            <div className='flex flex-col md:flex-row max-w-7xl w-full items-center gap-4 md:gap-0 justify-between px-8 md:px-0'>
             <Link href='/change-password' className={buttonVariants({ variant: 'link' })}>
               Change password
             </Link>
@@ -51,6 +59,18 @@ const page: React.FC = () => {
               <Icons.Trash /> Delete Account
             </Button>
           </div>
+          <div className='h-5 md:h-7 lg:h-9'></div>
+          <div className='justify-start left-1 w-full gap-4' ></div>     
+          <Link href='/collections' className='text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
+               View collections >
+          </Link>     
+          <Link href='/recipes' className='text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
+               View your recipes >
+          </Link> 
+
+          </div>
+
+       
 
         </div>
       </div>
