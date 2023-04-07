@@ -60,17 +60,17 @@ const page: React.FC = () => {
             </Button>
           </div>
           <div className='h-5 md:h-7 lg:h-9'></div>
-          <div className='justify-start left-1 w-full gap-4' ></div>     
+          <div className='justify-start left-1 w-full gap-4' ></div>
           <Link href='/collections' className='text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
-               View collections >
-          </Link>     
+               View collections &gt;
+          </Link>
           <Link href='/recipes' className='text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
-               View your recipes >
-          </Link> 
+               View your recipes &gt;
+          </Link>
 
           </div>
 
-       
+
 
         </div>
       </div>
