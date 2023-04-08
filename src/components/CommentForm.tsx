@@ -15,12 +15,12 @@ const CommentForm = () => {
   return (
   <Form.Root className='w-full flex flex-col items-center justify-center'>
     <div className='w-full md:w-2/5 px-8 flex flex-col items-center mr-0 md:mr-5'>
-      <Form.Field className='w-full grid mb-[10px]' name=''>
+      <Form.Field className='w-full grid mb-[10px]' name='rating'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-white font-medium text-[15px] leading-[35px]'>
             Rate this recipe
           </Form.Label>
-          <Form.Message className='text-white text-[13px] opacity-80' match='valueMissing'>
+          <Form.Message className='text-white text-[13px] opacity-80' match='tooShort'>
             Please rate
           </Form.Message>
         </div>
@@ -38,7 +38,7 @@ const CommentForm = () => {
           </div>
         </Form.Control>
       </Form.Field>
-      <Form.Field className='w-full grid mb-[10px]' name=''>
+      <Form.Field className='w-full grid mb-[10px]' name='comment'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-white font-medium text-[15px] leading-[35px]'>
             Comment (optional)

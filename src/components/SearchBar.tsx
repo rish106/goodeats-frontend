@@ -5,16 +5,13 @@ import Icons from '@/components/Icons';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/Button';
 
-type SearchBarProps = {
-  placeholder?: string;
-};
-
-export default function SearchBar({ placeholder }: SearchBarProps) {
+export default function SearchBar() {
   const router = useRouter();
   const [value, setValue] = useState('');
 
   const handleSearch = () => {
-    router.push(`/recipes?search=${value}`);
+    var query = encodeURIComponent(value);
+    router.push(`/recipes?search=${query}`);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +31,7 @@ export default function SearchBar({ placeholder }: SearchBarProps) {
         <input
           type='text'
           className='block h-[40px] w-full pl-10 pr-3 py-2 border rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-orange-300 focus:ring focus:ring-orange-200 focus:ring-opacity-50 sm:text-sm'
-          placeholder={placeholder}
+          placeholder='Search recipes'
           value={value}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -43,7 +40,7 @@ export default function SearchBar({ placeholder }: SearchBarProps) {
           <Icons.Search className='h-5 w-5 text-gray-400' aria-hidden='true' />
         </div>
       </div>
-      <Button variant='default' onClick={() => router.push(`/recipes?search=${value}`)} className='bg-orange-300 hover:bg-orange-400 text-black'>
+      <Button variant='default' onClick={() => handleSearch()} className='bg-orange-300 hover:bg-orange-400 text-black'>
         Search
       </Button>
     </div>

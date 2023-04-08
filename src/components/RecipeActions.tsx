@@ -1,17 +1,12 @@
 import { Icons } from '@/components/Icons'
 import { IconButton } from '@/components/ui/Button'
+import AddToCollectionDialog from './AddToCollectionDialog'
 
 export function RecipeActions() {
   return (
-    <div>
-      <div className='hidden md:flex flex-row items-center gap-2'>
-        <IconButton icon={Icons.Heart} variant='ghost' />
-        <IconButton icon={Icons.Plus} variant='ghost' />
-      </div>
-      <div className='md:hidden flex flex-row items-center gap-2'>
-        <IconButton icon={Icons.Heart} variant='ghost' size='sm' />
-        <IconButton icon={Icons.Plus} variant='ghost' size='sm' />
-      </div>
+    <div className='flex flex-row items-center gap-2 text-white'>
+      <IconButton icon={Icons.Heart} variant='ghost' className='hover:bg-purple-700' />
+      <AddToCollectionDialog />
     </div>
   )
 }

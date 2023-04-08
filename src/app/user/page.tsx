@@ -61,11 +61,11 @@ const page: React.FC = () => {
           </div>
           <div className='h-5 md:h-7 lg:h-9'></div>
           <div className='justify-start left-1 w-full gap-4' ></div>
-          <Link href='/collections' className='text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
-               View collections &gt;
+          <Link href='/collections' className='flex flex-row items-center text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
+               View collections <Icons.ChevronRight size={16} />
           </Link>
-          <Link href='/recipes' className='text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
-               View your recipes &gt;
+          <Link href='/recipes' className='flex flex-row items-center text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
+               View your recipes <Icons.ChevronRight size={16} />
           </Link>
 
           </div>

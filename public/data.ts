@@ -217,4 +217,20 @@ export const feedCollections: Array<Collection> = [
     description: 'A delicious chicken parmesan collection',
     recipeList: [feedRecipes[0], feedRecipes[1], feedRecipes[2]]
   },
+  {
+    collectionId: 4,
+    name: 'non veg',
+    username: 'john_doe',
+    imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+    description: 'A delicious chicken parmesan collection',
+    recipeList: [feedRecipes[0], feedRecipes[1], feedRecipes[2]]
+  },
+  {
+    collectionId: 5,
+    name: 'non veg',
+    username: 'john_doe',
+    imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+    description: 'A delicious chicken parmesan collection',
+    recipeList: [feedRecipes[0], feedRecipes[1], feedRecipes[2]]
+  },
 ]

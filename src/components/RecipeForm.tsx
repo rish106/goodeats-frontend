@@ -15,27 +15,13 @@ const RecipeForm = () => (
         </Form.Message>
       </div>
       <Form.Control asChild>
-        <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='username' required />
+        <input
+        className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]'
+        type='username'
+        required
+        />
       </Form.Control>
     </Form.Field>
-    <div className='flex w-full md:gap-[10px] gap-0 md:flex-row flex-col'>
-      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='selectMealType'>
-        <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
-          Best served in
-        </Form.Label>
-        <Form.Control asChild>
-          <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
-        </Form.Control>
-      </Form.Field>
-      <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='selectVegType'>
-        <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
-          Diet type
-        </Form.Label>
-        <Form.Control asChild>
-          <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
-        </Form.Control>
-      </Form.Field>
-    </div>
     <div className='flex w-full md:gap-[10px] gap-0 md:flex-row flex-col'>
       <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='cookTime'>
         <div className='flex items-baseline justify-between'>
@@ -47,7 +33,11 @@ const RecipeForm = () => (
           </Form.Message>
         </div>
         <Form.Control asChild>
-          <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
+          <input
+          className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]'
+          type='email'
+          required
+          />
         </Form.Control>
       </Form.Field>
       <Form.Field className='grid mb-[6px] md:mb-[10px] w-full' name='prepTime'>
@@ -60,7 +50,11 @@ const RecipeForm = () => (
           </Form.Message>
         </div>
         <Form.Control asChild>
-          <input className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' type='email' required />
+          <input
+          className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]'
+          type='email'
+          required
+          />
         </Form.Control>
       </Form.Field>
     </div>
@@ -74,7 +68,10 @@ const RecipeForm = () => (
         </Form.Message>
       </div>
       <Form.Control asChild>
-        <textarea className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
+        <textarea
+        className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]'
+        required
+        />
       </Form.Control>
     </Form.Field>
     <Form.Field className='grid mb-[15px]' name='instructions'>
@@ -87,7 +84,10 @@ const RecipeForm = () => (
         </Form.Message>
       </div>
       <Form.Control asChild>
-        <textarea className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]' required />
+        <textarea
+        className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[100px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black]'
+        required
+        />
       </Form.Control>
     </Form.Field>
     <div className='flex flex-row w-full justify-center md:justify-end'>

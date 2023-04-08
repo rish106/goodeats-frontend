@@ -6,11 +6,10 @@ import { RecipesMenu } from '@/components/RecipesMenu'
 import { Icons } from '@/components/Icons'
 import MobileMenu from '@/components/MobileMenu'
 import { cn } from '@/lib/utils'
-
-const id = 1;
+import LoggedInMenu from '@/components/LoggedInMenu'
 
 const Navbar = () => {
-  // const session = await getServerSession()
+  const session = false
 
   return (
     <div className='fixed backdrop-blur-sm bg-orange-400/75 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 shadow-sm flex'>
@@ -29,12 +28,14 @@ const Navbar = () => {
             About Us
           </Link>
 
-          <Link  href={`/recipes/${id}`} className={buttonVariants({ variant : 'link'})}>
-            RecipeID
-          </Link>
-
           <RecipesMenu />
 
+          {session ? (
+            <>
+              <LoggedInMenu />
+            </>
+            ): (
+            <>
           <Link
             href='/login'
             className={buttonVariants({ variant: 'link' })}>
@@ -46,6 +47,7 @@ const Navbar = () => {
             className={cn(buttonVariants({ variant: 'outline' }), 'text-black border-black hover:text-slate-600 hover:border-slate-600')}>
             Sign up
           </Link>
+            </>)}
 
         </div>
       </div>

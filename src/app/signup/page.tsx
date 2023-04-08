@@ -18,7 +18,7 @@ const page: React.FC = () => {
       <div className='mx-auto max-w-7xl w-1/2 flex flex-col items-center space-y-6 px-10'>
         <div className='flex flex-col items-center gap-5 text-center'>
           <LargeHeading>Welcome!</LargeHeading>
-          <div className='flex flex-col items-center gap-2 text-center'>
+          <div className='flex flex-col items-center text-center'>
             <SignupForm />
             <Paragraph size='sm'>
               Have an account already? {' '}

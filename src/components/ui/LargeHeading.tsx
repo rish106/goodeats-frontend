@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 interface LargeHeadingProps {}
 
 const LargeHeadingVariants = cva(
-  'text-black text-center lg:text-left font-extrabold leading-tight tracking-tighter',
+  'text-black text-center font-extrabold leading-tight tracking-tighter',
   {
     variants: {
       size: {

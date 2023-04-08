@@ -8,22 +8,27 @@ import {
 } from '@/components/ui/DropdownMenu'
 import Link from 'next/link'
 
-export function RecipesMenu() {
+export function LoggedInMenu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant='link' className='center'>
-          Recipes <Icons.ChevronDown size={16} />
+          username <Icons.ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuItem>
-          <Link href='/recipes' className='w-full'>All Recipes</Link>
+          <Link href='/user' className='w-full'>My profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href='/post-recipe' className='w-full'>Post a Recipe</Link>
+          <Link href='/collections' className='w-full'>My Collections</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href='/signout' className='w-full'>Sign Out</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   )
 }
+
+export default LoggedInMenu
