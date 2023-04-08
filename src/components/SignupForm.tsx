@@ -16,7 +16,6 @@ const SignupForm = () => {
   async function submitForm(data) {
     // Simulate server-side validation
     // If there are no errors, submit the form
-    console.log('Form submitted!', data);
     const response = await fetch('http://127.0.0.1:5000/register', {
       method: 'POST',
       headers: {
@@ -24,11 +23,17 @@ const SignupForm = () => {
       },
       body: JSON.stringify(data),
     });
+    const json = await response.json();
     console.log(response);
+    console.log(json);
     if (response.ok) {
       console.log('success');
     } else {
-      throw Error(response.statusText);
+      let error_msg = "";
+      error_msg = json.email || "";
+      error_msg += json.username || "";
+      error_msg += json.password || "";
+      alert(error_msg);
     }
   }
 
