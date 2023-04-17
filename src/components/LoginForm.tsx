@@ -11,7 +11,7 @@ const LoginForm = () => {
   const router = useRouter()
 
   async function submitForm(data) {
-    const response = await fetch('http://127.0.0.1:5000/login', {
+    const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ const LoginForm = () => {
     const json = await response.json();
     alert(json.message);
     if (response.ok) {
-      const token = jwt.sign({ userId: data.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ userId: data.username }, 'mysecretkey', { expiresIn: '1h' });
       localStorage.setItem('token', token);
       router.push('/');
     }
