@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -9,7 +11,8 @@ import { cn } from '@/lib/utils'
 import LoggedInMenu from '@/components/LoggedInMenu'
 
 const Navbar = () => {
-  const session = false
+  const token = localStorage.getItem('token');
+  const session = (token == null) ? false : true;
 
   return (
     <div className='fixed backdrop-blur-sm bg-orange-400/75 z-50 top-0 left-0 right-0 h-20 border-b border-slate-300 shadow-sm flex'>
@@ -36,17 +39,17 @@ const Navbar = () => {
             </>
             ): (
             <>
-          <Link
-            href='/login'
-            className={buttonVariants({ variant: 'link' })}>
-            Login
-          </Link>
+              <Link
+                href='/login'
+                className={buttonVariants({ variant: 'link' })}>
+                Login
+              </Link>
 
-          <Link
-            href='/signup'
-            className={cn(buttonVariants({ variant: 'outline' }), 'text-black border-black hover:text-slate-600 hover:border-slate-600')}>
-            Sign up
-          </Link>
+              <Link
+                href='/signup'
+                className={cn(buttonVariants({ variant: 'outline' }), 'text-black border-black hover:text-slate-600 hover:border-slate-600')}>
+                Sign up
+              </Link>
             </>)}
 
         </div>

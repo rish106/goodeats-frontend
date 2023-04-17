@@ -15,7 +15,7 @@ interface RecipeCardProps {
 export function RecipeCard({recipeName, recipeAuthor, recipeImage, recipeDescription, recipeId}: RecipeCardProps) {
   return (
     <div key={recipeId} className='flex flex-col md:flex-row gap-4 w-full max-w-7xl'>
-      <Image src={recipeImage} alt={recipeName} width={200} height={200} className='rounded-lg' />
+      <Image src={`/static/recipe_pics/${recipeImage}`} alt={recipeName} width={200} height={200} className='rounded-lg' />
       <div className='flex flex-col'>
         <div className='flex flex-row w-full justify-between pb-1'>
           <LargeHeading className='text-start' size='xs'>

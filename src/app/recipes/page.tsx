@@ -24,7 +24,6 @@ async function getAllRecipes() {
 
 export default async function page() {
   let feedRecipes = await getAllRecipes();
-  feedRecipes = feedRecipes.slice(0, 10);
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>

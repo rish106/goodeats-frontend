@@ -3,14 +3,18 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  // output: 'export',
+  trailingSlash: true,
   images: {
-    remotePatterns: [
+    unoptimized: true,
+  },
+  async rewrites() {
+    return [
       {
-        protocol: "https",
-        hostname: "www.themealdb.com",
-        pathname: "/**",
+        source: '/api/:path*',
+        destination: 'http://127.0.0.1:5000/:path*',
       },
-    ],
+    ]
   },
 }
 

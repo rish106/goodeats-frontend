@@ -4,19 +4,9 @@ import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 import * as React from 'react';
 
-interface FormData {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  confirm_password: string;
-}
-
 const SignupForm = () => {
   async function submitForm(data) {
-    // Simulate server-side validation
-    // If there are no errors, submit the form
-    const response = await fetch('http://127.0.0.1:5000/register', {
+    const response = await fetch('/api/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

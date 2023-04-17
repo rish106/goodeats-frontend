@@ -13,17 +13,16 @@ interface ingredient {
   name: string;
 }
 
-// import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-
 async function getRecipe(recipeId: string) {
-  const res = await fetch(`http://127.0.0.1:5000/recipe/${recipeId}`);
+  const res = await fetch(`/api/recipe/${recipeId}`);
   return res.json();
 }
 
-const Page = async ({ params }) => {
-  // const router = useRouter()
-  // const id : string = router.query.id || '1'
-  // const post = feedRecipes[id?.toNumber()]
+interface PageProps {
+  params: { id: string };
+}
+
+const Page = async ({ params }: PageProps) => {
 
   const post = await getRecipe(params.id);
 
@@ -50,7 +49,7 @@ const Page = async ({ params }) => {
               </Paragraph>
               <RecipeActions />
             </div>
-            <Image src={post.recipe_image} alt='Recipe Image' width={500} height={500} />
+            <Image src={`/static/recipe_pics/${post.recipe_image}`} alt='Recipe Image' width={500} height={500} />
           </div>
           <div className='flex flex-col justify-center gap-6 md:gap-32 md:flex-row bg-slate-100 w-full pt-8 pb-8'>
             <div className='flex flex-col justify-start items-center gap-1'>
@@ -60,7 +59,7 @@ const Page = async ({ params }) => {
               <div className='flex flex-row justify-start items-center gap-8'>
                 <div className='flex flex-col justify-center items-center'>
                   {post.ingredients.map((ingredient: ingredient) => (
-                    <Paragraph key={ingredient.amount} className='text-end'>
+                    <Paragraph key={ingredient.name} className='text-end'>
                         {ingredient.amount}
                     </Paragraph>
                   ))}
