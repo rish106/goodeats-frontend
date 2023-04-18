@@ -3,8 +3,12 @@
 import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 import * as React from 'react';
+import { toast } from './ui/toast';
+import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
+  const router = useRouter();
+
   async function submitForm(data) {
     const response = await fetch('/api/register', {
       method: 'POST',
@@ -14,16 +18,29 @@ const SignupForm = () => {
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    console.log(response);
-    console.log(json);
     if (response.ok) {
-      console.log('success');
+      toast({
+        title: 'Successfully registered',
+        message: '',
+        type: 'success',
+        duration: 1000,
+      })
+      const token = json.token;
+      localStorage.setItem('token', token);
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
     } else {
       let error_msg = "";
       error_msg = json.email || "";
       error_msg += json.username || "";
       error_msg += json.password || "";
-      alert(error_msg);
+      toast({
+        title: 'Error',
+        message: error_msg,
+        type: 'error',
+        duration: 1000,
+      });
     }
   }
 
@@ -86,7 +103,7 @@ const SignupForm = () => {
           required />
         </Form.Control>
       </Form.Field>
-      <Form.Field className='grid mb-[15px]' name='password'>
+      <Form.Field className='grid mb-[10px]' name='password'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
             Password
