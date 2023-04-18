@@ -20,58 +20,54 @@ const page: React.FC = () => {
             My profile
           </LargeHeading>
 
-          <div className='flex flex-col md:flex-col max-w-7xl lg:w-[500px] w-5/12 items-center px-8 md:px-0 gap-2 lg:gap-3 pt-6'>
+          <div className='flex flex-col md:flex-col max-w-7xl lg:w-[500px] w-5/12 min-w-[360px] items-center px-8 md:px-0 gap-2 lg:gap-3 pt-6'>
             <div className='flex flex-col justify-start w-full '>
               <Paragraph size='sm' className='font-medium px-3 w-full text-start'>
                 Username
               </Paragraph>
               <input
-              type='text'
-              value='username'
-              disabled
-              className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
+                type='text'
+                value='username'
+                disabled
+                className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
             </div>
-            <div className='flex flex-col justify-start w-full'>
+            <div className='flex flex-col justify-start items-baseline w-full'>
               <Paragraph size='sm' className='font-medium px-3 w-full text-start'>
                 Email
               </Paragraph>
               <input
-              type='email'
-              value='email'
-              disabled
-              className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
+                type='email'
+                value='email'
+                disabled
+                className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
             </div>
-            <div className='flex flex-col justify-start w-full'>
+            <div className='flex flex-col justify-start items-baseline w-full'>
               <Paragraph size='sm' className='font-medium px-3 w-full text-start'>
                 Name
               </Paragraph>
               <input
-              type='name'
-              value='name'
-              disabled
-              className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
+                type='name'
+                value='name'
+                disabled
+                className='bg-gray-200 px-3 w-full py-2 rounded-md opacity-50 cursor-not-allowed' />
             </div>
             <div className='flex flex-col md:flex-row max-w-7xl w-full items-center gap-4 md:gap-0 justify-between px-8 md:px-0'>
-            <Link href='/change-password' className={buttonVariants({ variant: 'link' })}>
-              Change password
+              <Link href='/change-password' className={buttonVariants({ variant: 'link' })}>
+                Change password
+              </Link>
+              <Button className='bg-red-600 hover:bg-red-500 ring-red-400 gap-2'>
+                <Icons.Trash /> Delete Account
+              </Button>
+            </div>
+          </div>
+          <div className='flex flex-col items-center w-full gap-4 mt-4' >
+            <Link href='/collections' className='flex flex-row items-center text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
+              View collections <Icons.ChevronRight size={16} />
             </Link>
-            <Button className='flex flex-row items-center gap-2 bg-orange-300 hover:bg-orange-200 text-black'>
-              <Icons.Trash /> Delete Account
-            </Button>
+            <Link href='/recipes' className='flex flex-row items-center text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
+              View your recipes <Icons.ChevronRight size={16} />
+            </Link>
           </div>
-          <div className='h-5 md:h-7 lg:h-9'></div>
-          <div className='justify-start left-1 w-full gap-4' ></div>
-          <Link href='/collections' className='flex flex-row items-center text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
-               View collections <Icons.ChevronRight size={16} />
-          </Link>
-          <Link href='/recipes' className='flex flex-row items-center text-slate-700 left-0 hover:underline-offset-2 hover:underline sm:text-left'  >
-               View your recipes <Icons.ChevronRight size={16} />
-          </Link>
-
-          </div>
-
-
-
         </div>
       </div>
     </div>
