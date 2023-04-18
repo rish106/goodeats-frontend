@@ -2,19 +2,47 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { buttonVariants, IconButton } from '@/ui/Button'
+import { Button, buttonVariants, IconButton } from '@/ui/Button'
 import { Icons } from '@/components/Icons'
 import Drawer from '@mui/material/Drawer'
-import { cn } from '@/lib/utils'
+import jwt from 'jsonwebtoken'
 
 const MobileMenu = () => {
-  // const session = await getServerSession()
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
+  const [session, setSession] = React.useState(false);
+  const [username, setUsername] = React.useState('');
+
+  React.useEffect(() => {
+    const fetchToken = async () => {
+      // Check if there's a JWT token in localStorage
+      const token = localStorage.getItem('token');
+      if (token) {
+        const decodedToken = jwt.decode(token);
+        if (decodedToken) {
+          const decodedTokenPayload = decodedToken as jwt.JwtPayload;
+          const user = decodedTokenPayload.user;
+          setUsername(user);
+          setSession(true);
+        }
+      } else {
+        setSession(false);
+      }
+    }
+    fetchToken();
+    const intervalId = setInterval(fetchToken, 1000);
+    return () => clearInterval(intervalId);
+  }, []);
+
 
   function toggleDrawer() {
     setIsDrawerOpen(!isDrawerOpen);
   }
+
+  const signOut = () => {
+    localStorage.removeItem('token');
+    setSession(false);
+  };
 
   return (
     <div className='flex flex-row md:hidden gap-4'>
@@ -32,15 +60,15 @@ const MobileMenu = () => {
             <Link href='/post-recipe' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
               Post a Recipe
             </Link>
+            <Link href='/user' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
+              My profile
+            </Link>
             <Link href='/collections' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
-              Collections
+              My Collections
             </Link>
-            <Link href='/login' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
-              Login
-            </Link>
-            <Link href='/signup' className={cn(buttonVariants({ variant: 'outline' }), 'text-black border-black hover:text-slate-600 hover:border-slate-600')} onClick={toggleDrawer}>
-              Sign up
-            </Link>
+            <Button onClick={signOut} variant='link'>
+              Sign Out
+            </Button>
           </div>
         </div>
       </Drawer>
