@@ -1,11 +1,13 @@
 'use client'
 
+import Image from 'next/image';
+import useSWR from 'swr';
 import LargeHeading from '@/components/ui/LargeHeading';
 import Paragraph from '@/components/ui/Paragraph';
-import Image from 'next/image';
 import Icons from '@/components/Icons';
 import CommentForm from '@/components/CommentForm';
 import { RecipeActions } from '@/components/RecipeActions';
+import { CommentCard } from '@/components/CommentCard';
 // import { useRouter } from 'next/router';
 
 interface ingredient {
@@ -13,18 +15,41 @@ interface ingredient {
   name: string;
 }
 
-async function getRecipe(recipeId: string) {
-  const res = await fetch(`/api/recipe/${recipeId}`);
-  return res.json();
-}
-
 interface PageProps {
   params: { id: string };
 }
 
-const Page = async ({ params }: PageProps) => {
+const fetcher = async (url: string) => {
+  const res = await fetch(url)
+  const data = await res.json()
+  return data
+}
 
-  const post = await getRecipe(params.id);
+const Page = ({ params }: PageProps) => {
+
+  const recipeData = useSWR(`/api/recipe/${params.id}`, fetcher)
+  const commentData = useSWR(`/api/recipe/${params.id}/reviews`, fetcher)
+
+  if (recipeData.error || commentData.error) return (
+    <div className='pt-32'>
+      <LargeHeading>
+        Error fetching data
+      </LargeHeading>
+    </div>
+  )
+
+  if (!recipeData.data || !commentData.data) return (
+    <div className='pt-32'>
+      <LargeHeading>
+        Loading...
+      </LargeHeading>
+    </div>
+  )
+
+  const post = recipeData.data;
+  let comments = commentData.data.other_reviews || [];
+  // comments += commentData.data.user_reviews || [];
+  const comment = comments[0];
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
@@ -82,8 +107,19 @@ const Page = async ({ params }: PageProps) => {
               </Paragraph>
             </div>
           </div>
-          <div className='flex flex-col justify-center bg-purple-800 w-full pt-8 pb-8'>
-            <CommentForm />
+          <div className='flex flex-col items-center justify-center bg-purple-800 w-full pt-8 pb-8'>
+            <CommentForm id={params.id} />
+            {
+              comments.length === 0 ? (
+                <Paragraph className='text-white'>
+                  No reviews yet
+                </Paragraph>
+              ) : (
+                <>
+                  <CommentCard id={comment.id} key={comment.review_id} author={comment.user_id} message={comment.reviewText} rating={comment.rating} />
+                </>
+              )
+            }
           </div>
         </div>
       </div>

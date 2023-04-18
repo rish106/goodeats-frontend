@@ -12,7 +12,6 @@ export interface Recipe {
   rating: number;
   imageUrl: string;
   description: string;
-  datepublished: Date;
   cooktime: string;
   preptime: string;
   reviewcount: number;
@@ -41,7 +40,6 @@ export const feedRecipes: Array<Recipe> = [
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
-    datepublished: new Date(2023, 3, 1),
     cooktime: '30 minutes',
     preptime: '10 minutes',
     reviewcount: 10
@@ -68,7 +66,6 @@ export const feedRecipes: Array<Recipe> = [
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
-    datepublished: new Date(2023, 3, 1),
     cooktime: '30 minutes',
     preptime: '10 minutes',
     reviewcount: 10
@@ -95,7 +92,6 @@ export const feedRecipes: Array<Recipe> = [
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
-    datepublished: new Date(2023, 3, 1),
     cooktime: '30 minutes',
     preptime: '10 minutes',
     reviewcount: 10
@@ -122,7 +118,6 @@ export const feedRecipes: Array<Recipe> = [
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
-    datepublished: new Date(2023, 3, 1),
     cooktime: '30 minutes',
     preptime: '10 minutes',
     reviewcount: 10
@@ -149,7 +144,6 @@ export const feedRecipes: Array<Recipe> = [
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
-    datepublished: new Date(2023, 3, 1),
     cooktime: '30 minutes',
     preptime: '10 minutes',
     reviewcount: 10
@@ -176,7 +170,6 @@ export const feedRecipes: Array<Recipe> = [
     rating: 4.5,
     imageUrl: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
     description: 'A delicious chicken parmesan recipe',
-    datepublished: new Date(2023, 3, 1),
     cooktime: '30 minutes',
     preptime: '10 minutes',
     reviewcount: 10
