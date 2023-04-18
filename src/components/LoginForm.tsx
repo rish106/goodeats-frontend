@@ -3,7 +3,7 @@
 import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 import { useRouter } from 'next/navigation';
-import jwt from 'jsonwebtoken';
+import { toast } from '@/ui/toast';
 
 
 const LoginForm = () => {
@@ -11,6 +11,17 @@ const LoginForm = () => {
   const router = useRouter()
 
   async function submitForm(data) {
+    if (data.remember == 'on') {
+      data = {
+        ...data,
+        remember: true,
+      }
+    } else {
+      data = {
+        ...data,
+        remember: false,
+      }
+    }
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -18,14 +29,31 @@ const LoginForm = () => {
       },
       body: JSON.stringify(data),
     });
+    // alert(json.message);
     const json = await response.json();
-    alert(json.message);
-    if (response.ok) {
-      const token = jwt.sign({ userId: data.username }, 'mysecretkey', { expiresIn: '1h' });
+    if (json.message || json.username) {
+      const error_msg = json.message || json.username[0];
+      toast({
+        title: 'Error',
+        message: error_msg,
+        type: 'error',
+        duration: 1000,
+      });
+    } else {
+      toast({
+        title: 'Success',
+        message: 'You are now logged in',
+        type: 'success',
+        duration: 1000,
+      })
+      const token = json.token;
       localStorage.setItem('token', token);
-      router.push('/');
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
     }
-  }
+  };
+
   return (
     <Form.Root className='w-[360px] items-center px-8 md:px-0 pb-8'
       onSubmit={(event) => {
@@ -50,7 +78,7 @@ const LoginForm = () => {
           required />
         </Form.Control>
       </Form.Field>
-      <Form.Field className='grid mb-[15px]' name='password'>
+      <Form.Field className='grid mb-[10px]' name='password'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
             Password
@@ -62,6 +90,18 @@ const LoginForm = () => {
           type='password'
           required />
         </Form.Control>
+      </Form.Field>
+      <Form.Field className='flex flex-row items-center gap-2 justify-start mb-[15px]' name='remember'>
+        <Form.Control asChild>
+          <input
+          className='bg-gray-200 hover:bg-gray-300 cursor-pointer w-4 h-4 focus:outline-none rounded-lg'
+          type='checkbox' />
+        </Form.Control>
+        <div className='flex items-baseline justify-between'>
+          <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
+            Remember Me
+          </Form.Label>
+        </div>
       </Form.Field>
       <Form.Submit asChild>
         <Button className='w-full'>
