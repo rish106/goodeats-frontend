@@ -15,6 +15,7 @@ interface RecipeCardProps {
   username: string
   id: number
   recipe_image: string
+  rating: number
 }
 
 async function getAllRecipes() {
@@ -38,7 +39,7 @@ export default async function page() {
           <div className='h-full flex flex-col justify-start place-items-start px-8'>
             {feedRecipes.map((recipe: RecipeCardProps) => (
               <Link href={`/recipes/${recipe.id}`} key={recipe.id} className='mb-8'>
-                <RecipeCard recipeId={recipe.id} recipeName={recipe.name} recipeImage={recipe.recipe_image} recipeAuthor={recipe.username} recipeDescription={recipe.description} />
+                <RecipeCard recipeId={recipe.id} recipeName={recipe.name} recipeImage={recipe.recipe_image} recipeAuthor={recipe.username} recipeDescription={recipe.description} recipeRating={recipe.rating} />
               </Link>
             ))}
           </div>

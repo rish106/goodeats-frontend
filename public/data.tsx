@@ -48,7 +48,7 @@ export const feedRecipes: Array<Recipe> = [
   },
   {
     recipeId: 2,
-    name: 'Chicken Parmesan',
+    name: 'Moustalevria (Grape Wine Pudding)',
     instructions: 'Cook the chicken, cook the pasta, mix it all together',
     ingredients: [
       {

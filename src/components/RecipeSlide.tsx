@@ -37,10 +37,10 @@ export async function scrollArea() {
 export function RecipeBox({recipeName, recipeAuthor, recipeImage, recipeDescription, recipeId, recipeRating}: RecipeCardProps) {
   return (
     
-    <Link key={recipeId} className='grid grid-flow-row grid-cols-1 flex-col justify-center h-[450px] items-center gap-4 lg:w-72 sm:w-44 max-w-7xl rounded-lg hover:scale-110 hover:shadow-lg hover:shadow-orange-300 transition-transform'
+    <Link key={recipeId} className='snap-start flex flex-col justify-center lg:h-[450px] sm:h-[350px] items-center gap-10  lg:w-72 sm:w-44 max-w-7xl rounded-lg hover:scale-110 hover:shadow-lg hover:shadow-orange-100 transition-transform hover:overflow-visible'
         href= {`/recipes/${recipeId}`}>
         <Image src={recipeImage} alt={recipeName} width={300} height={500} className='rounded-lg lg:h-80 lg:w-72  object-cover sm:h-40 sm:w-36' />
-        <LargeHeading className='text-center flex-wrap max-w-xs max-h-5 gap-5 sm:text-sm font-medium' size='xs'>
+        <LargeHeading className='text-center flex-wrap max-w-xs max-h-5 gap-5 sm:text-sm font-medium' size='xxs'>
             {recipeName} 
         </LargeHeading>
         <div className='text-center font-semibold'> {recipeRating} ★ </div>
