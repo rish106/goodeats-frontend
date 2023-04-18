@@ -3,7 +3,7 @@ interface ingredient {
   name: string;
 }
 
-interface Recipe {
+export interface Recipe {
   recipeId: number;
   name: string;
   ingredients: Array<ingredient>;

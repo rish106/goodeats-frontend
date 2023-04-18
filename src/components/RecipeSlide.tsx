@@ -6,32 +6,47 @@ import LargeHeading from '@/ui/LargeHeading'
 import Paragraph from '@/ui/Paragraph'
 import type {RecipeCardProps} from '@/components/RecipeCard'
 import Link from 'next/link'
+import type {Recipe} from '@/public/data'
 import { RecipeCard } from '@/components/RecipeCard'
 async function getAllRecipes() {
   const res = await fetch('http://127.0.0.1:5000/');
   return res.json();
 }
 
-export async function scrollArea() {
-  let feedRecipes = await getAllRecipes();
-  return (
-    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
-      <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
-        <div className='h-full gap-8 flex flex-col justify-start items-center'>
-          <div className='flex flex-col items-center gap-6'>
-            <LargeHeading>
-              Browse Trending Recipes
-            </LargeHeading>
-            <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
-              recipeImage={feedRecipes[0].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>                    
-          </div>
-        </div>
-      </div>
-    </div>
-
-  )
+interface scrollAreaProps
+{
+  feedRecipes: Array<Recipe>
+  header: string
 }
 
+export function ScrollArea({feedRecipes, header}:scrollAreaProps) {
+  // let feedRecipes = await getAllRecipes();
+  return (
+    <div className='items-center  justify-center flex flex-col gap-10 h-[900px] bg-slate-100'>
+          <LargeHeading className='font-sans font-medium'>{header}</LargeHeading>
+          <div className=' flex-row h-[600px] justify-start items-center inset-x-20 grid grid-rows-1 grid-flow-col gap-8 overflow-y-visible overflow-x-scroll 2xl:max-w-screen-2xl xl:max-w-screen-xl lg:max-w-screen-lg md:max-w-screen-md sm:max-w-screen-sm'>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[0].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[1].name} recipeAuthor={feedRecipes[1].username} recipeId={feedRecipes[1].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[1].description} recipeRating={feedRecipes[1].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+                <RecipeBox recipeName= {feedRecipes[0].name} recipeAuthor={feedRecipes[0].username} recipeId={feedRecipes[0].recipeId} 
+                recipeImage={feedRecipes[1].imageUrl} recipeDescription={feedRecipes[0].description} recipeRating={feedRecipes[0].rating}/>
+            </div>
+          </div>
+  )
+}
 
 
 export function RecipeBox({recipeName, recipeAuthor, recipeImage, recipeDescription, recipeId, recipeRating}: RecipeCardProps) {
