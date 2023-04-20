@@ -1,12 +1,10 @@
 import Image from 'next/image';
-import useSWR from 'swr';
 import LargeHeading from '@/components/ui/LargeHeading';
 import Paragraph from '@/components/ui/Paragraph';
 import Icons from '@/components/Icons';
 import CommentForm from '@/components/CommentForm';
 import { RecipeActions } from '@/components/RecipeActions';
 import { CommentCard } from '@/components/CommentCard';
-// import { useRouter } from 'next/router';
 
 interface ingredient {
   amount: string;
@@ -22,6 +20,7 @@ export async function generateMetadata({ params }) {
   const [post] = await Promise.all([postPromise]);
   return {
     title: `Goodeats | ${post.name}`,
+    description: `${post.description}`,
   };
 }
 

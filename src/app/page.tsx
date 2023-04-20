@@ -20,11 +20,11 @@ export default function Home() {
       <div className='container pt-32 max-w-full w-full h-full mx-2 md:mx-5'>
         <div className='h-full w-full gap-6 grid grid-row-flow grid-cols-2 justify-start lg:justify-center items-center  lg:items-start'>
         <div className='relative w-full gap-10 flex flex-col h-[530px] items-center justify-center '>
-          <LargeHeading className='font-semibold'> Looking for a snack? </LargeHeading>  
-          <LargeHeading className='text-wrap font-semibold' size='sm'> Whether you want easy to make homemade food or 
-          exquisite dishes and delicacies, We've got you covered.</LargeHeading>  
+          <LargeHeading className='font-semibold'> Looking for a snack? </LargeHeading>
+          <LargeHeading className='text-wrap font-semibold' size='sm'> Whether you want easy to make homemade food or
+          exquisite dishes and delicacies, We&apos;ve got you covered.</LargeHeading>
           <LargeHeading className='font-semibold'>
-           Welcome to GoodEats! </LargeHeading>     
+           Welcome to GoodEats! </LargeHeading>
         </div>
           <div className='w-full h-[600px]'>
           <Image className='w-full h-600 object-cover' src='fryingpantop.jpg' alt='frying pan' width={1000} height={1000} />
@@ -36,5 +36,5 @@ export default function Home() {
          </div>
        </div>
   )
- 
+
 }
