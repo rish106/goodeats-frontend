@@ -22,6 +22,16 @@ const CommentForm : React.FC<CommentProps> = ({id}) => {
       rating: rating,
       review_text: data.comment,
     }
+    const token = localStorage.getItem('token');
+    if (!token) {
+      toast({
+        title: 'Error',
+        message: 'Please login to add a review',
+        type: 'error',
+        duration: 2000,
+      });
+      return;
+    }
     if (data.rating == 0) {
       toast({
         title: 'Error',
@@ -58,40 +68,42 @@ const CommentForm : React.FC<CommentProps> = ({id}) => {
         event.preventDefault();
       }}
     >
-      <div className='w-full md:w-2/5 px-8 flex flex-col items-center mr-0 md:mr-5'>
-        <Form.Field className='w-full grid mb-[10px]' name='rating'>
-          <div className='flex items-baseline justify-between'>
-            <Form.Label className='text-white font-medium text-[15px] leading-[35px]'>
-              Rate this recipe
-            </Form.Label>
-            <Form.Message className='text-white text-[13px] opacity-80' match='tooShort'>
-              Please rate
-            </Form.Message>
-          </div>
-          <Form.Control asChild>
-            <div className='flex flex-row gap-1'>
-              {[1, 2, 3, 4, 5].map((value) => (
-                <Icons.Star
-                  key={value}
-                  className='h-6 w-6 cursor-pointer text-white'
-                  fill={`${value <= rating ? 'white' : 'transparent'}`}
-                  onClick={() => handleRatingChange(value)}
-                />
-              ))}
+      <div className='w-full md:w-3/5 flex flex-col md:flex-row gap-5 justify-start items-end'>
+        <div className='w-full flex flex-col gap-2 md:flex-row md:gap-5 items-start'>
+          <Form.Field className='grid md:gap-[7px]' name='rating'>
+            <div className='flex items-baseline justify-between'>
+              <Form.Label className='text-white font-medium text-[15px] leading-[35px]'>
+                Rate this recipe
+              </Form.Label>
+              <Form.Message className='text-white text-[13px] opacity-80' match='tooShort'>
+                Please rate
+              </Form.Message>
             </div>
-          </Form.Control>
-        </Form.Field>
-        <Form.Field className='w-full grid mb-[10px]' name='comment'>
-          <div className='flex items-baseline justify-between'>
-            <Form.Label className='text-white font-medium text-[15px] leading-[35px]'>
-              Comment (optional)
-            </Form.Label>
-          </div>
-          <Form.Control asChild>
-            <textarea className='pt-1 box-border w-full bg-blackA5 shadow-white inline-flex h-[80px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-white shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px] focus:shadow-[0_0_0_2px_white] selection:color-white' />
-          </Form.Control>
-        </Form.Field>
-        <div className='w-full flex flex-col items-end'>
+            <Form.Control asChild>
+              <div className='flex flex-row gap-1'>
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <Icons.Star
+                    key={value}
+                    className='h-6 w-6 cursor-pointer text-white'
+                    fill={`${value <= rating ? 'white' : 'transparent'}`}
+                    onClick={() => handleRatingChange(value)}
+                  />
+                ))}
+              </div>
+            </Form.Control>
+          </Form.Field>
+          <Form.Field className='w-full grid' name='comment'>
+            <div className='flex items-baseline justify-between'>
+              <Form.Label className='text-white font-medium text-[15px] leading-[35px]'>
+                Comment (optional)
+              </Form.Label>
+            </div>
+            <Form.Control asChild>
+              <textarea className='pt-2 box-border w-full bg-blackA5 shadow-white inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-white shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px] focus:shadow-[0_0_0_2px_white] selection:color-white' />
+            </Form.Control>
+          </Form.Field>
+        </div>
+        <div className='flex flex-col items-end'>
           <Form.Submit asChild>
             <Button className='bg-white text-black/100 hover:bg-slate-100'>
               Review

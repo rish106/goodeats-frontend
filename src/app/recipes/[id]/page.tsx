@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image';
 import useSWR from 'swr';
 import LargeHeading from '@/components/ui/LargeHeading';
@@ -19,64 +17,68 @@ interface PageProps {
   params: { id: string };
 }
 
-const fetcher = async (url: string) => {
-  const res = await fetch(url)
-  const data = await res.json()
-  return data
+export async function generateMetadata({ params }) {
+  const postPromise = getRecipeById(params.id);
+  const [post] = await Promise.all([postPromise]);
+  return {
+    title: `Goodeats | ${post.name}`,
+  };
 }
 
-const Page = ({ params }: PageProps) => {
+async function getRecipeById(id: string) {
+  const res = await fetch(`http://127.0.0.1:5000/recipe/${id}`);
+  const data = await res.json();
+  return data;
+}
 
-  const recipeData = useSWR(`/api/recipe/${params.id}`, fetcher)
-  const commentData = useSWR(`/api/recipe/${params.id}/reviews`, fetcher)
+async function getCommentsById(id: string) {
+  const res = await fetch(`http://127.0.0.1:5000/recipe/${id}/reviews`);
+  const data = await res.json();
+  return data;
+}
 
-  if (recipeData.error || commentData.error) return (
-    <div className='pt-32'>
-      <LargeHeading>
-        Error fetching data
-      </LargeHeading>
-    </div>
-  )
+const Page = async ({ params }: PageProps) => {
 
-  if (!recipeData.data || !commentData.data) return (
-    <div className='pt-32'>
-      <LargeHeading>
-        Loading...
-      </LargeHeading>
-    </div>
-  )
+  const postPromise = getRecipeById(params.id);
+  const commentDataPromise = getCommentsById(params.id);
 
-  const post = recipeData.data;
-  let comments = commentData.data.other_reviews || [];
-  // comments += commentData.data.user_reviews || [];
-  const comment = comments[0];
+  const [post, commentData] = await Promise.all([postPromise, commentDataPromise]);
+
+  const comments = [...commentData.user_reviews, ...commentData.other_reviews];
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container max-w-full mx-auto w-full h-full'>
         <div className='h-full gap-0 flex flex-col justify-start items-center'>
-          <div className='flex pt-32 flex-col justify-between items-center gap-8 md:flex-row md:px-10 bg-violet-800 w-full px-8 pb-8'>
-            <div className='flex flex-col justify-center items-center'>
-              <LargeHeading className='text-white text-center w-full pb-2'>
+          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row bg-violet-800 w-full px-8 pb-8'>
+            <div className='flex flex-col md:w-1/2 justify-center gap-3 items-center'>
+              <LargeHeading className='text-white text-center w-full'>
                 {post.name}
               </LargeHeading>
-              <LargeHeading size='xs' className='text-white font-bold pb-2'>
+              <LargeHeading size='xs' className='text-white font-bold'>
                 {`${post.username}`}
               </LargeHeading>
-              <Paragraph className='text-white flex flex-row items-center pb-1'>
-                {`${post.avgRating}  `} <Icons.Star size={16} />
-              </Paragraph>
-              <Paragraph className='text-white pb-1'>
-                {`Cook : ${post.cooktime}`}
-              </Paragraph>
-              <Paragraph className='text-white pb-1'>
-                {`Prep : ${post.preptime}`}
-              </Paragraph>
+              <LargeHeading size='xs' className='text-white flex flex-row items-center gap-1'>
+                {`${post.avgRating}  `} <Icons.Star size={28} fill='white' />
+              </LargeHeading>
+              <div className='flex flex-col md:flex-row md:gap-6 -mb-2'>
+                <Paragraph className='text-white'>
+                  {`Cook : ${post.cooktime}`}
+                </Paragraph>
+                <Paragraph className='text-white'>
+                  {`Prep : ${post.preptime}`}
+                </Paragraph>
+              </div>
               <RecipeActions />
             </div>
-            <Image src={`/static/recipe_pics/${post.recipe_image}`} alt='Recipe Image' width={500} height={500} />
+            <Image
+              src={`/static/recipe_pics/${post.recipe_image}`}
+              alt='Recipe Image'
+              className='md:w-1/2'
+              width={500}
+              height={500} />
           </div>
-          <div className='flex flex-col justify-center gap-6 md:gap-32 md:flex-row bg-slate-100 w-full pt-8 pb-8'>
+          <div className='flex flex-col justify-center gap-6 md:gap-32 md:flex-row bg-slate-100 w-full px-8 py-8'>
             <div className='flex flex-col justify-start items-center gap-1'>
               <LargeHeading size='xs'>
                Ingredients
@@ -107,7 +109,7 @@ const Page = ({ params }: PageProps) => {
               </Paragraph>
             </div>
           </div>
-          <div className='flex flex-col items-center justify-center bg-purple-800 w-full pt-8 pb-8'>
+          <div className='flex flex-col items-center justify-center bg-violet-800 gap-8 w-full py-8 px-8'>
             <CommentForm id={params.id} />
             {
               comments.length === 0 ? (
@@ -115,9 +117,13 @@ const Page = ({ params }: PageProps) => {
                   No reviews yet
                 </Paragraph>
               ) : (
-                <>
-                  <CommentCard id={comment.id} key={comment.review_id} author={comment.user_id} message={comment.reviewText} rating={comment.rating} />
-                </>
+                <div className='flex flex-col items-center justify-start w-full gap-4 pt-4'>
+                  {
+                    comments.map((comment: any) =>
+                      <CommentCard id={comment.id} key={comment.review_id} author={comment.user_id} message={comment.reviewText} rating={comment.rating} />
+                    )
+                  }
+                </div>
               )
             }
           </div>

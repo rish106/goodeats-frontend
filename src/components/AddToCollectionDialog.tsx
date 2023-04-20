@@ -1,3 +1,5 @@
+'use client'
+
 import * as Dialog from '@radix-ui/react-dialog';
 import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
@@ -17,7 +19,7 @@ const AddToCollectionDialog = () => {
   return (
   <Dialog.Root>
     <Dialog.Trigger asChild>
-      <IconButton icon={Icons.Plus} variant='ghost' className='hover:bg-purple-700' />
+      <IconButton icon={Icons.Plus} variant='ghost' className='hover:bg-violet-600' />
     </Dialog.Trigger>
     <Dialog.Portal>
       <Dialog.Overlay className='bg-blackA9 data-[state=open]:animate-overlayShow fixed inset-0' />

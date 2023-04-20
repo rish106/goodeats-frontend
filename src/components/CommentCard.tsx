@@ -11,7 +11,7 @@ interface CommentCardProps {
 
 export function CommentCard({id, author, message, rating}: CommentCardProps) {
   return (
-    <div className='w-full md:w-3/5 px-4 flex flex-col items-center'>
+    <div className='w-full md:w-3/5 flex flex-col items-center'>
       <div key={id} className='flex flex-col md:flex-row gap-4 w-full max-w-7xl'>
         <div className='flex flex-col'>
           <Paragraph className='font-bold text-start text-white'>
