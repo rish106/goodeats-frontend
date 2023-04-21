@@ -57,6 +57,7 @@ const CommentForm : React.FC<CommentProps> = ({id}) => {
         type: 'success',
         duration: 2000,
       });
+      setRating(0);
     }
   };
 

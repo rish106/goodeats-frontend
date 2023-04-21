@@ -57,8 +57,8 @@ const Page = async ({ params }: PageProps) => {
               <LargeHeading size='xs' className='text-white font-bold'>
                 {`${post.username}`}
               </LargeHeading>
-              <LargeHeading size='xs' className='text-white flex flex-row items-center gap-1'>
-                {`${post.avgRating}  `} <Icons.Star size={28} fill='white' />
+              <LargeHeading size='xs' className='text-white flex flex-row items-center md:gap-1'>
+                {`${post.avgRating}  `} <Icons.Star size={28} className='scale-75 md:scale-100' fill='white' />
               </LargeHeading>
               <div className='flex flex-col md:flex-row md:gap-6 -mb-2'>
                 <Paragraph className='text-white'>
