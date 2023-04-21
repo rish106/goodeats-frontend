@@ -25,7 +25,7 @@ const page: React.FC = () => {
               <div key={collection.collectionId} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                 <div className=''>
                   <Image
-                    src={collection.imageUrl}
+                    src={collection.recipe_image}
                     height={250}
                     width={250}
                     alt='thumbnail'

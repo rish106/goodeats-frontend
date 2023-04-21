@@ -14,27 +14,25 @@ export interface RecipeCardProps {
 
 export function RecipeCard({recipeName, recipeAuthor, recipeImage, recipeDescription, recipeId, recipeRating}: RecipeCardProps) {
   return (
-    <div key={recipeId} className='flex flex-col md:flex-row gap-4 w-full max-w-7xl'>
+    <div className='flex flex-col md:flex-row gap-4 w-full max-w-7xl items-center md:items-start'>
       <Image
         src={`/static/recipe_pics/${recipeImage}`}
         alt={recipeName}
         width={200}
         height={200}
         className='rounded-lg md:h-[150px] md:w-[200px] h-[240px] w-[320px]' />
-      <div className='flex flex-col'>
-        <div className='flex flex-row w-full justify-between pb-1'>
+      <div className='flex flex-col w-full'>
+        <div className='flex flex-row w-full justify-between gap-4 pb-1'>
           <LargeHeading className='text-start' size='xs'>
             {recipeName}
           </LargeHeading>
+          <LargeHeading size='xxs' className='flex flex-row items-center md:gap-1'>
+            {recipeRating} <Icons.Star size={20} className='scale-75 md:scale-100' fill='black' />
+          </LargeHeading>
         </div>
-        <div className='flex flex-row gap-4'>
-          <Paragraph className='text-start font-bold'>
-            {recipeAuthor}
-          </Paragraph>
-          <Paragraph>
-            {recipeRating} <Icons.Star size={16} fill='black' />
-          </Paragraph>
-        </div>
+        <Paragraph className='text-start font-bold'>
+          {recipeAuthor}
+        </Paragraph>
         <Paragraph size='sm' className='w-full text-start'>
           {recipeDescription.slice(0, 150) + (recipeDescription.length > 150 ? '...' : '')}
         </Paragraph>
