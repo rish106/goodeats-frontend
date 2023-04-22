@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
@@ -19,6 +20,8 @@ import {
 const UserActions = () => {
   const [session, setSession] = React.useState(false);
   const [username, setUsername] = React.useState('');
+  const [dropdownOpen, setDropdownOpen] = React.useState(false)
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen)
   const router = useRouter();
 
   React.useEffect(() => {
@@ -57,28 +60,30 @@ const UserActions = () => {
   };
 
   return (session ? (
-    <DropdownMenu>
+    <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant='link' className='center'>
+        <Button variant='link' className='center' onClick={toggleDropdown}>
           {username} <Icons.ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
-        <DropdownMenuItem>
-          <Link href='/user' className='w-full'>
-            My profile
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Link href='/collections' className='w-full'>
-            My Collections
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <a onClick={signOut} className='w-full cursor-pointer'>
-            Sign Out
-          </a>
-        </DropdownMenuItem>
+        <DropdownMenuGroup onClick={toggleDropdown}>
+          <DropdownMenuItem>
+            <Link href='/user' className='w-full h-full'>
+              My profile
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href='/collections' className='w-full'>
+              My Collections
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <a onClick={signOut} className='w-full cursor-pointer'>
+              Sign Out
+            </a>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   ) : (

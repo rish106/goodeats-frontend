@@ -1,4 +1,8 @@
+'use client'
+
 import Image from 'next/image';
+import useSWR from 'swr';
+import React from 'react';
 import LargeHeading from '@/components/ui/LargeHeading';
 import Paragraph from '@/components/ui/Paragraph';
 import Icons from '@/components/Icons';
@@ -15,47 +19,54 @@ interface PageProps {
   params: { id: string };
 }
 
-export async function generateMetadata({ params }) {
-  const postPromise = getRecipeById(params.id);
-  const [post] = await Promise.all([postPromise]);
-  return {
-    title: `Goodeats | ${post.name}`,
-    description: `${post.description}`,
-  };
+const fetcher = async (url: string) => {
+  const res = await fetch(url)
+  const data = await res.json()
+  return data
 }
 
-async function getRecipeById(id: string) {
-  const res = await fetch(`http://127.0.0.1:5000/recipe/${id}`);
-  const data = await res.json();
-  return data;
-}
+const Page = ({ params }: PageProps) => {
 
-async function getCommentsById(id: string) {
-  const res = await fetch(`http://127.0.0.1:5000/recipe/${id}/reviews`);
-  const data = await res.json();
-  return data;
-}
+  const recipeData = useSWR(`/api/recipe/${params.id}`, fetcher)
+  const commentData = useSWR(`/api/recipe/${params.id}/reviews`, fetcher)
+  const [comments, setComments] = React.useState<any>([]);
+  const [post, setPost] = React.useState<any>(null);
 
-const Page = async ({ params }: PageProps) => {
+  React.useEffect(() => {
+    if (recipeData.data && commentData.data) {
+      setPost(recipeData.data);
+      setComments([...commentData.data.user_reviews, ...commentData.data.other_reviews]);
+    }
+  }, [recipeData.data, commentData.data])
 
-  const postPromise = getRecipeById(params.id);
-  const commentDataPromise = getCommentsById(params.id);
+  if (recipeData.error || commentData.error || recipeData.data?.error) return (
+    <div className='pt-32'>
+      <LargeHeading>
+        Error fetching recipe data
+      </LargeHeading>
+    </div>
+  )
 
-  const [post, commentData] = await Promise.all([postPromise, commentDataPromise]);
+  if (!post || !comments) return (
+    <div className='pt-32'>
+      <LargeHeading>
+        Loading...
+      </LargeHeading>
+    </div>
+  )
 
-  const comments = [...commentData.user_reviews, ...commentData.other_reviews];
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container max-w-full mx-auto w-full h-full'>
         <div className='h-full gap-0 flex flex-col justify-start items-center'>
-          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row bg-violet-800 w-full px-8 pb-8'>
+          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row md:px-10 bg-violet-800 w-full px-8 pb-8'>
             <div className='flex flex-col md:w-1/2 justify-center gap-3 items-center'>
               <LargeHeading className='text-white text-center w-full'>
                 {post.name}
               </LargeHeading>
               <LargeHeading size='xs' className='text-white font-bold'>
-                {`${post.username}`}
+                {post.username}
               </LargeHeading>
               <LargeHeading size='xs' className='text-white flex flex-row items-center md:gap-1'>
                 {post.avgRating} <Icons.Star size={28} className='scale-75 md:scale-100' fill='white' />
@@ -77,23 +88,23 @@ const Page = async ({ params }: PageProps) => {
               width={500}
               height={500} />
           </div>
-          <div className='flex flex-col justify-center gap-6 md:gap-32 md:flex-row bg-slate-100 w-full px-8 py-8'>
+          <div className='flex flex-col justify-center gap-6 md:gap-32 md:flex-row bg-slate-100 w-full pt-8 pb-8'>
             <div className='flex flex-col justify-start items-center gap-1'>
               <LargeHeading size='xs'>
-               Ingredients
+                Ingredients
               </LargeHeading>
               <div className='flex flex-row justify-start items-center gap-8'>
                 <div className='flex flex-col justify-center items-center'>
                   {post.ingredients.map((ingredient: ingredient) => (
                     <Paragraph key={ingredient.name} className='text-end'>
-                        {ingredient.amount}
+                      {ingredient.amount}
                     </Paragraph>
                   ))}
                 </div>
                 <div className='flex flex-col justify-center items-center'>
                   {post.ingredients.map((ingredient: ingredient) => (
                     <Paragraph key={ingredient.name} className='text-start w-full'>
-                        {ingredient.name}
+                      {ingredient.name}
                     </Paragraph>
                   ))}
                 </div>
@@ -119,7 +130,7 @@ const Page = async ({ params }: PageProps) => {
                 <div className='flex flex-col items-center justify-start w-full gap-4 pt-4'>
                   {
                     comments.map((comment: any) =>
-                      <CommentCard id={comment.id} key={comment.review_id} author={comment.user_id} message={comment.reviewText} rating={comment.rating} />
+                      <CommentCard key={comment.review_id} id={comment.review_id} author={comment.user_id} message={comment.reviewText} rating={comment.rating} />
                     )
                   }
                 </div>
