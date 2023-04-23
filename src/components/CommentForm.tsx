@@ -10,11 +10,11 @@ interface CommentProps {
   id: string;
 }
 
-const CommentForm : React.FC<CommentProps> = ({id}) => {
-  const [rating, setRating] = useState(0)
+const CommentForm : React.FC<CommentProps> = ({id}: CommentProps) => {
+  const [rating, setRating] = useState(0);
 
   const handleRatingChange = (value: number) => {
-    setRating(value)
+    setRating(value);
   }
 
   async function submitForm(data) {
@@ -32,7 +32,7 @@ const CommentForm : React.FC<CommentProps> = ({id}) => {
       });
       return;
     }
-    if (data.rating == 0) {
+    if (data.rating === 0) {
       toast({
         title: 'Error',
         message: 'Please select a rating',
@@ -49,7 +49,6 @@ const CommentForm : React.FC<CommentProps> = ({id}) => {
       },
       body: JSON.stringify(data),
     });
-    // // alert(json.message);
     if (response.ok) {
       toast({
         title: 'Success',
@@ -100,7 +99,7 @@ const CommentForm : React.FC<CommentProps> = ({id}) => {
               </Form.Label>
             </div>
             <Form.Control asChild>
-              <textarea className='pt-2 box-border w-full bg-blackA5 shadow-white inline-flex h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-white shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px] focus:shadow-[0_0_0_2px_white] selection:color-white' />
+              <textarea className='pt-2 box-border w-full bg-blackA5 shadow-white inline-flex h-[60px] md:h-[35px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-white shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px] focus:shadow-[0_0_0_2px_white] selection:color-white' />
             </Form.Control>
           </Form.Field>
         </div>
