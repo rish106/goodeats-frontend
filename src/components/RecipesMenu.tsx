@@ -19,7 +19,7 @@ export function RecipesMenu() {
   return (
     <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant='link' className='center' onClick={toggleDropdown}>
+        <Button variant='link' className='center gap-2' onClick={toggleDropdown}>
           Recipes <Icons.ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>

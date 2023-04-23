@@ -126,7 +126,14 @@ export default function Page() {
               </Link>
             ))}
             <div className='w-full flex flex-col items-center'>
-              <Pagination count={100} size='large' shape='rounded' color='standard' page={currentPage} onChange={handlePageChange} className='mb-16'/>
+              <Pagination
+                count={100}
+                size='large'
+                variant='outlined'
+                color='standard'
+                page={currentPage}
+                onChange={handlePageChange}
+                className='mb-16'/>
             </div>
           </div>
         </div>

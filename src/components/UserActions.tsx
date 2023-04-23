@@ -6,7 +6,6 @@ import jwt from 'jsonwebtoken'
 import { toast } from '@/ui/toast'
 import { useRouter } from 'next/navigation'
 import { buttonVariants } from '@/ui/Button'
-import { cn } from '@/lib/utils'
 import { Icons } from '@/components/Icons'
 import { Button } from '@/components/ui/Button'
 import {
@@ -50,27 +49,27 @@ const UserActions = () => {
       title: 'Signing out...',
       message: '',
       type: 'default',
-      duration: 2500,
+      duration: 1500,
     });
     localStorage.removeItem('token');
     setSession(false);
     setTimeout(() => {
       router.push('/');
-    }, 2500);
+    }, 500);
   };
 
   return (session ? (
     <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
-        <Button variant='link' className='center' onClick={toggleDropdown}>
-          {username} <Icons.ChevronDown size={16} />
+        <Button variant='link' className='font-bold center gap-2' onClick={toggleDropdown}>
+          {username} <Icons.ChevronDown size={16} strokeWidth={3} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuGroup onClick={toggleDropdown}>
           <DropdownMenuItem>
             <Link href='/user' className='w-full h-full'>
-              My profile
+              My Profile
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -96,10 +95,11 @@ const UserActions = () => {
 
       <Link
         href='/signup'
-        className={cn(buttonVariants({ variant: 'default' }))}>
+        className={buttonVariants({ variant: 'default' })}>
         Sign up
       </Link>
-    </>)
+    </>
+    )
   )
 }
 
