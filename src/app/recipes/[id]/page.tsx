@@ -55,7 +55,6 @@ const Page = ({ params }: PageProps) => {
     </div>
   )
 
-
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container max-w-full mx-auto w-full h-full'>

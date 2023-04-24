@@ -68,7 +68,7 @@ const UserActions = () => {
       <DropdownMenuContent align='end' forceMount>
         <DropdownMenuGroup onClick={toggleDropdown}>
           <DropdownMenuItem>
-            <Link href='/user' className='w-full h-full'>
+            <Link href={`/user/${username}`} className='w-full h-full'>
               My Profile
             </Link>
           </DropdownMenuItem>
