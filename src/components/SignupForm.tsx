@@ -3,7 +3,7 @@
 import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 import * as React from 'react';
-import { toast } from './ui/toast';
+import { toast } from '@/ui/toast';
 import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {

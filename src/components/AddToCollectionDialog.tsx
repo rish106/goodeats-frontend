@@ -3,7 +3,7 @@
 import * as Dialog from '@radix-ui/react-dialog';
 import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
-import { IconButton } from '@/components/ui/Button';
+import { IconButton } from '@/ui/Button';
 import { feedCollections } from '@/public/data';
 // import { useRouter } from 'next/navigation';
 

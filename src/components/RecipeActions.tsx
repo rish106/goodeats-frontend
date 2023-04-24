@@ -1,5 +1,5 @@
 import { Icons } from '@/components/Icons'
-import { IconButton } from '@/components/ui/Button'
+import { IconButton } from '@/ui/Button'
 import AddToCollectionDialog from './AddToCollectionDialog'
 
 export function RecipeActions() {

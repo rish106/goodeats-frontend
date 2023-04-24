@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import useSWR from 'swr';
 import React from 'react';
-import LargeHeading from '@/components/ui/LargeHeading';
-import Paragraph from '@/components/ui/Paragraph';
+import LargeHeading from '@/ui/LargeHeading';
+import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
 import CommentForm from '@/components/CommentForm';
 import { RecipeActions } from '@/components/RecipeActions';

@@ -5,9 +5,9 @@ import useSWR from 'swr';
 import jwt from 'jsonwebtoken';
 import Link from 'next/link';
 import Image from 'next/image';
-import LargeHeading from '@/components/ui/LargeHeading';
-import Paragraph from '@/components/ui/Paragraph';
-import { Button, buttonVariants } from '@/components/ui/Button';
+import LargeHeading from '@/ui/LargeHeading';
+import Paragraph from '@/ui/Paragraph';
+import { Button, buttonVariants } from '@/ui/Button';
 import Icons from '@/components/Icons';
 
 interface PageProps {
