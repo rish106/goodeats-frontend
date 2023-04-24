@@ -75,7 +75,7 @@ const MobileMenu = () => {
             {
               session ? (
                 <>
-                  <Link href='/user' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
+                  <Link href={`/user/${username}`} className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
                     {username}&apos;s Profile
                   </Link>
                   <Link href='/collections' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>

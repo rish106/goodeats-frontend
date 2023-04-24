@@ -129,7 +129,6 @@ export default function Page() {
               <Pagination
                 count={100}
                 size='large'
-                variant='outlined'
                 color='standard'
                 page={currentPage}
                 onChange={handlePageChange}

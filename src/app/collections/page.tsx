@@ -9,7 +9,23 @@ export const metadata: Metadata = {
   title: 'Goodeats | My Collections',
 }
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
+  let token = null as string | null;
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
+  if (!token) return (
+    <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
+      <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+        <div className='flex flex-col items-center'>
+          <LargeHeading>
+            You must be logged in to view this page
+          </LargeHeading>
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
@@ -49,4 +65,4 @@ const page: React.FC = () => {
   );
 }
 
-export default page
+export default Page
