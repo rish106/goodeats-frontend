@@ -3,7 +3,7 @@ import LargeHeading from '@/ui/LargeHeading'
 import { ScrollArea } from '@/components/RecipeSlide'
 import Image from 'next/image'
 import { feedRecipes } from '@/public/data'
-
+import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Goodeats',
   description: 'What would you like to cook today',
@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden bg-slate-200 overflow-y-scroll'>
       <div className='container pt-32 max-w-full w-full h-full mx-2 md:mx-5'>
-        <div className='h-full w-full gap-6 grid grid-row-flow grid-cols-2 justify-start lg:justify-center items-center  lg:items-start'>
+        <div className='h-full w-full gap-6 grid grid-row-flow grid-cols-2 justify-start lg:justify-center items-center  lg:items-start rounded-md'>
           <div className='relative w-full gap-10 flex flex-col h-[530px] items-center justify-center '>
             <LargeHeading className='font-semibold'>
               Looking for a snack?
@@ -42,6 +42,26 @@ export default async function Home() {
         <ScrollArea feedRecipes={topRecipes} header='Top Rated' />
 
         <ScrollArea feedRecipes={feedRecipes} header='Recommended for you' />
+
+        <div className='flex flex-row justify-center h-[500px] items-center gap-6  bg-slate-300'>
+          <Link href='/recipes' className='flex flex-col h-2/3 w-1/4 items-center hover:scale-102 hover:shadow-2xl hover:bg-gray-700 bg-slate-600 rounded-3xl align-middle'>
+            <div className='h-1/3'></div>
+              <LargeHeading size={'sm'} className='font-light w-4/5 align-middle text-white'>
+                Want something more appetising?
+                View all recipes
+              </LargeHeading>
+
+          </Link>
+
+          <Link href='/post-recipe' className='flex flex-col h-2/3 w-1/4 items-center hover:scale-102 hover:shadow-2xl hover:bg-gray-700 bg-slate-600 rounded-3xl align-middle'>
+            <div className='h-1/3'></div>
+            <LargeHeading size={'sm'} className='font-light w-4/5 align-middle text-white'>
+                Got a new creation?
+                Post it here!
+              </LargeHeading>
+          </Link>
+        
+        </div>
       </div>
     </div>
   )
