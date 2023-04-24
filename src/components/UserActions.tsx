@@ -7,14 +7,14 @@ import { toast } from '@/ui/toast'
 import { useRouter } from 'next/navigation'
 import { buttonVariants } from '@/ui/Button'
 import { Icons } from '@/components/Icons'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/ui/Button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu'
+} from '@/ui/DropdownMenu'
 
 const UserActions = () => {
   const [session, setSession] = React.useState(false);

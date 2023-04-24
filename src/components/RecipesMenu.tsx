@@ -1,14 +1,14 @@
 'use client'
 
 import { Icons } from '@/components/Icons'
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/ui/Button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu'
+} from '@/ui/DropdownMenu'
 import Link from 'next/link'
 import React from 'react'
 

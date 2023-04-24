@@ -4,7 +4,7 @@ import * as Form from '@radix-ui/react-form';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/ui/Button';
 import Icons from '@/components/Icons';
-import { IconButton } from '@/components/ui/Button';
+import { IconButton } from '@/ui/Button';
 
 const NewCollectionDialog = () => {
   return (

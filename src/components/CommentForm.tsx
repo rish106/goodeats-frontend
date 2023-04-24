@@ -4,7 +4,7 @@ import * as Form from '@radix-ui/react-form';
 import { Button } from '@/ui/Button';
 import Icons from '@/components/Icons';
 import { useState } from 'react';
-import { toast } from './ui/toast';
+import { toast } from '@/ui/toast';
 
 interface CommentProps {
   id: string;

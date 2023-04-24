@@ -1,5 +1,5 @@
-import LargeHeading from '@/components/ui/LargeHeading';
-import Paragraph from '@/components/ui/Paragraph';
+import LargeHeading from '@/ui/LargeHeading';
+import Paragraph from '@/ui/Paragraph';
 import Image from 'next/image';
 import { feedCollections } from '@/public/data';
 import { Metadata } from 'next'
