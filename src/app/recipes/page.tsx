@@ -31,20 +31,16 @@ async function fetcher(url: string) {
 
 async function getRecipesByPage(search: string, page: number) {
   if (search) {
-    const res = await fetch(`http://127.0.0.1:5000/search?keywords=${search}&page=${page}`)
-    const data = await res.json();
-    return data;
+    return await fetcher(`/api/search?keywords=${search}&page=${page}`);
   } else {
-    const res = await fetch(`http://127.0.0.1:5000/home?page=${page}`);
-    const data = await res.json();
-    return data;
+    return await fetcher(`/api/home?page=${page}`);
   }
 }
 
 let onLoad = true;
 
 export default function Page() {
-  const { data, error } = useSWR('http://127.0.0.1:5000/home', fetcher);
+  const { data, error } = useSWR('/api/home', fetcher);
   const [currentPage, setCurrentPage] = useState(1);
   const [feedRecipes, setFeedRecipes] = useState<RecipeCardProps[]>(data || []);
   const [search, setSearchValue] = useState('');
@@ -90,7 +86,7 @@ export default function Page() {
     onLoad = false;
   };
 
-  async function handlePageChange (event, value) {
+  async function handlePageChange (event, value: number) {
     const recipes = await getRecipesByPage(search, value);
     setFeedRecipes(recipes);
     setCurrentPage(value);
@@ -130,7 +126,13 @@ export default function Page() {
               </Link>
             ))}
             <div className='w-full flex flex-col items-center'>
-              <Pagination count={100} size='large' shape='rounded' color='standard' page={currentPage} onChange={handlePageChange} className='mb-16'/>
+              <Pagination
+                count={100}
+                size='large'
+                color='standard'
+                page={currentPage}
+                onChange={handlePageChange}
+                className='mb-16'/>
             </div>
           </div>
         </div>

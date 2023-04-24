@@ -1,17 +1,20 @@
 'use client'
 
-import * as React from 'react'
+import React from 'react'
 import Link from 'next/link'
+import jwt from 'jsonwebtoken'
+import { useRouter } from 'next/navigation'
 import { Button, buttonVariants, IconButton } from '@/ui/Button'
 import { Icons } from '@/components/Icons'
 import Drawer from '@mui/material/Drawer'
-import jwt from 'jsonwebtoken'
+import { toast } from '@/ui/toast'
 
 const MobileMenu = () => {
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
   const [session, setSession] = React.useState(false);
   const [username, setUsername] = React.useState('');
+  const router = useRouter();
 
   React.useEffect(() => {
     const fetchToken = async () => {
@@ -40,8 +43,17 @@ const MobileMenu = () => {
   }
 
   const signOut = () => {
+    toast({
+      title: 'Signing out...',
+      message: '',
+      type: 'default',
+      duration: 1500,
+    });
     localStorage.removeItem('token');
     setSession(false);
+    setTimeout(() => {
+      router.push('/');
+    }, 500);
   };
 
   return (
@@ -60,15 +72,35 @@ const MobileMenu = () => {
             <Link href='/post-recipe' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
               Post a Recipe
             </Link>
-            <Link href='/user' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
-              My profile
-            </Link>
-            <Link href='/collections' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
-              My Collections
-            </Link>
-            <Button onClick={signOut} variant='link'>
-              Sign Out
-            </Button>
+            {
+              session ? (
+                <>
+                  <Link href={`/user/${username}`} className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
+                    {username}&apos;s Profile
+                  </Link>
+                  <Link href='/collections' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
+                    My Collections
+                  </Link>
+                  <Button onClick={signOut} variant='link'>
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href='/login'
+                    className={buttonVariants({ variant: 'link' })}>
+                    Login
+                  </Link>
+
+                  <Link
+                    href='/signup'
+                    className={buttonVariants({ variant: 'default' })}>
+                    Sign up
+                  </Link>
+                </>
+              )
+            }
           </div>
         </div>
       </Drawer>
