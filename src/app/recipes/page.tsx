@@ -1,6 +1,6 @@
 'use client'
 
-import LargeHeading from '@/components/ui/LargeHeading';
+import LargeHeading from '@/ui/LargeHeading';
 import React, { useState } from 'react';
 import { Metadata } from 'next'
 import useSWR from 'swr';
@@ -8,7 +8,7 @@ import { RecipeCard } from '@/components/RecipeCard';
 import { Pagination } from '@mui/material';
 import Link from 'next/link';
 import Icons from '@/components/Icons';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/ui/Button';
 
 // export const metadata: Metadata = {
 //   title: 'Goodeats | Browse Recipes',

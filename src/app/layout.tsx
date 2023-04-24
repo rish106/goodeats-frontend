@@ -15,12 +15,14 @@ export default function RootLayout({
     lang='en'
     className={cn('bg-white text-slate-900 antialiased', inter.className)}>
       <link rel='icon' href='/logo.png' />
-      <body className='min-h-screen bg-slate-50 antialiased'>
+      <body className='min-h-screen bg-slate-50 antialiased overflow-y-auto'>
         <Providers>
           <Navbar />
           <Toaster position='bottom-right' />
-          <main>{children}</main>
+          <main className='flex flex-col'>{children} 
+         </main>
         </Providers>
+      
       </body>
     </html>
   )
