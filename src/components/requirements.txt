@@ -1,2 +1,0 @@
-requirements ->
-flask_cors

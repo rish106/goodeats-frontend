@@ -81,7 +81,7 @@ const Page = ({ params }: PageProps) => {
               <RecipeActions />
             </div>
             <Image
-              src={`/static/recipe_pics/${post.recipe_image}`}
+              src={post.recipe_image}
               alt='Recipe Image'
               className='md:w-1/2'
               width={500}

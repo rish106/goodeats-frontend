@@ -16,7 +16,7 @@ export function RecipeCard({recipeName, recipeAuthor, recipeImage, recipeDescrip
   return (
     <div className='flex flex-col md:flex-row gap-4 w-full max-w-7xl items-center md:items-start'>
       <Image
-        src={`/static/recipe_pics/${recipeImage}`}
+        src={recipeImage}
         alt={recipeName}
         width={200}
         height={200}
