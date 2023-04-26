@@ -17,10 +17,10 @@ const page: React.FC = () => {
       </div>
       <div className='mx-auto max-w-7xl w-1/2 flex flex-col items-center space-y-6 px-10'>
         <div className='flex flex-col items-center gap-5 text-center'>
-          <LargeHeading>Welcome!</LargeHeading>
+          <LargeHeading className='dark:text-[$FFDCDC]'>Welcome!</LargeHeading>
           <div className='flex flex-col items-center text-center'>
             <SignupForm />
-            <Paragraph size='sm'>
+            <Paragraph className='dark:text-slate-300' size='sm'>
               Have an account already? {' '}
               <Link href='/login' className='underline underline-offset-2 font-medium text-black'>
                 Login
