@@ -18,7 +18,7 @@ async function getTopRecipes() {
 export default async function Home() {
   const topRecipesPromise = getTopRecipes();
   const [topRecipes] = await Promise.all([topRecipesPromise]);
-
+  
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden dark:bg-darkBg1-100 bg-slate-200 overflow-y-auto'>
       <div className='container pt-32 max-w-full w-full h-full mx-2 md:mx-5 dark:bg-darkBg1-100'>
