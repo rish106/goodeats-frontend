@@ -14,15 +14,6 @@ import { Button } from '@/ui/Button';
 //   title: 'Goodeats | Browse Recipes',
 // }
 
-interface RecipeCardProps {
-  name: string
-  description: string
-  username: string
-  id: number
-  recipe_image: string
-  rating: number
-}
-
 async function fetcher(url: string) {
   const res = await fetch(url);
   const data = await res.json();
@@ -33,22 +24,22 @@ async function getRecipesByPage(search: string, page: number) {
   if (search) {
     return await fetcher(`/api/search?keywords=${search}&page=${page}`);
   } else {
-    return await fetcher(`/api/home?page=${page}`);
+    return await fetcher(`/api/latest_recipes?page=${page}`);
   }
 }
 
 let onLoad = true;
 
 export default function Page() {
-  const { data, error } = useSWR('/api/home', fetcher);
+  const { data, error } = useSWR('/api/latest_recipes', fetcher);
   const [currentPage, setCurrentPage] = useState(1);
-  const [feedRecipes, setFeedRecipes] = useState<RecipeCardProps[]>(data || []);
+  const [feedRecipes, setFeedRecipes] = useState<any[]>(data || []);
   const [search, setSearchValue] = useState('');
 
   async function handleSearch () {
     setCurrentPage(1);
     const recipes = await getRecipesByPage(search, 1);
-    setFeedRecipes(recipes);
+    setFeedRecipes(recipes.recipe_data);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,13 +73,13 @@ export default function Page() {
   )
 
   if (onLoad && data) {
-    setFeedRecipes(data);
+    setFeedRecipes(data.recipe_data);
     onLoad = false;
   };
 
   async function handlePageChange (event, value: number) {
     const recipes = await getRecipesByPage(search, value);
-    setFeedRecipes(recipes);
+    setFeedRecipes(recipes.recipe_data);
     setCurrentPage(value);
   };
 
@@ -120,14 +111,14 @@ export default function Page() {
             </div>
           </div>
           <div className='h-full flex flex-col justify-start place-items-start px-8 w-full sm:w-4/5'>
-            {feedRecipes.map((recipe: RecipeCardProps) => (
-              <Link href={`/recipes/${recipe.id}`} key={recipe.id} className='w-full mb-8'>
-                <RecipeCard recipeId={recipe.id} recipeName={recipe.name} recipeImage={recipe.recipe_image} recipeAuthor={recipe.username} recipeDescription={recipe.description} recipeRating={recipe.rating} />
+            {feedRecipes.map((recipe: any) => (
+              <Link href={`/recipes/${recipe.recipe.recipe_id}`} key={recipe.recipe.recipe_id} className='w-full mb-8'>
+                <RecipeCard recipeId={recipe.recipe.recipe_id} recipeName={recipe.recipe.name} recipeImage={recipe.recipe.recipe_image} recipeAuthor={recipe.recipe.username} recipeDescription={recipe.recipe.description} recipeRating={recipe.recipe.avgRating} />
               </Link>
             ))}
             <div className='w-full flex flex-col items-center'>
               <Pagination
-                count={100}
+                count={data.max_pages}
                 size='large'
                 color='standard'
                 page={currentPage}
