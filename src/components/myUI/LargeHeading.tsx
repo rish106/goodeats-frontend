@@ -15,6 +15,7 @@ const LargeHeadingVariants = cva(
         xs: 'text-xl md:text-2xl lg:text-3xl',
         xxs: 'text-lg md:text-xl lg:text-2xl',
         xxxs: 'text-base md:text-lg lg:text-xl',
+        bottom: 'xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl',
       },
     },
     defaultVariants: {
