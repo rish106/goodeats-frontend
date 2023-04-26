@@ -61,7 +61,7 @@ const MobileMenu = () => {
       <IconButton icon={Icons.Search} variant='ghost' className='hover:bg-transparent' />
       <IconButton icon={Icons.Menu} variant='ghost' className='hover:bg-transparent focus:ring-0 focus:ring-offset-0' onClick={toggleDrawer} />
       <Drawer anchor='right' open={isDrawerOpen} onClose={toggleDrawer}>
-        <div className='container h-full bg-orange-300 flex flex-col w-[180px] items-center pt-6'>
+        <div className='container h-full bg-orange-300/90 dark:bg-cyan-200/80 flex flex-col w-[180px] items-center pt-6'>
           <div className='flex flex-col w-4/5 items-center gap-4'>
             <Link href='/about-us' className={buttonVariants({ variant: 'link' })} onClick={toggleDrawer}>
               About Us
