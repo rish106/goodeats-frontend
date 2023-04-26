@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 import '../styles/globals.css'
 async function getTopRecipes() {
-  const res = await fetch(`http://127.0.0.1:5000/`);
+  const res = await fetch(`${process.env.BASE_API_URL}/top_rated`);
   const data = await res.json();
   return data;
 }
@@ -39,8 +39,12 @@ export default async function Home() {
             <Image className='align-middle w-full h-600 object-cover' src='fryingpantop.jpg' alt='frying pan' width={1000} height={1000} />
           </div>
         </div>
-        
-        <ScrollArea feedRecipes={topRecipes} header='Top Rated' />
+
+        {
+          topRecipes && topRecipes.length > 0 && (
+            <ScrollArea feedRecipes={topRecipes} header='Top Rated' />
+          )
+        }
 
         <ScrollArea feedRecipes={feedRecipes} header='Recommended for you' />
 
@@ -61,7 +65,7 @@ export default async function Home() {
                 Post it here!
               </LargeHeading>
           </Link>
-        
+
         </div>
       </div>
     </div>
