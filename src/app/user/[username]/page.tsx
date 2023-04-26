@@ -2,7 +2,7 @@
 
 import React from 'react';
 import useSWR from 'swr';
-import jwt from 'jsonwebtoken';
+import * as jose from 'jose';
 import Link from 'next/link';
 import Image from 'next/image';
 import LargeHeading from '@/ui/LargeHeading';
@@ -35,10 +35,9 @@ export default function Page ({ params }: PageProps) {
 
   React.useEffect(() => {
     if (token) {
-      const decodedToken = jwt.decode(token);
-      if (decodedToken) {
-        const decodedTokenPayload = decodedToken as jwt.JwtPayload;
-        const user = decodedTokenPayload.user;
+      const payload = jose.decodeJwt(token);
+      if (payload) {
+        const user = payload.user as string;
         setLoggedInUsername(user);
       }
     };

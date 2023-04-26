@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import jwt from 'jsonwebtoken'
+import * as jose from 'jose';
 import { toast } from '@/ui/toast'
 import { useRouter } from 'next/navigation'
 import { buttonVariants } from '@/ui/Button'
@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/ui/DropdownMenu'
 
-const UserActions = () => {
+const UserActions = ({ secret } : { secret: string }) => {
   const [session, setSession] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
@@ -28,12 +28,17 @@ const UserActions = () => {
       // Check if there's a JWT token in localStorage
       const token = localStorage.getItem('token');
       if (token) {
-        const decodedToken = jwt.decode(token);
-        if (decodedToken) {
-          const decodedTokenPayload = decodedToken as jwt.JwtPayload;
-          const user = decodedTokenPayload.user;
-          setUsername(user);
-          setSession(true);
+        const secretKey = new TextEncoder().encode(secret);
+        try {
+          const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey)
+          if (payload) {
+            const user = payload.user as string;
+            setUsername(user);
+            setSession(true);
+          }
+        } catch (err) {
+          localStorage.removeItem('token');
+          setSession(false);
         }
       } else {
         setSession(false);
@@ -42,20 +47,20 @@ const UserActions = () => {
     fetchToken();
     const intervalId = setInterval(fetchToken, 1000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [secret]);
 
   const signOut = () => {
     toast({
       title: 'Signing out...',
       message: '',
       type: 'default',
-      duration: 1500,
+      duration: 1000,
     });
     localStorage.removeItem('token');
     setSession(false);
     setTimeout(() => {
       router.push('/');
-    }, 500);
+    }, 1000);
   };
 
   return (session ? (

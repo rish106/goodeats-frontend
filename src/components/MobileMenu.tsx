@@ -2,14 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
-import jwt from 'jsonwebtoken'
+import * as jose from 'jose';
 import { useRouter } from 'next/navigation'
 import { Button, buttonVariants, IconButton } from '@/ui/Button'
 import { Icons } from '@/components/Icons'
 import Drawer from '@mui/material/Drawer'
 import { toast } from '@/ui/toast'
 
-const MobileMenu = () => {
+const MobileMenu = ({ secret }: { secret: string }) => {
 
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
   const [session, setSession] = React.useState(false);
@@ -21,10 +21,10 @@ const MobileMenu = () => {
       // Check if there's a JWT token in localStorage
       const token = localStorage.getItem('token');
       if (token) {
-        const decodedToken = jwt.decode(token);
-        if (decodedToken) {
-          const decodedTokenPayload = decodedToken as jwt.JwtPayload;
-          const user = decodedTokenPayload.user;
+        const secretKey = new TextEncoder().encode(secret);
+        const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey)
+        if (payload) {
+          const user = payload.user as string;
           setUsername(user);
           setSession(true);
         }
@@ -35,7 +35,7 @@ const MobileMenu = () => {
     fetchToken();
     const intervalId = setInterval(fetchToken, 1000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [secret]);
 
 
   function toggleDrawer() {
@@ -47,13 +47,13 @@ const MobileMenu = () => {
       title: 'Signing out...',
       message: '',
       type: 'default',
-      duration: 1500,
+      duration: 1000,
     });
     localStorage.removeItem('token');
     setSession(false);
     setTimeout(() => {
       router.push('/');
-    }, 500);
+    }, 1000);
   };
 
   return (

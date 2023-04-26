@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import * as jose from 'jose';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
@@ -12,8 +12,13 @@ export async function POST(request: NextRequest) {
   });
   const json = await response.json();
   if (!json.message) {
-    return NextResponse.json(json)
+    return NextResponse.json(json);
   }
-  const token = jwt.sign({ user: data.username }, 'myprivatekey', { expiresIn: '14d' })
-  return NextResponse.json({ token })
+  const secret = new TextEncoder().encode(
+    process.env.JWT_SECRET as string
+  )
+  const token = await new jose.SignJWT({ user: data.username })
+  .setExpirationTime('14d')
+  .sign(secret);
+  return NextResponse.json({ token });
 }

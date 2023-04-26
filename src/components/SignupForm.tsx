@@ -18,7 +18,16 @@ const SignupForm = () => {
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    if (response.ok) {
+    if (json.username || json.email || json.password || json.confirm_password) {
+      let error_msg = "";
+      error_msg = json.email || json.username || (json.password && `Password ${json.password}`) || (json.confirm_password && `Confirm Password ${json.confirm_password}`) || "";
+      toast({
+        title: 'Error',
+        message: error_msg,
+        type: 'error',
+        duration: 2000,
+      });
+    } else {
       toast({
         title: 'Successfully registered',
         message: '',
@@ -30,17 +39,6 @@ const SignupForm = () => {
       setTimeout(() => {
         router.push('/');
       }, 1500);
-    } else {
-      let error_msg = "";
-      error_msg = json.email || "";
-      error_msg += json.username || "";
-      error_msg += json.password || "";
-      toast({
-        title: 'Error',
-        message: error_msg,
-        type: 'error',
-        duration: 1000,
-      });
     }
   }
 

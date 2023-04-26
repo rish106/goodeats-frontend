@@ -8,19 +8,13 @@ import { toast } from '@/ui/toast';
 
 const LoginForm = () => {
 
-  const router = useRouter()
+  const router = useRouter();
 
   async function submitForm(data) {
     if (data.remember == 'on') {
-      data = {
-        ...data,
-        remember: true,
-      }
+      data.remember = true;
     } else {
-      data = {
-        ...data,
-        remember: false,
-      }
+      data.remember = false;
     }
     const response = await fetch('/api/login', {
       method: 'POST',
@@ -29,28 +23,28 @@ const LoginForm = () => {
       },
       body: JSON.stringify(data),
     });
-    // alert(json.message);
     const json = await response.json();
-    if (json.message || json.username) {
-      const error_msg = json.message || json.username[0];
+    if (json.token) {
+      toast({
+        title: 'Success',
+        message: 'You are now logged in',
+        type: 'success',
+        duration: 1500,
+      })
+      const token = json.token;
+      localStorage.setItem('token', token);
+      setTimeout(() => {
+        router.push('/');
+      }, 1000);
+    }
+    else {
+      const error_msg = json.message || json.password || json.username;
       toast({
         title: 'Error',
         message: error_msg,
         type: 'error',
         duration: 1000,
       });
-    } else {
-      toast({
-        title: 'Success',
-        message: 'You are now logged in',
-        type: 'success',
-        duration: 1000,
-      })
-      const token = json.token;
-      localStorage.setItem('token', token);
-      setTimeout(() => {
-        router.push('/');
-      }, 1500);
     }
   };
 
