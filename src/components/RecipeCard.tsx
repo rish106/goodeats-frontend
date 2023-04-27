@@ -18,9 +18,9 @@ export function RecipeCard({recipeName, recipeAuthor, recipeImage, recipeDescrip
       <Image
         src={recipeImage}
         alt={recipeName}
-        width={200}
+        width={300}
         height={200}
-        className='rounded-lg md:h-[150px] md:w-[200px] h-[240px] w-[320px]' />
+        className='rounded-lg md:max-h-[150px] md:max-w-[200px] h-[240px] w-[320px]' />
       <div className='flex flex-col w-full'>
         <div className='flex flex-row w-full justify-between gap-4 pb-1'>
           <LargeHeading className='text-start' size='xs'>

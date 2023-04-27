@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden bg-slate-200 overflow-y-auto'>
-      <div className='container pt-32 max-w-full w-full h-full mx-2 md:mx-5'>
+      <div className='container pt-32 max-w-full w-full h-full'>
         <div className='h-full w-full gap-6  flex md:flex-row flex-col justify-start lg:justify-center items-center  lg:items-start rounded-md'>
           <div className='relative md:w-1/2 sm:w-full gap-10 flex flex-col h-[530px] items-center justify-center '>
             <LargeHeading className='font-semibold '>
@@ -42,16 +42,14 @@ export default function Home() {
           </div>
 
           <div className='md:w-1/2 align-middle justify-center w-3/4  h-[600px]'>
-            <Image className='align-middle w-full h-600 object-cover' src='fryingpantop.jpg' alt='frying pan' width={1000} height={1000} />
+            <Image className='align-middle w-full h-600 object-cover' src='/fryingpantop.jpg' alt='frying pan' width={1000} height={1000} />
           </div>
         </div>
 
-        <SWRConfig>
-          {!error && topRecipes && topRecipes.length > 0 && (
-            <ScrollArea feedRecipes={topRecipes} header='Top Rated' />
-          )
-          }
-        </SWRConfig>
+        {!error && topRecipes && topRecipes.length > 0 && (
+          <ScrollArea feedRecipes={topRecipes} header='Top Rated' />
+        )
+        }
 
         <ScrollArea feedRecipes={feedRecipes} header='Recommended for you' />
 
