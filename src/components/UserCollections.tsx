@@ -1,17 +1,37 @@
 'use client'
 
+import React from 'react'
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import LargeHeading from '@/ui/LargeHeading';
 import NewCollectionDialog from './NewCollectionDialog';
 import Paragraph from './myUI/Paragraph';
 import { feedCollections } from '@/public/data';
+import useSWR from 'swr';
+import * as jose from 'jose';
+import { Console } from 'console';
+
 
 interface collectionProps {
   secret: string
 }
 
+async function fetcher(url: string) {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}
+
+
+
+
 export const UserCollections = ({ secret }: collectionProps) => {
+  const [feedCollections, setFeedCollections] = useState<any[]>([]);
+  const [username, setUsername] = React.useState('');
+  const [user_id, setUserID] = React.useState(0);
+  const [session, setSession] = React.useState(false);
+  const {data, error } = useSWR(`/api/${username}/collections`, fetcher);
+
   let token = '' as string | null;
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   if (typeof window !== 'undefined') {
@@ -20,6 +40,54 @@ export const UserCollections = ({ secret }: collectionProps) => {
   useEffect(() => {
     localStorage.getItem('token') ? setIsAuthenticated(true) : setIsAuthenticated(false);
   }, [token, secret]);
+
+  
+  
+  useEffect(() => {
+    const fetchToken = async () => {
+      // Check if there's a JWT token in localStorage
+      const token = localStorage.getItem('token');
+      if (token) {
+        const secretKey = new TextEncoder().encode(secret);
+        try {
+          const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey)
+          if (payload) {
+            const user = payload.user as string;
+            setUsername(user);
+            setSession(true);
+            setUserID(payload.user_id as number)
+          }
+        } catch (err) {
+          localStorage.removeItem('token');
+          setSession(false);
+        }
+      } else {
+        setSession(false);
+      }
+    }
+    fetchToken(); // This is the function that runs every second
+    const intervalId = setInterval(fetchToken, 600); 
+    // if (username) { //if data is present then we print the collection of the user
+    //   setFeedCollections(data.recipe_data);
+    // }
+    // else
+    // {
+    //   setFeedCollections([]); //sets it to empty if data isn't there at all.
+    // }
+    return () => clearInterval(intervalId);
+
+    
+  }, [secret])
+
+  if (!username) return (
+    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+      <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+        <LargeHeading>
+          Loading Collections...
+        </LargeHeading>
+      </div>
+    </div>
+  )
 
   if (token === '') return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
@@ -53,11 +121,11 @@ export const UserCollections = ({ secret }: collectionProps) => {
             <LargeHeading>
               My Collections
             </LargeHeading>
-            <NewCollectionDialog />
+            <NewCollectionDialog username={username} user_id={user_id} />
           </div>
           <div className='h-full flex flex-col justify-start items-center w-full px-8'>
             {
-              feedCollections.length === 0 ? (
+              feedCollections.length == 0 ? (
                 <div className='flex flex-col items-center'>
                   <LargeHeading size='xs'>
                     You have no collections

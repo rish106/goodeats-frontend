@@ -6,7 +6,27 @@ import { Button } from '@/ui/Button';
 import Icons from '@/components/Icons';
 import { IconButton } from '@/ui/Button';
 
-const NewCollectionDialog = () => {
+
+
+
+
+const NewCollectionDialog = ({username, user_id}:{username:string, user_id:number}) => {
+  
+  async function submitForm(data) {
+    data.user_id = user_id;
+    const response = await fetch(`/api/${username}/collections`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(data);
+    const json = await response.json();
+    console.log(json);
+  }
+
+
   return (
   <Dialog.Root>
     <Dialog.Trigger asChild>
@@ -26,8 +46,12 @@ const NewCollectionDialog = () => {
         <Dialog.Description className='text-[15px] text-black mb-[15px]'>
           Create a new collection to organize your recipes.
         </Dialog.Description>
-        <Form.Root className='w-full flex flex-col items-start justify-start'>
-          <Form.Field className='w-full grid mb-[10px]' name='collectionName'>
+        <Form.Root className='w-full flex flex-col items-start justify-start' onSubmit={(event) => {
+        const data = Object.fromEntries(new FormData(event.currentTarget));
+        submitForm(data); 
+        event.preventDefault();
+       }}>
+          <Form.Field className='w-full grid mb-[10px]' name='name'>
             <div className='flex items-baseline justify-between'>
               <Form.Label className='text-black font-medium text-[15px]'>
                 Collection Name

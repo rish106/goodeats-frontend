@@ -7,9 +7,22 @@ import { IconButton } from '@/ui/Button';
 import { feedCollections } from '@/public/data';
 // import { useRouter } from 'next/navigation';
 
-const AddToCollectionDialog = () => {
+const AddToCollectionDialog = ({username,user_id}:{username:string, user_id:number}) => {
 
   // const router = useRouter();
+  async function submitForm(data) {
+    const response = await fetch(`/api/${username}/collections`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    data.user_id = user_id;
+    console.log(data);
+    const json = await response.json();
+    console.log(json);
+  }
 
   const addToCollection = (collectionId: number) => (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
