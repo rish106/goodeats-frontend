@@ -7,9 +7,15 @@ async function getRecipeById(id: string) {
 export async function generateMetadata({ params }) {
   const postPromise = getRecipeById(params.id);
   const [post] = await Promise.all([postPromise]);
-  return {
-    title: `Goodeats | ${post.name}`,
-  };
+  if (post.recipe_data?.name) {
+    return {
+      title: `Goodeats | ${post.recipe_data.name}`,
+    };
+  } else {
+    return {
+      title: `Goodeats | Recipe not found`,
+    }
+  }
 }
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

@@ -15,8 +15,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(json);
   }
   const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-  const token = await new jose.SignJWT({ user: data.username })
-  .setExpirationTime('14d')
-  .sign(secret);
+  const token = await new jose.SignJWT({ user: data.username, user_id: json.user_id })
+    .setExpirationTime('14d')
+    .setProtectedHeader({ alg: 'HS256' })
+    .sign(secret);
   return NextResponse.json({ token });
 }
