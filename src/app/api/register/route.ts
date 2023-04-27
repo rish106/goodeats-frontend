@@ -14,8 +14,12 @@ export async function POST(request: NextRequest) {
   if (!json.message) {
     return NextResponse.json(json);
   }
-  const secret = new TextEncoder().encode(process.env.JWT_SECRET)
-  const token = await new jose.SignJWT({ user: data.username, user_id: json.user_id })
+  const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+  const newJson = {
+    user: data.username,
+    user_id: json.user_id
+  };
+  const token = await new jose.SignJWT(newJson)
     .setExpirationTime('14d')
     .setProtectedHeader({ alg: 'HS256' })
     .sign(secret);

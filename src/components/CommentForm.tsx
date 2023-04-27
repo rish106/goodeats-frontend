@@ -1,6 +1,7 @@
 'use client'
 
 import * as Form from '@radix-ui/react-form';
+import * as jose from 'jose';
 import { Button } from '@/ui/Button';
 import Icons from '@/components/Icons';
 import { useState } from 'react';
@@ -41,7 +42,12 @@ const CommentForm : React.FC<CommentProps> = ({id}: CommentProps) => {
       });
       return;
     }
+    // target api route
     const route_link = `/api/recipe/${id}/reviews/new`;
+
+    // assign user_id
+    data.user_id = jose.decodeJwt(token).user_id;
+
     const response = await fetch(route_link, {
       method: 'POST',
       headers: {

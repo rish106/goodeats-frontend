@@ -5,11 +5,41 @@ import * as Form from '@radix-ui/react-form';
 import * as jose from 'jose';
 import { Button } from '@/ui/Button';
 import { toast } from '@/ui/toast';
-import { TupleType } from 'typescript';
+import { useState } from 'react';
 
 const RecipeForm = () => {
 
   const router = useRouter();
+  const [imageSrc, setImageSrc] = useState<string>('');
+
+  async function handleImageChange (event: any) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    let fileInput = null as any;
+
+    for (const ele of form.elements) {
+      if (ele.name === 'file') {
+        fileInput = ele;
+        break;
+      }
+    }
+
+    const formData = new FormData();
+
+    for ( const file of fileInput.files ) {
+      formData.append('file', file);
+    }
+
+    formData.append('upload_preset', 'goodeats');
+
+    const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
+      method: 'POST',
+      body: formData
+    }).then(r => r.json());
+
+    setImageSrc(data.secure_url);
+  }
 
   async function submitForm(data) {
     const token = localStorage.getItem('token');
@@ -45,10 +75,15 @@ const RecipeForm = () => {
     data.ingredients = ingredients;
 
     // assign user_id
-    data.user_id = jose.decodeJwt(token).user_id as string;
+    data.user_id = jose.decodeJwt(token).user_id;
 
     // parse keywords
     data.keywords = data.keywords.split(',').map((keyword: string) => keyword.trim());
+
+    // set image
+    if (imageSrc) {
+      data.recipe_image = imageSrc;
+    }
 
     console.log(data);
     const response = await fetch('/api/recipe/post', {
@@ -215,7 +250,7 @@ const RecipeForm = () => {
           />
         </Form.Control>
       </Form.Field>
-      <Form.Field className='grid mb-[15px]' name='instructions'>
+      <Form.Field className='grid mb-[6px] md:mb-[10px]' name='instructions'>
         <div className='flex items-baseline justify-between'>
           <Form.Label className='text-black font-medium text-[15px] leading-[35px]'>
             Instructions
@@ -231,6 +266,12 @@ const RecipeForm = () => {
           />
         </Form.Control>
       </Form.Field>
+      <form className='grid mb-[15px]' onChange={handleImageChange}>
+        <p className='text-black font-medium text-[15px] leading-[35px]'>
+          Upload Image
+        </p>
+        <input type='file' accept='image/\*' name='file'/>
+      </form>
       <div className='flex flex-row w-full justify-center md:justify-end'>
         <Form.Submit asChild>
           <Button className='w-full md:w-1/2'>

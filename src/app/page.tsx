@@ -28,6 +28,7 @@ export default function Home() {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden bg-slate-200 overflow-y-auto'>
       <div className='container pt-32 max-w-full w-full h-full'>
         <div className='h-full w-full gap-6  flex md:flex-row flex-col justify-start lg:justify-center items-center lg:items-start rounded-md'>
+
           <div className='relative md:w-1/2 sm:w-full gap-10 flex flex-col h-[530px] items-center justify-center '>
             <LargeHeading className='font-semibold '>
               Looking for a snack?
