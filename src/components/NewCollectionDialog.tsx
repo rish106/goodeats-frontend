@@ -6,12 +6,16 @@ import { Button } from '@/ui/Button';
 import Icons from '@/components/Icons';
 import { IconButton } from '@/ui/Button';
 
+import React from 'react';
 
+import { useRouter } from 'next/router'
 
+//...
 
 
 const NewCollectionDialog = ({username, user_id}:{username:string, user_id:number}) => {
-  
+  const [open, setOpen] = React.useState(false);
+
   async function submitForm(data) {
     data.user_id = user_id;
     const response = await fetch(`/api/${username}/collections`, {
@@ -21,14 +25,16 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
       },
       body: JSON.stringify(data),
     });
-    console.log(data);
     const json = await response.json();
     console.log(json);
+    setOpen(false);
+    
+    //then we gotta automatically close the dialog box
   }
 
 
   return (
-  <Dialog.Root>
+  <Dialog.Root open={open} onOpenChange={setOpen}>
     <Dialog.Trigger asChild>
       <IconButton icon={Icons.Plus} variant='ghost' size='lg' />
     </Dialog.Trigger>
@@ -50,6 +56,7 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
         const data = Object.fromEntries(new FormData(event.currentTarget));
         submitForm(data); 
         event.preventDefault();
+        
        }}>
           <Form.Field className='w-full grid mb-[10px]' name='name'>
             <div className='flex items-baseline justify-between'>
@@ -75,11 +82,14 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
             </Form.Control>
           </Form.Field>
           <div className='flex flex-row w-full justify-end'>
+         
             <Form.Submit asChild>
               <Button className='w-full md:w-2/5'>
                 Add
+                
               </Button>
             </Form.Submit>
+            
           </div>
         </Form.Root>
       </Dialog.Content>

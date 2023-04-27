@@ -103,7 +103,7 @@ const Page = ({ params }: PageProps) => {
                   {`Prep : ${post.recipe_data.preptime}`}
                 </Paragraph>
               </div>
-              <RecipeActions />
+              <RecipeActions recipe_id={parseInt(params.id)} />
             </div>
             <Image
               src={post.recipe_data.recipe_image}

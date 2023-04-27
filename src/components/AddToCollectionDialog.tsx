@@ -5,30 +5,48 @@ import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
 import { IconButton } from '@/ui/Button';
 import { feedCollections } from '@/public/data';
+import useSWR from 'swr';
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+
 // import { useRouter } from 'next/navigation';
 
-const AddToCollectionDialog = ({username,user_id}:{username:string, user_id:number}) => {
-
+const AddToCollectionDialog = ({username,user_id,recipe_id}:{username:string, user_id:number, recipe_id:number}) => {
+  const [feedCollections, setFeedCollections] = useState<any[]>([]);
   // const router = useRouter();
-  async function submitForm(data) {
-    const response = await fetch(`/api/${username}/collections`, {
+  async function addToMyCollection(collection_id) {
+    
+    const data = {user_id, recipe_id, collection_id};
+    const response = await fetch(`/api/recipe/collection/${recipe_id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    data.user_id = user_id;
     console.log(data);
     const json = await response.json();
     console.log(json);
+    
   }
+
+useEffect(() => {
+    async function fetchCollections() {
+      const response = await fetch(`/api/${username}/collections/`);
+      const json = await response.json();
+      console.log(json);
+      setFeedCollections(json);
+    }
+    fetchCollections();
+
+},[])
+
 
   const addToCollection = (collectionId: number) => (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     // router.push(`/collections`);
   };
-
+  
   return (
   <Dialog.Root>
     <Dialog.Trigger asChild>
@@ -50,16 +68,26 @@ const AddToCollectionDialog = ({username,user_id}:{username:string, user_id:numb
         </Dialog.Description>
         <div className='max-h-[400px] flex flex-col justify-start items-start w-full overflow-y-scroll'>
           {feedCollections.map((collection) => (
-            <div key={collection.collectionId} onClick={addToCollection(collection.collectionId)} className='bg-transparent border-none cursor-pointer flex flex-col gap-4 mb-6'>
+            <div key={collection.collection_id} onClick={(event:React.MouseEvent<HTMLDivElement>) => addToMyCollection(collection.collection_id)} className='bg-transparent border-none cursor-pointer flex flex-col gap-4 mb-6'>
+              <div className='flex flex-row items-start gap-3'>
+              <Image
+                      src={collection.collection_image}
+                      height={100}
+                      width={100}
+                      alt='thumbnail'
+                      className='rounded-lg'
+                    />
               <div className='flex flex-col items-start w-full'>
-                <Paragraph className='text-black font-bold text-start'>
-                  {collection.name}
+              
+                <Paragraph className='text-black font-bold text-start mb-1'>
+                  {collection.collection_name}
                 </Paragraph>
                 <Paragraph size='sm' className='text-start'>
-                  {collection.description}
+                  {collection.description?.slice(0, 50) + (collection.description?.length > 50 ? '...' : '')}
                 </Paragraph>
               </div>
             </div>
+          </div>
           ))}
         </div>
       </Dialog.Content>

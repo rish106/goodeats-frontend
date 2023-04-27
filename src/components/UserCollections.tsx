@@ -6,10 +6,11 @@ import Image from 'next/image';
 import LargeHeading from '@/ui/LargeHeading';
 import NewCollectionDialog from './NewCollectionDialog';
 import Paragraph from './myUI/Paragraph';
-import { feedCollections } from '@/public/data';
+import { feedCollections, feedRecipes } from '@/public/data';
 import useSWR from 'swr';
 import * as jose from 'jose';
 import { Console } from 'console';
+import { FormControlUnstyledContext } from '@mui/base';
 
 
 interface collectionProps {
@@ -55,7 +56,7 @@ export const UserCollections = ({ secret }: collectionProps) => {
             const user = payload.user as string;
             setUsername(user);
             setSession(true);
-            setUserID(payload.user_id as number)
+            setUserID(payload.user_id as number);
           }
         } catch (err) {
           localStorage.removeItem('token');
@@ -66,20 +67,31 @@ export const UserCollections = ({ secret }: collectionProps) => {
       }
     }
     fetchToken(); // This is the function that runs every second
-    const intervalId = setInterval(fetchToken, 600); 
+    const intervalId = setInterval(fetchToken, 1000); 
     // if (username) { //if data is present then we print the collection of the user
-    //   setFeedCollections(data.recipe_data);
+    //   setFeedCollections(data);
     // }
     // else
+    // if(data != feedRecipes)
     // {
-    //   setFeedCollections([]); //sets it to empty if data isn't there at all.
+    //   setFeedCollections(data);
+    //   console.log(data);
     // }
-    return () => clearInterval(intervalId);
+    if(!username)
+    {
+      return () => clearInterval(intervalId);
+    }
+    else
+    {      
+      return () => clearInterval(intervalId);
+    }
 
     
   }, [secret])
 
-  if (!username) return (
+
+
+  if (!username || !data) return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
         <LargeHeading>
@@ -89,6 +101,20 @@ export const UserCollections = ({ secret }: collectionProps) => {
     </div>
   )
 
+  if(data != feedCollections)
+  {
+    setFeedCollections(data);
+    console.log(data);
+  }
+  // useEffect(() => {
+  //   if(data != feedCollections)
+  //   {
+  //     setFeedCollections(data);
+  //     console.log(data);
+  //   }
+  // },[])
+  
+  //else we set the collection
   if (token === '') return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
@@ -137,17 +163,18 @@ export const UserCollections = ({ secret }: collectionProps) => {
               ) : feedCollections.map((collection) => (
                 <div key={collection.collectionId} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                   <div className=''>
+                    <LargeHeading size='xs' > {collection.cn} </LargeHeading>
                     <Image
-                      src={collection.recipe_image}
+                      src={collection.collection_image}
                       height={250}
-                      width={250}
+                      width={300}
                       alt='thumbnail'
                       className='rounded-xl'
                     />
                   </div>
                   <div className='flex flex-col gap-1 w-[250px] md:w-full'>
                     <LargeHeading className='text-start' size='xs'>
-                      {collection.name}
+                      {collection.collection_name}
                     </LargeHeading>
                     <Paragraph size='sm' className='text-start'>
                       {collection.description}
