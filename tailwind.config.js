@@ -15,17 +15,6 @@ module.exports = {
     extend: {
       colors: {
         ...blackA,
-        transparent: 'transparent',
-        current: 'currentColor',
-        primary: slate.slate11,
-        darkText: slate.slate3,
-        darkHeading: slate.slate3,
-        darkBg1: 
-        {
-          100: slate.slate6,
-          200 : slate.slate8,
-
-        },
       },
     },
   },
