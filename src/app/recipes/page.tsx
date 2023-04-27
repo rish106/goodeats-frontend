@@ -109,18 +109,23 @@ export default function Page() {
               </Button>
             </div>
           </div>
-          <div className='h-full flex flex-col justify-start place-items-start px-8 w-full sm:w-4/5'>
+          <div className='h-full flex flex-col justify-start place-items-start px-8 min-w-[360px] w-4/5'>
               {feedRecipes.map((recipe: any) => (
                 <Link href={`/recipes/${recipe.recipe.recipe_id}`} key={recipe.recipe.recipe_id} className='w-full mb-8'>
-                  <RecipeCard recipeId={recipe.recipe.recipe_id} recipeName={recipe.recipe.name} recipeImage={recipe.recipe.recipe_image} recipeAuthor={recipe.recipe.username} recipeDescription={recipe.recipe.description} recipeRating={recipe.recipe.avgRating} />
+                  <RecipeCard
+                    recipeId={recipe.recipe.recipe_id}
+                    recipeName={recipe.recipe.name}
+                    recipeImage={recipe.recipe.recipe_image}
+                    recipeAuthor={recipe.user.username}
+                    recipeDescription={recipe.recipe.description}
+                    recipeRating={recipe.recipe.avgRating} />
                 </Link>
               ))}
             <div className='w-full flex flex-col items-center'>
               <Pagination
                 count={maxPage}
                 boundaryCount={0}
-                siblingCount={2}
-                size='large'
+                size='medium'
                 color='standard'
                 page={currentPage}
                 onChange={handlePageChange}

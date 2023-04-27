@@ -13,6 +13,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'img.sndimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.themealdb.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
       }
     ],
   },

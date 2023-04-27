@@ -8,6 +8,21 @@ import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
   const router = useRouter();
+  let token = '' as string | null;
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
+    if (token) {
+      toast({
+        title: 'Already logged in',
+        message: '',
+        type: 'success',
+        duration: 2000,
+      });
+      setTimeout(() => {
+        router.push('/');
+      }, 1500);
+    }
 
   async function submitForm(data) {
     const response = await fetch('/api/register', {

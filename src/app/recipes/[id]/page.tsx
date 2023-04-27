@@ -77,29 +77,29 @@ const Page = ({ params }: PageProps) => {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container max-w-full mx-auto w-full h-full'>
         <div className='h-full gap-0 flex flex-col justify-start items-center'>
-          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row md:px-10 bg-violet-800 w-full px-8 pb-8'>
+          <div className='flex pt-32 flex-col-reverse justify-between items-center gap-8 md:flex-row md:px-10 bg-slate-800 min-h-screen w-full px-8 pb-8'>
             <div className='flex flex-col md:w-1/2 justify-center gap-3 items-center'>
               <LargeHeading className='text-white text-center w-full'>
-                {post.name}
+                {post.recipe_data.name}
               </LargeHeading>
               <LargeHeading size='xs' className='text-white font-bold'>
-                {post.username}
+                {post.user_data.username}
               </LargeHeading>
               <LargeHeading size='xs' className='text-white flex flex-row items-center md:gap-1'>
-                {post.avgRating} <Icons.Star size={28} className='scale-75 md:scale-100' fill='white' />
+                {post.recipe_data.avgRating} <Icons.Star size={28} className='scale-75 md:scale-100' fill='white' />
               </LargeHeading>
               <div className='flex flex-col md:flex-row md:gap-6 -mb-2'>
                 <Paragraph className='text-white'>
-                  {`Cook : ${post.cooktime}`}
+                  {`Cook : ${post.recipe_data.cooktime}`}
                 </Paragraph>
                 <Paragraph className='text-white'>
-                  {`Prep : ${post.preptime}`}
+                  {`Prep : ${post.recipe_data.preptime}`}
                 </Paragraph>
               </div>
               <RecipeActions />
             </div>
             <Image
-              src={post.recipe_image}
+              src={post.recipe_data.recipe_image}
               alt='Recipe Image'
               className='md:w-1/2'
               width={500}
@@ -112,14 +112,14 @@ const Page = ({ params }: PageProps) => {
               </LargeHeading>
               <div className='flex flex-row justify-start items-center gap-8'>
                 <div className='flex flex-col justify-center items-center'>
-                  {post.ingredients.map((ingredient: ingredient) => (
+                  {post.recipe_data.ingredients.map((ingredient: ingredient) => (
                     <Paragraph key={ingredient.name} className='text-end'>
                       {ingredient.amount}
                     </Paragraph>
                   ))}
                 </div>
                 <div className='flex flex-col justify-center items-center'>
-                  {post.ingredients.map((ingredient: ingredient) => (
+                  {post.recipe_data.ingredients.map((ingredient: ingredient) => (
                     <Paragraph key={ingredient.name} className='text-start w-full'>
                       {ingredient.name}
                     </Paragraph>
@@ -132,11 +132,11 @@ const Page = ({ params }: PageProps) => {
                 Instructions
               </LargeHeading>
               <Paragraph size='sm' className='text-start'>
-                {post.instructions}
+                {post.recipe_data.instructions}
               </Paragraph>
             </div>
           </div>
-          <div className='flex flex-col items-center justify-center bg-violet-800 gap-8 w-full py-8 px-8'>
+          <div className='flex flex-col items-center justify-center bg-slate-800 gap-8 w-full py-8 px-8'>
             <CommentForm id={params.id} />
             {
               comments.length === 0 ? (
