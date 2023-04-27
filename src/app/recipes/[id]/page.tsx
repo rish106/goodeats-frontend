@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import useSWR from 'swr';
 import React from 'react';
+import * as jose from 'jose';
 import LargeHeading from '@/ui/LargeHeading';
 import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
@@ -25,10 +26,27 @@ const fetcher = async (url: string) => {
   return data
 }
 
+const commentFetcher = async (url: string) => {
+  const token = localStorage.getItem('token');
+  let user_id = '';
+  if (token) {
+    user_id = jose.decodeJwt(token as string).user_id as string;
+  }
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user_id ? { user_id } : {}),
+  })
+  const data = await res.json()
+  return data
+}
+
 const Page = ({ params }: PageProps) => {
 
   const recipeData = useSWR(`/api/recipe/${params.id}`, fetcher)
-  const commentData = useSWR(`/api/recipe/${params.id}/reviews`, fetcher)
+  const commentData = useSWR(`/api/recipe/${params.id}/reviews`, commentFetcher)
   const [comments, setComments] = React.useState<any>([]);
   const [post, setPost] = React.useState<any>(null);
 
