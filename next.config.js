@@ -5,7 +5,16 @@ const nextConfig = {
   },
   trailingSlash: true,
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'w7.pngwing.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.sndimg.com',
+      }
+    ],
   },
   async rewrites() {
     return [

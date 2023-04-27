@@ -1,18 +1,13 @@
 'use client'
 
 import LargeHeading from '@/ui/LargeHeading';
-import React, { useState } from 'react';
-import { Metadata } from 'next'
+import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import { RecipeCard } from '@/components/RecipeCard';
 import { Pagination } from '@mui/material';
 import Link from 'next/link';
 import Icons from '@/components/Icons';
 import { Button } from '@/ui/Button';
-
-// export const metadata: Metadata = {
-//   title: 'Goodeats | Browse Recipes',
-// }
 
 async function fetcher(url: string) {
   const res = await fetch(url);
@@ -28,18 +23,25 @@ async function getRecipesByPage(search: string, page: number) {
   }
 }
 
-let onLoad = true;
-
 export default function Page() {
   const { data, error } = useSWR('/api/latest_recipes', fetcher);
   const [currentPage, setCurrentPage] = useState(1);
-  const [feedRecipes, setFeedRecipes] = useState<any[]>(data || []);
+  const [feedRecipes, setFeedRecipes] = useState<any[]>([]);
   const [search, setSearchValue] = useState('');
+  const [maxPage, setMaxPage] = useState(1);
+
+  useEffect(() => {
+    if (data) {
+      setFeedRecipes(data.recipe_data);
+      setMaxPage(data.max_pages);
+    }
+  }, [data])
 
   async function handleSearch () {
     setCurrentPage(1);
     const recipes = await getRecipesByPage(search, 1);
     setFeedRecipes(recipes.recipe_data);
+    setMaxPage(recipes.max_pages);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,15 +74,12 @@ export default function Page() {
     </div>
   )
 
-  if (onLoad && data) {
-    setFeedRecipes(data.recipe_data);
-    onLoad = false;
-  };
-
   async function handlePageChange (event, value: number) {
-    const recipes = await getRecipesByPage(search, value);
-    setFeedRecipes(recipes.recipe_data);
-    setCurrentPage(value);
+    if (value !== currentPage) {
+      const recipes = await getRecipesByPage(search, value);
+      setFeedRecipes(recipes.recipe_data);
+      setCurrentPage(value);
+    }
   };
 
   return (
@@ -111,14 +110,16 @@ export default function Page() {
             </div>
           </div>
           <div className='h-full flex flex-col justify-start place-items-start px-8 w-full sm:w-4/5'>
-            {feedRecipes.map((recipe: any) => (
-              <Link href={`/recipes/${recipe.recipe.recipe_id}`} key={recipe.recipe.recipe_id} className='w-full mb-8'>
-                <RecipeCard recipeId={recipe.recipe.recipe_id} recipeName={recipe.recipe.name} recipeImage={recipe.recipe.recipe_image} recipeAuthor={recipe.recipe.username} recipeDescription={recipe.recipe.description} recipeRating={recipe.recipe.avgRating} />
-              </Link>
-            ))}
+              {feedRecipes.map((recipe: any) => (
+                <Link href={`/recipes/${recipe.recipe.recipe_id}`} key={recipe.recipe.recipe_id} className='w-full mb-8'>
+                  <RecipeCard recipeId={recipe.recipe.recipe_id} recipeName={recipe.recipe.name} recipeImage={recipe.recipe.recipe_image} recipeAuthor={recipe.recipe.username} recipeDescription={recipe.recipe.description} recipeRating={recipe.recipe.avgRating} />
+                </Link>
+              ))}
             <div className='w-full flex flex-col items-center'>
               <Pagination
-                count={data.max_pages}
+                count={maxPage}
+                boundaryCount={0}
+                siblingCount={2}
                 size='large'
                 color='standard'
                 page={currentPage}
