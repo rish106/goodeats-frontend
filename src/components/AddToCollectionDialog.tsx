@@ -40,7 +40,6 @@ useEffect(() => {
     async function fetchCollections() {
       const response = await fetch(`/api/${username}/collections/`);
       const json = await response.json();
-      console.log(json);
       setFeedCollections(json);
     }
     fetchCollections();

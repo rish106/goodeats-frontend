@@ -24,7 +24,6 @@ export default function Page({params}:PageProps) {
   if (typeof(window) !== 'undefined') {
     token = localStorage.getItem('token');
   }
-  console.log(token);
   let user_id = 0;
   let username = '';
   if (token) {
@@ -41,7 +40,6 @@ export default function Page({params}:PageProps) {
     {
       if (feedRecipes != data) {
         setFeedRecipes(data);
-        console.log(data);
       }
     }
     getCollectionRecipes();
@@ -65,15 +63,10 @@ export default function Page({params}:PageProps) {
       </div>
     </div>
   )
-  // if (feedRecipes != data) {
-  //   setFeedRecipes(data);
-  //   console.log(data);
-  // }
+
   if(data != feedRecipes)
   {
     setFeedRecipes(data);
-    console.log(data);
-    console.log(feedRecipes);
   }
   if(!feedRecipes)
   {

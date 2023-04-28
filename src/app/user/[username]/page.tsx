@@ -46,7 +46,6 @@ export default function Page ({ params }: PageProps) {
   React.useEffect(() => {
     if (userData.data) {
       setUser(userData.data);
-      console.log(userData.data);
     }
   }, [userData.data]);
 

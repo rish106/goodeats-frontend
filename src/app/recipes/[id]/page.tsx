@@ -41,7 +41,6 @@ const commentFetcher = async (url: string) => {
     body: JSON.stringify(user_id ? { user_id } : {}),
   })
   const data = await res.json();
-  // console.log(data);
   if (data.error) {
     return {user_reviews: [], other_reviews: []};
   } else {

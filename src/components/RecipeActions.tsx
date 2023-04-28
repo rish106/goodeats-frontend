@@ -9,7 +9,6 @@ import * as jose from 'jose';
 export function RecipeActions({recipe_id}:{recipe_id:number}){
 
   const token = localStorage.getItem('token');
-  console.log(token);
   let user_id = 0;
   let username = '';
   if (token) {

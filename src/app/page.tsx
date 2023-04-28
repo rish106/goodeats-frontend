@@ -30,7 +30,6 @@ async function recommendFetcher(url: string) {
   if (user_id === -1) {
     return { recipe_data: [] };
   }
-  console.log(user_id);
   const res = await fetch(url, {
     method: 'POST',
     headers: {

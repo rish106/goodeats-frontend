@@ -66,15 +66,7 @@ export const UserCollections = ({ secret }: collectionProps) => {
     }
     fetchToken(); // This is the function that runs every second
     const intervalId = setInterval(fetchToken, 1000);
-    // if (username) { //if data is present then we print the collection of the user
-    //   setFeedCollections(data);
-    // }
-    // else
-    // if(data != feedRecipes)
-    // {
-    //   setFeedCollections(data);
-    //   console.log(data);
-    // }
+
     if(!username)
     {
       return () => clearInterval(intervalId);
@@ -102,16 +94,7 @@ export const UserCollections = ({ secret }: collectionProps) => {
   if(data != feedCollections)
   {
     setFeedCollections(data);
-    console.log(data);
   }
-  // useEffect(() => {
-  //   if(data != feedCollections)
-  //   {
-  //     setFeedCollections(data);
-  //     console.log(data);
-  //   }
-  // },[])
-
   //else we set the collection
   if (token === '') return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
@@ -161,7 +144,6 @@ export const UserCollections = ({ secret }: collectionProps) => {
               ) : feedCollections.map((collection) => (
 
                 // <Link href={`/collections/${collection.collectionId}`} key={collection.collectionId}>
-                console.log(collection.collection_id),
                 <Link href={`/collections/${(collection.collection_id).toString()}`} key={collection.collection_id} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                   <div className=''>
                     <LargeHeading size='xs' > {collection.cn} </LargeHeading>

@@ -26,9 +26,8 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    console.log(json);
     setOpen(false);
-    
+
     //then we gotta automatically close the dialog box
   }
 
@@ -54,9 +53,9 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
         </Dialog.Description>
         <Form.Root className='w-full flex flex-col items-start justify-start' onSubmit={(event) => {
         const data = Object.fromEntries(new FormData(event.currentTarget));
-        submitForm(data); 
+        submitForm(data);
         event.preventDefault();
-        
+
        }}>
           <Form.Field className='w-full grid mb-[10px]' name='name'>
             <div className='flex items-baseline justify-between'>
@@ -82,14 +81,14 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
             </Form.Control>
           </Form.Field>
           <div className='flex flex-row w-full justify-end'>
-         
+
             <Form.Submit asChild>
               <Button className='w-full md:w-2/5'>
                 Add
-                
+
               </Button>
             </Form.Submit>
-            
+
           </div>
         </Form.Root>
       </Dialog.Content>
