@@ -6,8 +6,6 @@ import useSWR from 'swr';
 import { RecipeCard } from '@/components/RecipeCard';
 import { Pagination } from '@mui/material';
 import Link from 'next/link';
-import Icons from '@/components/Icons';
-import { Button } from '@/ui/Button';
 
 import * as jose from 'jose';
 
@@ -20,15 +18,6 @@ async function fetcher(url: string) {
   const data = await res.json();
   return data;
 }
-async function getRecipesByPage(search: string, page: number) {
-  if (search) {
-    return await fetcher(`/api/search?keywords=${search}&page=${page}`);
-  } else {
-    return await fetcher(`/api/latest_recipes?page=${page}`);
-  }
-}
-
-
 
 export default function Page({params}:PageProps) {
   let token = '' as string | null;
@@ -62,7 +51,7 @@ export default function Page({params}:PageProps) {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
         <LargeHeading>
-          Error loading recipes in collection 
+          Error loading recipes in collection
         </LargeHeading>
       </div>
     </div>
@@ -87,7 +76,7 @@ export default function Page({params}:PageProps) {
     console.log(feedRecipes);
   }
   if(!feedRecipes)
-  { 
+  {
     return (
         <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
           <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
@@ -98,7 +87,7 @@ export default function Page({params}:PageProps) {
         </div>
       )
   }
- 
+
   if(feedRecipes.length == 0)
   {
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
@@ -116,32 +105,25 @@ export default function Page({params}:PageProps) {
         <div className='h-full gap-8 flex flex-col justify-start items-center'>
           <div className='flex flex-col items-center gap-6 w-full sm:w-4/5 md:w-3/5 lg:2/5'>
             <LargeHeading>
-              Browse all Recipes in your Collection 
+              Browse all Recipes in your Collection
             </LargeHeading>
           </div>
           <div className='h-full flex flex-col justify-start place-items-start px-8 min-w-[360px] w-4/5'>
-              {feedRecipes.map((recipe: any) => (
-                <Link href={`/recipes/${recipe.recipe_id}`} key={recipe.recipe_id} className='w-full mb-8'>
-                  <RecipeCard
-                    recipeId={recipe.recipe_id}
-                    recipeName={recipe.name}
-                    recipeImage={recipe.recipe_image}
-                    recipeAuthor={recipe.username}
-                    recipeDescription={recipe.description}
-                    recipeRating={recipe.avgRating} />
-                </Link>
-              ))}
-            <div className='w-full flex flex-col items-center'>
-              <Pagination
-                boundaryCount={0}
-                size='medium'
-                color='standard'
-                className='mb-16'/>
-            </div>
+            {feedRecipes.map((recipe: any) => (
+              <Link href={`/recipes/${recipe.recipe_id}`} key={recipe.recipe_id} className='w-full mb-8'>
+                <RecipeCard
+                  recipeId={recipe.recipe_id}
+                  recipeName={recipe.name}
+                  recipeImage={recipe.recipe_image}
+                  recipeAuthor={recipe.username}
+                  recipeDescription={recipe.description}
+                  recipeRating={recipe.avgRating}
+                  recipeReviewCount={recipe.reviewCount} />
+              </Link>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
-            

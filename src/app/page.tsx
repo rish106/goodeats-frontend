@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import useSWR from 'swr'
+import * as jose from 'jose'
 import LargeHeading from '@/ui/LargeHeading'
 import { ScrollArea } from '@/components/RecipeSlide'
 import { feedRecipes } from '@/public/data'
@@ -14,15 +15,54 @@ async function fetcher(url: string) {
   return data;
 }
 
+async function recommendFetcher(url: string) {
+  let token = null as string | null;
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token');
+  }
+  let user_id = -1;
+  if (token) {
+    const payload = jose.decodeJwt(token);
+    if (payload) {
+      user_id = payload.user_id as number;
+    }
+  };
+  if (user_id === -1) {
+    return { recipe_data: [] };
+  }
+  console.log(user_id);
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({user_id}),
+  });
+  const data = await res.json();
+  return data;
+}
+
 export default function Home() {
-  const { data, error } = useSWR('/api/top_rated', fetcher);
-  const [topRecipes, setTopRecipes] = useState<any[]>(data || []);
+  const topRecipesData = useSWR('/api/top_rated', fetcher);
+  const recommendedRecipesData = useSWR('/api/recommend_recipes', recommendFetcher);
+  const [topRecipes, setTopRecipes] = useState<any[]>(topRecipesData.data || []);
+  const [recommendedRecipes, setRecommendedRecipes] = useState<any[]>(recommendedRecipesData.data || []);
 
   useEffect(() => {
-    if (data) {
-      setTopRecipes(data.recipe_data);
+    if (topRecipesData.data) {
+      setTopRecipes(topRecipesData.data.recipe_data);
     }
-  }, [data])
+  }, [topRecipesData.data])
+
+  useEffect(() => {
+    if (recommendedRecipesData.data?.recipe_data) {
+      if (recommendedRecipesData.data.recipe_data.length > 10) {
+        setRecommendedRecipes(recommendedRecipesData.data.recipe_data.slice(0, 10));
+      } else {
+        setRecommendedRecipes(recommendedRecipesData.data.recipe_data);
+      }
+    }
+  }, [recommendedRecipesData.data])
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden bg-slate-200 overflow-y-auto'>
@@ -46,12 +86,17 @@ export default function Home() {
           </div>
         </div>
 
-        {!error && topRecipes && topRecipes.length > 0 && (
-          <ScrollArea key={1} feedRecipes={topRecipes} header='Top Rated' />
-        )
+        {
+          !topRecipesData.error && topRecipes && topRecipes.length > 0 && (
+            <ScrollArea key={1} feedRecipes={topRecipes} header='Top Rated' />
+          )
         }
 
-        <ScrollArea key={2} feedRecipes={feedRecipes} header='Recommended for you' />
+        {
+          !recommendedRecipesData.error && recommendedRecipes && recommendedRecipes.length > 0 && (
+            <ScrollArea key={2} feedRecipes={recommendedRecipes} header='Recommended for you' />
+          )
+        }
 
         <div className='flex flex-row justify-center md:h-[500px] sm:h-[300px] h-[200px] items-center gap-6 bg-slate-300'>
           <Link href='/recipes' className='flex flex-col justify-center h-2/3 lg:w-1/4 md:w-1/3 w-3/6 items-center hover:scale-102 hover:shadow-2xl hover:bg-gray-700  bg-blackA11 rounded-3xl align-middle'>

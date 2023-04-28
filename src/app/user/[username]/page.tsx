@@ -46,6 +46,7 @@ export default function Page ({ params }: PageProps) {
   React.useEffect(() => {
     if (userData.data) {
       setUser(userData.data);
+      console.log(userData.data);
     }
   }, [userData.data]);
 
@@ -125,9 +126,11 @@ export default function Page ({ params }: PageProps) {
               </div>
             </div>
           ) : (
-            <>
+            <div className='flex flex-col w-full'>
               <div className='w-full gap-6 flex flex-col md:flex-row justify-start md:justify-center items-center'>
-                <Image src={`/static/profile_pics/${user.image_file}`} alt={user.name} width={200} height={200} className='rounded-full' />
+                <div className='h-200 w-200'>
+                  <Image src={`${user.profile_picture}`} alt={user.name} width={200} height={200} className='rounded-full object-contain' />
+                </div>
                 <div className='flex flex-col gap-2 items-center'>
                   <LargeHeading size='sm'>
                     {user.name}
@@ -143,7 +146,7 @@ export default function Page ({ params }: PageProps) {
               <div className=''>
 
               </div>
-            </>
+            </div>
           )
         }
       </div>

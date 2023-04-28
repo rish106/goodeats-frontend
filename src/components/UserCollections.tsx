@@ -42,8 +42,6 @@ export const UserCollections = ({ secret }: collectionProps) => {
     localStorage.getItem('token') ? setIsAuthenticated(true) : setIsAuthenticated(false);
   }, [token, secret]);
 
-  
-  
   useEffect(() => {
     const fetchToken = async () => {
       // Check if there's a JWT token in localStorage
@@ -67,7 +65,7 @@ export const UserCollections = ({ secret }: collectionProps) => {
       }
     }
     fetchToken(); // This is the function that runs every second
-    const intervalId = setInterval(fetchToken, 1000); 
+    const intervalId = setInterval(fetchToken, 1000);
     // if (username) { //if data is present then we print the collection of the user
     //   setFeedCollections(data);
     // }
@@ -82,11 +80,11 @@ export const UserCollections = ({ secret }: collectionProps) => {
       return () => clearInterval(intervalId);
     }
     else
-    {      
+    {
       return () => clearInterval(intervalId);
     }
 
-    
+
   }, [secret])
 
 
@@ -113,7 +111,7 @@ export const UserCollections = ({ secret }: collectionProps) => {
   //     console.log(data);
   //   }
   // },[])
-  
+
   //else we set the collection
   if (token === '') return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden pb-32'>
@@ -161,7 +159,7 @@ export const UserCollections = ({ secret }: collectionProps) => {
                   </Paragraph>
                 </div>
               ) : feedCollections.map((collection) => (
-                
+
                 // <Link href={`/collections/${collection.collectionId}`} key={collection.collectionId}>
                 console.log(collection.collection_id),
                 <Link href={`/collections/${(collection.collection_id).toString()}`} key={collection.collection_id} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
@@ -186,8 +184,8 @@ export const UserCollections = ({ secret }: collectionProps) => {
                 </Link>
 
               )
-              
-              
+
+
               )
             }
           </div>

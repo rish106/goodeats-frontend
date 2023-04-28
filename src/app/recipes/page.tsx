@@ -118,7 +118,8 @@ export default function Page() {
                     recipeImage={recipe.recipe.recipe_image}
                     recipeAuthor={recipe.user.username}
                     recipeDescription={recipe.recipe.description}
-                    recipeRating={recipe.recipe.avgRating} />
+                    recipeRating={recipe.recipe.avgRating}
+                    recipeReviewCount={recipe.recipe.reviewCount} />
                 </Link>
               ))}
             <div className='w-full flex flex-col items-center'>

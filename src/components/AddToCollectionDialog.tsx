@@ -4,10 +4,10 @@ import * as Dialog from '@radix-ui/react-dialog';
 import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
 import { IconButton } from '@/ui/Button';
-import { feedCollections } from '@/public/data';
 import useSWR from 'swr';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { toast } from './myUI/toast';
 
 // import { useRouter } from 'next/navigation';
 
@@ -15,7 +15,7 @@ const AddToCollectionDialog = ({username,user_id,recipe_id}:{username:string, us
   const [feedCollections, setFeedCollections] = useState<any[]>([]);
   // const router = useRouter();
   async function addToMyCollection(collection_id) {
-    
+
     const data = {user_id, recipe_id, collection_id};
     const response = await fetch(`/api/recipe/collection/${recipe_id}`, {
       method: 'POST',
@@ -24,10 +24,16 @@ const AddToCollectionDialog = ({username,user_id,recipe_id}:{username:string, us
       },
       body: JSON.stringify(data),
     });
-    console.log(data);
     const json = await response.json();
-    console.log(json);
-    
+    if (!json.error) {
+      toast({
+        title: 'Success',
+        message: 'Added to collection',
+        type: 'success',
+        duration: 2000,
+      });
+    }
+
   }
 
 useEffect(() => {
@@ -42,11 +48,6 @@ useEffect(() => {
 },[])
 
 
-  const addToCollection = (collectionId: number) => (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    // router.push(`/collections`);
-  };
-  
   return (
   <Dialog.Root>
     <Dialog.Trigger asChild>
@@ -78,7 +79,7 @@ useEffect(() => {
                       className='rounded-lg'
                     />
               <div className='flex flex-col items-start w-full'>
-              
+
                 <Paragraph className='text-black font-bold text-start mb-1'>
                   {collection.collection_name}
                 </Paragraph>

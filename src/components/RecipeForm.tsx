@@ -70,12 +70,12 @@ const RecipeForm = () => {
         });
         return;
       }
-      ingredients.push([ingredient[0], ingredient.slice(1).join(' ').trim()]);
+      ingredients.push([ingredient.slice(1).join(' ').trim(), ingredient[0]]);
     }
     data.ingredients = ingredients;
 
     // assign user_id
-    data.user_id = jose.decodeJwt(token).user_id;
+    data.user_id = parseInt(jose.decodeJwt(token).user_id as string);
 
     // parse keywords
     data.keywords = data.keywords.split(',').map((keyword: string) => keyword.trim());
@@ -85,7 +85,6 @@ const RecipeForm = () => {
       data.recipe_image = imageSrc;
     }
 
-    console.log(data);
     const response = await fetch('/api/recipe/post', {
       method: 'POST',
       headers: {

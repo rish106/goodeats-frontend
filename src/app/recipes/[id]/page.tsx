@@ -10,6 +10,7 @@ import Icons from '@/components/Icons';
 import CommentForm from '@/components/CommentForm';
 import { RecipeActions } from '@/components/RecipeActions';
 import { CommentCard } from '@/components/CommentCard';
+import Link from 'next/link';
 
 interface ingredient {
   amount: string;
@@ -87,12 +88,17 @@ const Page = ({ params }: PageProps) => {
               <LargeHeading className='text-white text-center w-full'>
                 {post.recipe_data.name}
               </LargeHeading>
-              <LargeHeading size='xs' className='text-white font-bold'>
+              <Link href={`/user/${post.user_data.username}`} className='text-xl md:text-2xl lg:text-3xl text-white font-bold'>
                 {post.user_data.username}
-              </LargeHeading>
-              <LargeHeading size='xs' className='text-white flex flex-row items-center md:gap-1'>
-                {post.recipe_data.avgRating} <Icons.Star size={28} className='scale-75 md:scale-100' fill='white' />
-              </LargeHeading>
+              </Link>
+              <div className='flex flex-row gap-4 items-baseline'>
+                <LargeHeading size='xs' className='text-white flex flex-row items-center md:gap-1'>
+                  {post.recipe_data.avgRating} <Icons.Star size={24} className='scale-75 md:scale-100' fill='white' />
+                </LargeHeading>
+                <Paragraph className='text-white'>
+                  by {post.recipe_data.reviewCount} {post.recipe_data.reviewCount === 1 ? 'user' : 'users'}
+                </Paragraph>
+              </div>
               <div className='flex flex-col md:flex-row md:gap-6 -mb-2'>
                 <Paragraph className='text-white'>
                   {`Cook : ${post.recipe_data.cooktime}`}
@@ -102,7 +108,7 @@ const Page = ({ params }: PageProps) => {
                 </Paragraph>
               </div>
               <RecipeActions recipe_id={parseInt(params.id)} />
-              
+
             </div>
             <Image
               src={post.recipe_data.recipe_image}
@@ -153,7 +159,7 @@ const Page = ({ params }: PageProps) => {
                 <div className='flex flex-col items-center justify-start w-full gap-4 pt-4'>
                   {
                     comments.map((comment: any) =>
-                      <CommentCard key={comment.review_id} id={comment.review_id} author={comment.user_id} message={comment.reviewText} rating={comment.rating} />
+                      <CommentCard key={comment.review_id} reviewId={comment.review_id} author={comment.username} message={comment.reviewText} rating={comment.rating} />
                     )
                   }
                 </div>

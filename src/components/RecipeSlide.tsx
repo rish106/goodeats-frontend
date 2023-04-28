@@ -21,7 +21,7 @@ export function ScrollArea({feedRecipes, header}:scrollAreaProps) {
         {feedRecipes.length > 0 && feedRecipes.map((post) => {
           return (
             <RecipeBox key={post.recipe?.recipe_id} recipeName={post.recipe?.name} recipeAuthor={post.user?.name} recipeId={post.recipe?.recipe_id}
-              recipeImage={post.recipe?.recipe_image} recipeDescription={post.recipe?.description} recipeRating={post.recipe?.avgRating} />
+              recipeImage={post.recipe?.recipe_image} recipeDescription={post.recipe?.description} recipeRating={post.recipe?.avgRating} recipeReviewCount={post.recipe?.reviewCount} />
           )
         })
         }
