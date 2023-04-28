@@ -28,12 +28,10 @@ const fetcher = async (url: string) => {
 
 const commentFetcher = async (url: string) => {
   const token = localStorage.getItem('token');
-  console.log(token);
   let user_id = 0;
   if (token) {
     user_id = jose.decodeJwt(token as string).user_id as number;
   }
-  console.log(user_id);
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -42,7 +40,7 @@ const commentFetcher = async (url: string) => {
     body: JSON.stringify(user_id ? { user_id } : {}),
   })
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
   if (data.error) {
     return {user_reviews: [], other_reviews: []};
   } else {
@@ -104,6 +102,7 @@ const Page = ({ params }: PageProps) => {
                 </Paragraph>
               </div>
               <RecipeActions recipe_id={parseInt(params.id)} />
+              
             </div>
             <Image
               src={post.recipe_data.recipe_image}

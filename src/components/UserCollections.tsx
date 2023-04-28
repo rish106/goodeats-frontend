@@ -11,7 +11,7 @@ import useSWR from 'swr';
 import * as jose from 'jose';
 import { Console } from 'console';
 import { FormControlUnstyledContext } from '@mui/base';
-
+import Link from 'next/link';
 
 interface collectionProps {
   secret: string
@@ -161,7 +161,10 @@ export const UserCollections = ({ secret }: collectionProps) => {
                   </Paragraph>
                 </div>
               ) : feedCollections.map((collection) => (
-                <div key={collection.collectionId} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
+                
+                // <Link href={`/collections/${collection.collectionId}`} key={collection.collectionId}>
+                console.log(collection.collection_id),
+                <Link href={`/collections/${(collection.collection_id).toString()}`} key={collection.collection_id} className='flex flex-col items-center md:items-start md:flex-row gap-4 md:w-[720px] lg:w-[900px] max-w-7xl pb-6'>
                   <div className=''>
                     <LargeHeading size='xs' > {collection.cn} </LargeHeading>
                     <Image
@@ -180,8 +183,12 @@ export const UserCollections = ({ secret }: collectionProps) => {
                       {collection.description}
                     </Paragraph>
                   </div>
-                </div>
-              ))
+                </Link>
+
+              )
+              
+              
+              )
             }
           </div>
         </div>
