@@ -70,12 +70,10 @@ const SignupForm = () => {
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    if (json.username || json.email || json.password || json.confirm_password) {
-      let error_msg = "";
-      error_msg = json.email || json.username || (json.password && `Password ${json.password}`) || (json.confirm_password && `Confirm Password ${json.confirm_password}`) || "";
+    if (json.message) {
       toast({
         title: 'Error',
-        message: error_msg,
+        message: json.message,
         type: 'error',
         duration: 2000,
       });
@@ -86,16 +84,7 @@ const SignupForm = () => {
         type: 'success',
         duration: 1500,
       });
-      const newJson = {
-        user: data.username,
-        user_id: json.user_id
-      };
-      const token = jwt.sign(newJson, secret, { expiresIn: '14d' });
-      // const token = await new jose.SignJWT(newJson)
-      //   .setExpirationTime('14d')
-      //   .setProtectedHeader({ alg: 'HS256' })
-      //   .sign(secretKey);
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', json.token);
       setTimeout(() => {
         router.push('/');
       }, 1500);

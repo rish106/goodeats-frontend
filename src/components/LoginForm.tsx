@@ -28,32 +28,19 @@ const LoginForm = () => {
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    if (json.user_id) {
+    if (json.token) {
       toast({
         title: 'Success',
         message: 'You are now logged in',
         type: 'success',
         duration: 1500,
       })
-      // console.log(secret);
-      const secretKey = new TextEncoder().encode(secret);
-      // console.log(secretKey);
-      const newJson = {
-        user: data.username,
-        user_id: json.user_id
-      };
-      const token = jwt.sign(newJson, secret, { expiresIn: expiresIn });
-      console.log(token);
-      // const token = await new jose.SignJWT(newJson)
-      //   .setExpirationTime(expiresIn)
-      //   .setProtectedHeader({ alg: 'HS256' })
-      //   .sign(secretKey);
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', json.token);
       setTimeout(() => {
         router.push('/');
       }, 1000);
     } else {
-      const error_msg = json.message || json.password || json.username;
+      const error_msg = json.message;
       toast({
         title: 'Error',
         message: error_msg,

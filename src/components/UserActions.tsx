@@ -17,7 +17,6 @@ import {
 } from '@/ui/DropdownMenu'
 
 const UserActions = () => {
-  const secret = process.env.NEXT_PUBLIC_JWT_SECRET as string;
   const [session, setSession] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
@@ -29,7 +28,7 @@ const UserActions = () => {
       // Check if there's a JWT token in localStorage
       const token = localStorage.getItem('token');
       if (token) {
-        const secretKey = new TextEncoder().encode(secret);
+        const secretKey = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET as string);
         try {
           const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey, {algorithms: ['HS256']});
           if (payload && Date.now() < payload.exp! * 1000) {
@@ -51,7 +50,7 @@ const UserActions = () => {
     fetchToken();
     const intervalId = setInterval(fetchToken, 1000);
     return () => clearInterval(intervalId);
-  }, [secret]);
+  }, []);
 
   const signOut = () => {
     toast({
