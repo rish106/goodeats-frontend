@@ -27,8 +27,6 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
     });
     const json = await response.json();
     setOpen(false);
-
-    //then we gotta automatically close the dialog box
   }
 
 

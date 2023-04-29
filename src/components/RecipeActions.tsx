@@ -22,7 +22,7 @@ export function RecipeActions({recipe_id}:{recipe_id:number}){
 
   return (
     <div hidden={username ? false : true} className='flex flex-row items-center gap-2 text-white'>
-      <IconButton icon={Icons.Heart} variant='ghost' className='hover:bg-purple-700' />
+      <IconButton icon={Icons.Heart} variant='ghost' className='hover:bg-slate-700' />
       <AddToCollectionDialog username={username} user_id={user_id} recipe_id={recipe_id}/>
     </div>
   )

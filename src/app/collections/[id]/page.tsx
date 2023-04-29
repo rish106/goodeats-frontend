@@ -34,62 +34,69 @@ export default function Page({params}:PageProps) {
   const { data, error } = useSWR(`/api/${username}/collections/${params.id}`, fetcher);
   const [feedRecipes, setFeedRecipes] = useState<any[]>([]);
 
-  useEffect(() => {
-
-    async function getCollectionRecipes()
-    {
-      if (feedRecipes != data) {
-        setFeedRecipes(data);
-      }
-    }
-    getCollectionRecipes();
-  }, [data])
-
-  if (error) return (
-    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
-      <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
-        <LargeHeading>
-          Error loading recipes in collection
-        </LargeHeading>
-      </div>
-    </div>
-  )
-  if (!data) return (
-    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
-      <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
-        <LargeHeading>
-          Loading recipes...
-        </LargeHeading>
-      </div>
-    </div>
-  )
-
-  if(data != feedRecipes)
-  {
-    setFeedRecipes(data);
-  }
-  if(!feedRecipes)
-  {
+  if (!token) {
     return (
-        <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
-          <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
-            <LargeHeading>
-              Loading...
-            </LargeHeading>
-          </div>
+      <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+        <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+          <LargeHeading>
+            Please log in to view your collections
+          </LargeHeading>
         </div>
-      )
+      </div>
+    )
   }
 
-  if(feedRecipes.length == 0)
-  {
-    <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
-    <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
-      <LargeHeading>
-        No recipes in this collection
-      </LargeHeading>
-    </div>
-   </div>
+  if (error) {
+    return (
+      <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+        <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+          <LargeHeading>
+            Error fetching recipes
+          </LargeHeading>
+        </div>
+      </div>
+    )
+  }
+
+  if (!data) {
+    return (
+      <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+        <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+          <LargeHeading>
+            Loading recipes...
+          </LargeHeading>
+        </div>
+      </div>
+    )
+  }
+
+  if (data !== feedRecipes) {
+    setFeedRecipes(data);
+    console.log(data);
+  }
+
+  if (!feedRecipes) {
+    return (
+      <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+        <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+          <LargeHeading>
+            Loading...
+          </LargeHeading>
+        </div>
+      </div>
+    )
+  }
+
+  if (feedRecipes.length === 0) {
+    return (
+      <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+        <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+          <LargeHeading>
+            No recipes in this collection
+          </LargeHeading>
+        </div>
+      </div>
+    )
   }
 
   return (

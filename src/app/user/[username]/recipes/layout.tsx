@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export function generateMetadata({ params }): Metadata {
   return {
-    title: `Goodeats | ${params.username}'s Profile`,
+    title: `Goodeats | ${params.username}'s Recipes`,
   }
 }
 

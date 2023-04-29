@@ -22,11 +22,19 @@ const MobileMenu = ({ secret }: { secret: string }) => {
       const token = localStorage.getItem('token');
       if (token) {
         const secretKey = new TextEncoder().encode(secret);
-        const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey)
-        if (payload) {
-          const user = payload.user as string;
-          setUsername(user);
-          setSession(true);
+        try {
+          const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey, { algorithms: ['HS256'] });
+          if (payload && Date.now() < payload.exp! * 1000) {
+            const user = payload.user as string;
+            setUsername(user);
+            setSession(true);
+          } else if (payload && Date.now() > payload.exp! * 1000) {
+            localStorage.removeItem('token');
+            setSession(false);
+          }
+        } catch (err) {
+          localStorage.removeItem('token');
+          setSession(false);
         }
       } else {
         setSession(false);
