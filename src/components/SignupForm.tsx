@@ -3,11 +3,13 @@
 import * as Form from '@radix-ui/react-form';
 import * as React from 'react';
 import * as jose from 'jose';
+import * as jwt from 'jsonwebtoken';
 import { Button } from '@/ui/Button';
 import { toast } from '@/ui/toast';
 import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
+  const secret = process.env.NEXT_PUBLIC_JWT_SECRET as string;
   const router = useRouter();
   const [imageSrc, setImageSrc] = React.useState<string>('');
   let token = '' as string | null;
@@ -83,16 +85,16 @@ const SignupForm = () => {
         message: '',
         type: 'success',
         duration: 1500,
-      })
-      const secret = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
+      });
       const newJson = {
         user: data.username,
         user_id: json.user_id
       };
-      const token = await new jose.SignJWT(newJson)
-        .setExpirationTime('14d')
-        .setProtectedHeader({ alg: 'HS256' })
-        .sign(secret);
+      const token = jwt.sign(newJson, secret, { expiresIn: '14d' });
+      // const token = await new jose.SignJWT(newJson)
+      //   .setExpirationTime('14d')
+      //   .setProtectedHeader({ alg: 'HS256' })
+      //   .sign(secretKey);
       localStorage.setItem('token', token);
       setTimeout(() => {
         router.push('/');

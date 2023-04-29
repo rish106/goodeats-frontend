@@ -1,10 +1,9 @@
 'use client'
 
 import LargeHeading from '@/ui/LargeHeading';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import useSWR from 'swr';
 import { RecipeCard } from '@/components/RecipeCard';
-import { Pagination } from '@mui/material';
 import Link from 'next/link';
 
 import * as jose from 'jose';
@@ -78,7 +77,6 @@ export default function Page({params}:PageProps) {
 
   if (data !== feedRecipes) {
     setFeedRecipes(data);
-    console.log(data);
   }
 
   if (!feedRecipes) {

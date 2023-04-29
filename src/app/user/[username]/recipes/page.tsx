@@ -6,8 +6,6 @@ import useSWR from 'swr';
 import { RecipeCard } from '@/components/RecipeCard';
 import { Pagination } from '@mui/material';
 import Link from 'next/link';
-import Icons from '@/components/Icons';
-import { Button } from '@/ui/Button';
 
 interface PageProps {
   params: {

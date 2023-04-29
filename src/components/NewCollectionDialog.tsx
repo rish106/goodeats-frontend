@@ -1,17 +1,11 @@
 'use client'
 
+import React from 'react';
 import * as Form from '@radix-ui/react-form';
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/ui/Button';
 import Icons from '@/components/Icons';
 import { IconButton } from '@/ui/Button';
-
-import React from 'react';
-
-import { useRouter } from 'next/router'
-
-//...
-
 
 const NewCollectionDialog = ({username, user_id}:{username:string, user_id:number}) => {
   const [open, setOpen] = React.useState(false);

@@ -7,7 +7,6 @@ import useSWR from 'swr'
 import * as jose from 'jose'
 import LargeHeading from '@/ui/LargeHeading'
 import { ScrollArea } from '@/components/RecipeSlide'
-import { feedRecipes } from '@/public/data'
 
 async function fetcher(url: string) {
   const res = await fetch(url);

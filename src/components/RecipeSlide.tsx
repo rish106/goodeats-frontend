@@ -11,7 +11,6 @@ interface scrollAreaProps
 }
 
 export function ScrollArea({feedRecipes, header}:scrollAreaProps) {
-  // let feedRecipes = await getAllRecipes();
   return (
     <div className='items-center justify-center flex flex-col gap-6 lg:h-[900px] md:h-[700px] h-[600px] bg-slate-100'>
       <LargeHeading className='font-sans font-medium'>

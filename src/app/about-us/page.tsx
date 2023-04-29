@@ -1,8 +1,7 @@
 import * as React from 'react'
-import LargeHeading from '@/ui/LargeHeading'
-import Image from 'next/image'
-import About from '@/components/About'
 import { Metadata } from 'next'
+import LargeHeading from '@/ui/LargeHeading'
+import About from '@/components/About'
 
 export const metadata: Metadata = {
   title: 'Goodeats | About Us',

@@ -2,17 +2,18 @@
 
 import * as Form from '@radix-ui/react-form';
 import * as jose from 'jose';
+import * as jwt from 'jsonwebtoken';
 import { Button } from '@/ui/Button';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/ui/toast';
 
 
 const LoginForm = () => {
-
+  const secret = process.env.NEXT_PUBLIC_JWT_SECRET as string;
   const router = useRouter();
 
   async function submitForm(data) {
-    let expiresIn = '1h'
+    let expiresIn = '1h';
     if (data.remember == 'on') {
       data.remember = true;
       expiresIn = '14d';
@@ -34,15 +35,19 @@ const LoginForm = () => {
         type: 'success',
         duration: 1500,
       })
-      const secret = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
+      // console.log(secret);
+      const secretKey = new TextEncoder().encode(secret);
+      // console.log(secretKey);
       const newJson = {
         user: data.username,
         user_id: json.user_id
       };
-      const token = await new jose.SignJWT(newJson)
-        .setExpirationTime(expiresIn)
-        .setProtectedHeader({ alg: 'HS256' })
-        .sign(secret);
+      const token = jwt.sign(newJson, secret, { expiresIn: expiresIn });
+      console.log(token);
+      // const token = await new jose.SignJWT(newJson)
+      //   .setExpirationTime(expiresIn)
+      //   .setProtectedHeader({ alg: 'HS256' })
+      //   .sign(secretKey);
       localStorage.setItem('token', token);
       setTimeout(() => {
         router.push('/');

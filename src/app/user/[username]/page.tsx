@@ -5,13 +5,13 @@ import useSWR from 'swr';
 import * as jose from 'jose';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Icons from '@/components/Icons';
 import LargeHeading from '@/ui/LargeHeading';
 import Paragraph from '@/ui/Paragraph';
 import { Button, buttonVariants } from '@/ui/Button';
 import { toast } from '@/ui/toast';
 import { cn } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
 
 interface PageProps {
   params: {

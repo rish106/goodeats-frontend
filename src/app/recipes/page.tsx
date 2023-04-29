@@ -1,11 +1,11 @@
 'use client'
 
-import LargeHeading from '@/ui/LargeHeading';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
-import { RecipeCard } from '@/components/RecipeCard';
-import { Pagination } from '@mui/material';
 import Link from 'next/link';
+import { Pagination } from '@mui/material';
+import { RecipeCard } from '@/components/RecipeCard';
+import LargeHeading from '@/ui/LargeHeading';
 import Icons from '@/components/Icons';
 import { Button } from '@/ui/Button';
 

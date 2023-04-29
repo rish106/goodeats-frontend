@@ -4,13 +4,13 @@ import Image from 'next/image';
 import useSWR from 'swr';
 import React from 'react';
 import * as jose from 'jose';
+import Link from 'next/link';
 import LargeHeading from '@/ui/LargeHeading';
 import Paragraph from '@/ui/Paragraph';
 import Icons from '@/components/Icons';
 import CommentForm from '@/components/CommentForm';
 import { RecipeActions } from '@/components/RecipeActions';
 import { CommentCard } from '@/components/CommentCard';
-import Link from 'next/link';
 
 interface ingredient {
   amount: string;

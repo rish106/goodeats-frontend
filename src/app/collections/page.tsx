@@ -17,7 +17,6 @@ async function fetcher(url: string) {
 }
 
 const Page = () => {
-  const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
   let username = '';
   let user_id = 0;
   let token = '' as string | null;

@@ -3,11 +3,7 @@ import { IconButton } from '@/ui/Button'
 import AddToCollectionDialog from '@/components/AddToCollectionDialog'
 import * as jose from 'jose';
 
-
-
-
 export function RecipeActions({recipe_id}:{recipe_id:number}){
-
   const token = localStorage.getItem('token');
   let user_id = 0;
   let username = '';
