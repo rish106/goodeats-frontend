@@ -59,12 +59,17 @@ export default function Page ({ params }: PageProps) {
 
   React.useEffect(() => {
     if (token) {
-      const payload = jose.decodeJwt(token);
-      if (payload) {
-        const user = payload.user as string;
-        const user_id = payload.user_id as number;
-        setLoggedInUsername(user);
-        setUserId(user_id);
+      try {
+        const payload = jose.decodeJwt(token);
+        if (payload) {
+          const user = payload.user as string;
+          const user_id = payload.user_id as number;
+          setLoggedInUsername(user);
+          setUserId(user_id);
+        }
+      } catch (err) {
+        setLoggedInUsername(null);
+        setUserId(null);
       }
     };
   }, [token]);

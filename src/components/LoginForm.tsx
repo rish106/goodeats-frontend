@@ -1,6 +1,7 @@
 'use client'
 
 import * as Form from '@radix-ui/react-form';
+import * as jose from 'jose';
 import { Button } from '@/ui/Button';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/ui/toast';
@@ -11,8 +12,10 @@ const LoginForm = () => {
   const router = useRouter();
 
   async function submitForm(data) {
+    let expiresIn = '1h'
     if (data.remember == 'on') {
       data.remember = true;
+      expiresIn = '14d';
     } else {
       data.remember = false;
     }
@@ -24,20 +27,27 @@ const LoginForm = () => {
       body: JSON.stringify(data),
     });
     const json = await response.json();
-    if (json.token) {
+    if (json.user_id) {
       toast({
         title: 'Success',
         message: 'You are now logged in',
         type: 'success',
         duration: 1500,
       })
-      const token = json.token;
+      const secret = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
+      const newJson = {
+        user: data.username,
+        user_id: json.user_id
+      };
+      const token = await new jose.SignJWT(newJson)
+        .setExpirationTime(expiresIn)
+        .setProtectedHeader({ alg: 'HS256' })
+        .sign(secret);
       localStorage.setItem('token', token);
       setTimeout(() => {
         router.push('/');
       }, 1000);
-    }
-    else {
+    } else {
       const error_msg = json.message || json.password || json.username;
       toast({
         title: 'Error',

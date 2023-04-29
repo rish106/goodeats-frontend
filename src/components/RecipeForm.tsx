@@ -75,7 +75,8 @@ const RecipeForm = () => {
     data.ingredients = ingredients;
 
     // assign user_id
-    data.user_id = parseInt(jose.decodeJwt(token).user_id as string);
+    const payload = jose.decodeJwt(token);
+    data.user_id = parseInt(payload.user_id as string);
 
     // parse keywords
     data.keywords = data.keywords.split(',').map((keyword: string) => keyword.trim());

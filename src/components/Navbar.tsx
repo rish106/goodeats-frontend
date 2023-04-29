@@ -15,7 +15,7 @@ const Navbar = () => {
         </Link>
 
         <div className='md:hidden gap-4'>
-          <MobileMenu secret={process.env.JWT_SECRET as string} />
+          <MobileMenu/>
         </div>
 
         <div className='hidden md:flex gap-5 md:gap-4'>
@@ -26,7 +26,7 @@ const Navbar = () => {
 
           <RecipesMenu />
 
-          <UserActions secret={process.env.JWT_SECRET as string} />
+          <UserActions />
 
         </div>
       </div>

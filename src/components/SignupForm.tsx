@@ -1,8 +1,9 @@
 'use client'
 
 import * as Form from '@radix-ui/react-form';
-import { Button } from '@/ui/Button';
 import * as React from 'react';
+import * as jose from 'jose';
+import { Button } from '@/ui/Button';
 import { toast } from '@/ui/toast';
 import { useRouter } from 'next/navigation';
 
@@ -81,9 +82,17 @@ const SignupForm = () => {
         title: 'Successfully registered',
         message: '',
         type: 'success',
-        duration: 1000,
+        duration: 1500,
       })
-      const token = json.token;
+      const secret = new TextEncoder().encode(process.env.NEXT_PUBLIC_JWT_SECRET);
+      const newJson = {
+        user: data.username,
+        user_id: json.user_id
+      };
+      const token = await new jose.SignJWT(newJson)
+        .setExpirationTime('14d')
+        .setProtectedHeader({ alg: 'HS256' })
+        .sign(secret);
       localStorage.setItem('token', token);
       setTimeout(() => {
         router.push('/');

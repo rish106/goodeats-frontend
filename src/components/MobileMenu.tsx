@@ -9,8 +9,7 @@ import { Icons } from '@/components/Icons'
 import Drawer from '@mui/material/Drawer'
 import { toast } from '@/ui/toast'
 
-const MobileMenu = ({ secret }: { secret: string }) => {
-
+const MobileMenu = () => {
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false)
   const [session, setSession] = React.useState(false);
   const [username, setUsername] = React.useState('');
@@ -21,14 +20,13 @@ const MobileMenu = ({ secret }: { secret: string }) => {
       // Check if there's a JWT token in localStorage
       const token = localStorage.getItem('token');
       if (token) {
-        const secretKey = new TextEncoder().encode(secret);
         try {
-          const { payload, protectedHeader } = await jose.jwtVerify(token, secretKey, { algorithms: ['HS256'] });
-          if (payload && Date.now() < payload.exp! * 1000) {
+          const payload = jose.decodeJwt(token);
+          if (payload) {
             const user = payload.user as string;
             setUsername(user);
             setSession(true);
-          } else if (payload && Date.now() > payload.exp! * 1000) {
+          } else {
             localStorage.removeItem('token');
             setSession(false);
           }
@@ -43,7 +41,7 @@ const MobileMenu = ({ secret }: { secret: string }) => {
     fetchToken();
     const intervalId = setInterval(fetchToken, 1000);
     return () => clearInterval(intervalId);
-  }, [secret]);
+  }, []);
 
 
   function toggleDrawer() {

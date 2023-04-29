@@ -16,7 +16,8 @@ import {
   DropdownMenuTrigger,
 } from '@/ui/DropdownMenu'
 
-const UserActions = ({ secret } : { secret: string }) => {
+const UserActions = () => {
+  const secret = process.env.NEXT_PUBLIC_JWT_SECRET as string;
   const [session, setSession] = React.useState(false);
   const [username, setUsername] = React.useState('');
   const [dropdownOpen, setDropdownOpen] = React.useState(false)

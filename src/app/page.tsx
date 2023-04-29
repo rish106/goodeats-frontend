@@ -22,9 +22,13 @@ async function recommendFetcher(url: string) {
   }
   let user_id = -1;
   if (token) {
-    const payload = jose.decodeJwt(token);
-    if (payload) {
-      user_id = payload.user_id as number;
+    try {
+      const payload = jose.decodeJwt(token);
+      if (payload) {
+        user_id = payload.user_id as number;
+      }
+    } catch (err) {
+      user_id = -1;
     }
   };
   if (user_id === -1) {
