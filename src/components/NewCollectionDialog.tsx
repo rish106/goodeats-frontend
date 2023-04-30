@@ -69,7 +69,7 @@ const NewCollectionDialog = ({username, user_id}:{username:string, user_id:numbe
               </Form.Label>
             </div>
             <Form.Control asChild>
-              <textarea className='pt-1 box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[80px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-none text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white' />
+              <textarea className='box-border w-full bg-blackA5 shadow-blackA9 inline-flex h-[80px] appearance-none items-center justify-center rounded-[4px] px-[10px] text-[15px] leading-6 text-black shadow-[0_0_0_1px] outline-none hover:shadow-[0_0_0_1px_black] focus:shadow-[0_0_0_2px_black] selection:color-white' />
             </Form.Control>
           </Form.Field>
           <div className='flex flex-row w-full justify-end'>

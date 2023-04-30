@@ -19,7 +19,6 @@ const Navbar = () => {
         </div>
 
         <div className='hidden md:flex gap-5 md:gap-4'>
-          <IconButton icon={Icons.Search} variant='ghost' className='hover:bg-transparent focus:ring-black' />
           <Link href='/about-us' className={buttonVariants({ variant: 'link' })}>
             About Us
           </Link>

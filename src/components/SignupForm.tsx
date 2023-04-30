@@ -180,7 +180,7 @@ const SignupForm = () => {
         <p className='text-black text-start font-medium text-[15px] leading-[35px]'>
           Upload Image
         </p>
-        <input type='file' accept='image/\*' name='file'/>
+        <input type='file' accept='image/*' name='file'/>
       </form>
       <Form.Submit asChild>
         <Button className='w-full'>

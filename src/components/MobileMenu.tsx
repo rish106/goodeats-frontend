@@ -27,11 +27,9 @@ const MobileMenu = () => {
             setUsername(user);
             setSession(true);
           } else {
-            localStorage.removeItem('token');
             setSession(false);
           }
         } catch (err) {
-          localStorage.removeItem('token');
           setSession(false);
         }
       } else {

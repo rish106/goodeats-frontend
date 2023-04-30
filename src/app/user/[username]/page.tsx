@@ -176,12 +176,6 @@ export default function Page ({ params }: PageProps) {
                   <LargeHeading size='xxs' className='text-slate-700'>
                     {user.username}
                   </LargeHeading>
-                  <Paragraph size='sm' className='text-slate-700'>
-                    {user.follower_count === 0 ? 'No' : user.follower_count } {user.follower_count === 1 ? 'follower' : 'followers'}
-                  </Paragraph>
-                  <Button className={``}>
-                    Follow
-                  </Button>
                 </div>
               </div>
               <div className='w-full flex flex-col items-center my-12'>

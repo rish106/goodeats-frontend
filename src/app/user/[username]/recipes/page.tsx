@@ -36,13 +36,6 @@ export default function Page({ params }: PageProps) {
     }
   }, [data])
 
-  async function handleSearch () {
-    setCurrentPage(1);
-    const recipes = await getRecipesByPage(params.username, 1);
-    setFeedRecipes(recipes.recipe_data);
-    setMaxPage(recipes.max_pages);
-  };
-
   if (error) return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
       <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
@@ -69,6 +62,25 @@ export default function Page({ params }: PageProps) {
       setCurrentPage(value);
     }
   };
+
+  if (Array.isArray(feedRecipes) && feedRecipes.length === 0) {
+    return (
+      <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
+        <div className='container pt-32 max-w-7xl mx-auto w-full h-full'>
+          <div className='h-full gap-8 flex flex-col justify-start items-center'>
+            <div className='flex flex-col items-center gap-6 w-full sm:w-4/5 md:w-3/5 lg:2/5'>
+              <LargeHeading>
+                Recipes by {params.username}
+              </LargeHeading>
+              <LargeHeading size='xs'>
+                No recipes found
+              </LargeHeading>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className='relative h-screen flex items-center justify-center overflow-x-hidden'>
