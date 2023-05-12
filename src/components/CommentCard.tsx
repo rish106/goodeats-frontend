@@ -1,20 +1,23 @@
 'use client'
 
 import Link from 'next/link';
+import { useState } from 'react';
 import Paragraph from '@/ui/Paragraph';
 import { Icons } from '@/components/Icons';
 import { IconButton } from '@/ui/Button';
 
 interface CommentCardProps {
-  reviewId: number;
-  author: string;
-  message: string;
-  rating: number;
+  reviewId: number
+  author: string
+  message: string
+  rating: number
+  likes: number
 }
 
-export function CommentCard({reviewId, author, message, rating}: CommentCardProps) {
-  const likeCount = 0;
-  const isLiked = false;
+export function CommentCard({reviewId, author, message, rating, likes}: CommentCardProps) {
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(likes);
+
   return (
     <div className='w-full md:w-3/5 flex flex-col items-center'>
       <div className='flex flex-col md:flex-row w-full max-w-7xl'>

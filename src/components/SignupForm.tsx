@@ -2,8 +2,6 @@
 
 import * as Form from '@radix-ui/react-form';
 import * as React from 'react';
-import * as jose from 'jose';
-import * as jwt from 'jsonwebtoken';
 import { Button } from '@/ui/Button';
 import { toast } from '@/ui/toast';
 import { useRouter } from 'next/navigation';
@@ -16,21 +14,19 @@ const SignupForm = () => {
   if (typeof window !== 'undefined') {
     token = localStorage.getItem('token');
   }
-    if (token) {
-      toast({
-        title: 'Already logged in',
-        message: '',
-        type: 'success',
-        duration: 2000,
-      });
-      setTimeout(() => {
-        router.push('/');
-      }, 1500);
-    }
+  if (token) {
+    toast({
+      title: 'Already logged in',
+      message: '',
+      type: 'success',
+      duration: 2000,
+    });
+    setTimeout(() => {
+      router.push('/');
+    }, 500);
+  }
 
   async function handleImageChange (event: any) {
-    event.preventDefault();
-
     const form = event.currentTarget;
     let fileInput = null as any;
 
@@ -48,6 +44,12 @@ const SignupForm = () => {
     }
 
     formData.append('upload_preset', 'goodeats');
+    toast({
+      title: 'Uploading image',
+      message: 'Please wait...',
+      type: 'default',
+      duration: 2000,
+    });
 
     const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: 'POST',
@@ -55,6 +57,13 @@ const SignupForm = () => {
     }).then(r => r.json());
 
     setImageSrc(data.secure_url);
+
+    toast({
+      title: 'Success',
+      message: 'Image uploaded',
+      type: 'success',
+      duration: 1500,
+    });
   }
 
   async function submitForm(data) {

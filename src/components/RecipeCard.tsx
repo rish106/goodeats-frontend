@@ -21,6 +21,7 @@ export function RecipeCard({recipeName, recipeAuthor, recipeImage, recipeDescrip
         alt={recipeName}
         width={200}
         height={150}
+        fetchPriority="high"
         className='rounded-lg md:max-h-[150px] md:max-w-[200px] h-[240px] w-[320px]' />
       <div className='flex flex-col w-full'>
         <div className='flex flex-row w-full justify-between gap-4 pb-1'>

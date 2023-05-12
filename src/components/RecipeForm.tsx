@@ -32,6 +32,12 @@ const RecipeForm = () => {
     }
 
     formData.append('upload_preset', 'goodeats');
+    toast({
+      title: 'Uploading image',
+      message: 'Please wait...',
+      type: 'default',
+      duration: 2000,
+    });
 
     const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: 'POST',
@@ -39,6 +45,13 @@ const RecipeForm = () => {
     }).then(r => r.json());
 
     setImageSrc(data.secure_url);
+
+    toast({
+      title: 'Success',
+      message: 'Image uploaded',
+      type: 'success',
+      duration: 1500,
+    });
   }
 
   async function submitForm(data) {

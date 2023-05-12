@@ -49,22 +49,31 @@ const CommentForm : React.FC<CommentProps> = ({id}: CommentProps) => {
     // assign user_id
     data.user_id = jose.decodeJwt(token).user_id;
 
-    const response = await fetch(route_link, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
+    try {
+      const response = await fetch(route_link, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        toast({
+          title: 'Success',
+          message: 'Your review has been added',
+          type: 'success',
+          duration: 2000,
+        });
+        setRating(0);
+        setReviewText('');
+      }
+    } catch (err) {
       toast({
-        title: 'Success',
-        message: 'Your review has been added',
-        type: 'success',
+        title: 'Error',
+        message: 'Something went wrong',
+        type: 'error',
         duration: 2000,
       });
-      setRating(0);
-      setReviewText('');
     }
   };
 

@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 
 const iconButtonVariants = cva(
-  'active:scale-95 inline-flex items-center justify-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-slate-200 disabled:opacity-50 disabled:pointer-events-none',
+  'active:scale-95 inline-flex items-center justify-center rounded-full transition-colors disabled:opacity-50 disabled:pointer-events-none',
   {
     variants: {
       variant: {

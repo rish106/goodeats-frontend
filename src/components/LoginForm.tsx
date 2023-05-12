@@ -1,16 +1,25 @@
 'use client'
 
 import * as Form from '@radix-ui/react-form';
-import * as jose from 'jose';
-import * as jwt from 'jsonwebtoken';
 import { Button } from '@/ui/Button';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/ui/toast';
 
 
 const LoginForm = () => {
-  const secret = process.env.NEXT_PUBLIC_JWT_SECRET as string;
   const router = useRouter();
+  const token = (typeof window !== 'undefined') ? localStorage.getItem('token') : null;
+  if (token) {
+    toast({
+      title: 'Already logged in',
+      message: '',
+      type: 'success',
+      duration: 2000,
+    });
+    setTimeout(() => {
+      router.push('/');
+    }, 500);
+  }
 
   async function submitForm(data) {
     let expiresIn = '1h';

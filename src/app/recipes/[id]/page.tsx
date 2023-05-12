@@ -33,18 +33,22 @@ const commentFetcher = async (url: string) => {
   if (token) {
     user_id = jose.decodeJwt(token as string).user_id as number;
   }
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user_id ? { user_id } : {}),
-  })
-  const data = await res.json();
-  if (data.error) {
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user_id ? { user_id } : {}),
+    })
+    const data = await res.json();
+    if (data.error) {
+      return {user_reviews: [], other_reviews: []};
+    } else {
+      return data;
+    }
+  } catch (err) {
     return {user_reviews: [], other_reviews: []};
-  } else {
-    return data;
   }
 }
 
@@ -158,7 +162,7 @@ const Page = ({ params }: PageProps) => {
                 <div className='flex flex-col items-center justify-start w-full gap-4 pt-4'>
                   {
                     comments.map((comment: any) =>
-                      <CommentCard key={comment.review_id} reviewId={comment.review_id} author={comment.username} message={comment.reviewText} rating={comment.rating} />
+                      <CommentCard key={comment.review_id} reviewId={comment.review_id} author={comment.username} message={comment.reviewText} rating={comment.rating} likes={comment.reviewLikes} />
                     )
                   }
                 </div>

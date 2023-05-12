@@ -15,10 +15,7 @@ async function fetcher(url: string) {
 }
 
 async function recommendFetcher(url: string) {
-  let token = null as string | null;
-  if (typeof window !== 'undefined') {
-    token = localStorage.getItem('token');
-  }
+  const token = (typeof window !== 'undefined') ? localStorage.getItem('token') : null;
   let user_id = -1;
   if (token) {
     try {
@@ -33,15 +30,19 @@ async function recommendFetcher(url: string) {
   if (user_id === -1) {
     return { recipe_data: [] };
   }
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({user_id}),
-  });
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ user_id }),
+    });
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return { recipe_data: [] };
+  }
 }
 
 export default function Home() {
@@ -49,6 +50,18 @@ export default function Home() {
   const recommendedRecipesData = useSWR('/api/recommend_recipes', recommendFetcher);
   const [topRecipes, setTopRecipes] = useState<any[]>(topRecipesData.data || []);
   const [recommendedRecipes, setRecommendedRecipes] = useState<any[]>(recommendedRecipesData.data || []);
+  const token = (typeof window !== 'undefined') ? localStorage.getItem('token') : null;
+  let user_id = -1;
+  if (token) {
+    try {
+      const payload = jose.decodeJwt(token);
+      if (payload) {
+        user_id = payload.user_id as number;
+      }
+    } catch (err) {
+      user_id = -1;
+    }
+  };
 
   useEffect(() => {
     if (topRecipesData.data) {
@@ -95,7 +108,7 @@ export default function Home() {
         }
 
         {
-          !recommendedRecipesData.error && recommendedRecipes && recommendedRecipes.length > 0 && (
+          user_id !== -1 && !recommendedRecipesData.error && recommendedRecipes && recommendedRecipes.length > 0 && (
             <ScrollArea key={2} feedRecipes={recommendedRecipes} header='Recommended for you' />
           )
         }
