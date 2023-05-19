@@ -2,18 +2,21 @@
 
 import { IconButton } from '@/ui/Button'
 import { Icons } from '@/components/Icons'
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const NavSearchButton = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const openSearch = () => {
-    router.push('/recipes');
+    if (pathname !== '/recipes/') {
+      router.push('/recipes');
+    }
     setTimeout(() => {
       const searchInput = document.getElementById('search');
       if (searchInput) {
         searchInput.focus();
       }
-    }, 50);
+    }, 300);
   };
   return (
     <IconButton
